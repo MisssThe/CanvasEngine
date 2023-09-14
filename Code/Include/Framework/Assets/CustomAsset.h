@@ -23,6 +23,8 @@ public:
 protected:
     virtual void SerializeInInternal(cereal::BinaryInputArchive& archive) = 0;
     virtual void SerializeOutInternal(cereal::BinaryOutputArchive& archive) = 0;
+    var<CustomAsset> SerializeInPtr(cereal::BinaryInputArchive& archive);
+    void SerializeOutPtr(cereal::BinaryOutputArchive& archive, var<CustomAsset> asset);
 };
 
 

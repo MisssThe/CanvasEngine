@@ -18,6 +18,8 @@
 class CustomPtr {
 public:
     virtual std::string Type() = 0;
+public:
+    virtual ~CustomPtr();
 };
 
 class Reflect {
@@ -28,6 +30,6 @@ public:
     static bool Register(const std::string& type, const std::function<std::shared_ptr<CustomPtr>()>& call);
 };
 
-#define REFLECT_REGISTER(Type) bool Type##Register = Reflect::Register(#Type, []()->std::shared_ptr<CustomPtr> { return std::static_pointer_cast<CustomPtr>(std::make_shared<Type>()); })
+#define REFLECT_REGISTER(type) bool type##Register = Reflect::Register(#type, []()->std::shared_ptr<CustomPtr> { return std::static_pointer_cast<CustomPtr>(std::make_shared<type>()); }); std::string type::Type() { return #type;};
 
 #endif //CODE_CUSTOMPTR_H

@@ -18,3 +18,5 @@ bool Reflect::Register(const std::string &type, const std::function<std::shared_
     Map::Insert(reflectMap, type, call);
     return true;
 }
+
+CustomPtr::~CustomPtr() = default;

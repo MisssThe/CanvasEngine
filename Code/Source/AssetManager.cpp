@@ -31,6 +31,8 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
         return nullptr;
     }
     cai->SerializeIn(bia);
+    cai->path = path;
+    cai->name = "!";
     Map::Insert(assetMap, path, cai);
     return cai;
 }
@@ -44,5 +46,8 @@ bool AssetManager::Create(const std::string &path, const std::shared_ptr<CustomA
     cereal::BinaryOutputArchive boa(os);
     boa(ca->Type());
     ca->SerializeOut(boa);
+    ca->path = path;
+    ca->name = "!";
+    Map::Insert(assetMap, path, ca);
     return true;
 }
