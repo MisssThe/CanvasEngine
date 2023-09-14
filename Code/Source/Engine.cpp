@@ -27,6 +27,9 @@ Engine::~Engine() {
 void Engine::Invoke() {
 //    while (true)
 //    {
-    SceneManager::Invoke();
+//    AssetManager::Create("test.scene", new_ptr<Scene>());
+    SceneManager::Load("test.scene");
+//    SceneManager::Load("");
+//    SceneManager::Invoke();
 //    }
 }

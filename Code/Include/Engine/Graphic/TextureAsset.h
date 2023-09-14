@@ -7,16 +7,22 @@
 
 
 
-//#include "Assets/CustomAsset.h"
+#include "Assets/CustomAsset.h"
 //#include "CustomEntity.h"
-#include "CustomPtr.h"
+//#include "CustomPtr.h"
 
 //class TextureAsset : public CustomAsset {
 //class TextureAsset : public CustomEntity {
-class TextureAsset : public CustomPtr {
+class TextureAsset : public CustomAsset {
 public:
     std::string Type() override;
 
+protected:
+    void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
+
+    void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
+
+public:
     ~TextureAsset() override = default;
 };
 

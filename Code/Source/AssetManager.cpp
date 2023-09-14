@@ -8,6 +8,22 @@
 
 std::unordered_map<std::string, var<CustomAsset>> AssetManager::assetMap;
 
+bool AssetManager::Instance(const std::string &path, std::shared_ptr<CustomAsset>& asset) {
+    if (path.empty() || asset == nullptr || assetMap.find(path) != nullptr)
+        return false;
+    std::ifstream is(path);
+    if (!is.is_open())
+        return false;
+    cereal::BinaryInputArchive bia(is);
+    std::string type;
+    bia(type);
+    asset->SerializeIn(bia);
+    asset->path = path;
+    asset->name = "!";
+    Map::Insert(assetMap, path, asset);
+    return true;
+}
+
 var<CustomAsset> AssetManager::Instance(const std::string& path) {
     if (path.empty())
         return nullptr;

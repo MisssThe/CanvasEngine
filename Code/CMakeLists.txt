@@ -16,18 +16,17 @@ set(FRAMEWORK
         Source/CustomPtr.cpp Include/Framework/CustomPtr.h
         Source/CustomAsset.cpp Include/Framework/Assets/CustomAsset.h
         Source/AssetManager.cpp Include/Framework/Assets/AssetManager.h
-        Include/Framework/Scenes/SceneManager.cpp Include/Framework/Scenes/SceneManager.h)
+        Source/SceneManager.cpp Include/Framework/Scenes/SceneManager.h Source/SerializePtr.cpp Include/Framework/SerializePtr.h)
 
 set(GENERAL
         Include/General/Map.h
         Source/Debug.cpp
         Include/General/Debug.h
         Source/Time.cpp
-        Include/General/Time.h)
+        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h)
 
 set(Entity
-        Source/CustomEntity.cpp
-        Include/Framework/Scenes/CustomEntity.h)
+        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h)
 
 set(Asset
         Include/Engine/Graphic/TextureAsset.cpp

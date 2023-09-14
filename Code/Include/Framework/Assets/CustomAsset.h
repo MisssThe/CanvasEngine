@@ -6,23 +6,19 @@
 #define CODE_CUSTOMASSET_H
 
 #include "cereal/types/string.hpp"
-#include "cereal/types/memory.hpp"
-
 #include "cereal/archives/binary.hpp"
 #include "../CustomPtr.h"
+#include "SerializePtr.h"
 
-class CustomAsset : public CustomPtr {
+class CustomAsset : public CustomPtr, public SerializePtr {
 public:
     std::string Type() override;
+    bool IsAsset() override;
+    ~CustomAsset() override;
 public:
     std::string name;
     std::string path;
-public:
-    void SerializeIn(cereal::BinaryInputArchive& archive);
-    void SerializeOut(cereal::BinaryOutputArchive& archive);
 protected:
-    virtual void SerializeInInternal(cereal::BinaryInputArchive& archive) = 0;
-    virtual void SerializeOutInternal(cereal::BinaryOutputArchive& archive) = 0;
     var<CustomAsset> SerializeInPtr(cereal::BinaryInputArchive& archive);
     void SerializeOutPtr(cereal::BinaryOutputArchive& archive, var<CustomAsset> asset);
 };

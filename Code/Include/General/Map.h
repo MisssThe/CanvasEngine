@@ -9,8 +9,15 @@
 
 class Map {
 public:
-    template<class A, class B> static void Insert(std::unordered_map<A, B>& map, A a, B b) {
+    template<class A, class B> static void Insert(std::unordered_map<A, B>& map, const A& a, const B& b) {
         map.insert(std::pair<A,B>(a, b));
+    }
+
+    template<class A, class B> static B Find(std::unordered_map<A, B>& map, const A& a) {
+        auto f = map.find(a);
+        if (f == map.end())
+            return nullptr;
+        return f->second;
     }
 };
 

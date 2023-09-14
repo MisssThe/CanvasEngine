@@ -4,4 +4,12 @@
 
 #include "TextureAsset.h"
 
-REFLECT_REGISTER(TextureAsset);
+REFLECT_REGISTER(TextureAsset) /* NOLINT */
+
+void TextureAsset::SerializeInInternal(cereal::BinaryInputArchive &archive) {
+
+}
+
+void TextureAsset::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
+
+};

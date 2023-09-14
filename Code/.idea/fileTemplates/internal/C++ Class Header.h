@@ -11,7 +11,9 @@ ${NAMESPACES_OPEN}
 class ${NAME} : public CustomPtr {
 //class ${NAME} : public CustomAsset {
 //class ${NAME} : public CustomEntity {
-
+public:
+    std::string Type() override;
+    ~${NAME}() override = default;
 };
 
 ${NAMESPACES_CLOSE}

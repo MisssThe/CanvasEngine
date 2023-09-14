@@ -5,14 +5,6 @@
 #include "../Include/Framework/Assets/CustomAsset.h"
 #include "../Include/Framework/Assets/AssetManager.h"
 
-void CustomAsset::SerializeIn(cereal::BinaryInputArchive &archive) {
-    this->SerializeInInternal(archive);
-}
-
-void CustomAsset::SerializeOut(cereal::BinaryOutputArchive &archive) {
-    this->SerializeOutInternal(archive);
-}
-
 std::string CustomAsset::Type() {
     return "Asset";
 }
@@ -31,4 +23,12 @@ void CustomAsset::SerializeOutPtr(cereal::BinaryOutputArchive &archive, std::sha
     if (asset != nullptr)
         ptrPath = asset->path;
     archive(ptrPath);
+}
+
+bool CustomAsset::IsAsset() {
+    return true;
+}
+
+CustomAsset::~CustomAsset() {
+
 }

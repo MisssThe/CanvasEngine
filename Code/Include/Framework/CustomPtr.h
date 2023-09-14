@@ -17,6 +17,7 @@
 
 class CustomPtr {
 public:
+    virtual bool IsAsset() = 0;
     virtual std::string Type() = 0;
 public:
     virtual ~CustomPtr();
