@@ -51,3 +51,16 @@ bool AssetManager::Create(const std::string &path, const std::shared_ptr<CustomA
     Map::Insert(assetMap, path, ca);
     return true;
 }
+
+void AssetManager::Release() {
+    for (const auto &sa: assetMap) {
+        Save(sa.second);
+    }
+    assetMap.clear();
+}
+
+void AssetManager::Save(const std::shared_ptr<CustomAsset> &ca) {
+    if (ca == nullptr)
+        return;
+    Create(ca->path, ca);
+}

@@ -15,7 +15,8 @@ public:
     static var<CustomAsset> Instance(const std::string& path);
     static bool Create(const std::string &path, const std::shared_ptr<CustomAsset>& ca);
     static void Update();
-    static void Save();
+    static void Save(const std::shared_ptr<CustomAsset>& ca);
+    static void Release();
 };
 
 
