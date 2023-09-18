@@ -4,27 +4,7 @@
 
 #include "Scenes/GameObject.h"
 
-REFLECT_REGISTER(GameObject)
-
-void GameObject::Initial() {
-
-}
-
-void GameObject::Enable() {
-
-}
-
-void GameObject::Invoke() {
-
-}
-
-void GameObject::Disable() {
-
-}
-
-void GameObject::Release() {
-
-}
+REFLECT_REGISTER(GameObject) /* NOLINT */
 
 void GameObject::SerializeInInternal(cereal::BinaryInputArchive &archive) {
 
@@ -33,4 +13,7 @@ void GameObject::SerializeInInternal(cereal::BinaryInputArchive &archive) {
 void GameObject::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
 
 }
-/* NOLINT */
+
+bool GameObject::IsGameObject() {
+    return true;
+}

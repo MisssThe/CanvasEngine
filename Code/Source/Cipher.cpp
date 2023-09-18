@@ -3,11 +3,24 @@
 //
 
 #include <combaseapi.h>
-#include <iostream>
 #include "../Include/General/Cipher.h"
 
 std::string Cipher::Guid() {
-    _GUID guid;
+    _GUID guid{};
     CoCreateGuid(&guid);
-    return std::to_string(guid.Data1) + std::to_string(guid.Data2) + std::to_string(guid.Data3) + std::string(reinterpret_cast<const char *>(guid.Data4));
+    int index = 0;
+    char data[16];
+    for (int offset = 0; offset < 4; ++offset) {
+        data[index++] = guid.Data1 >> (offset * 4);
+    }
+    for (int offset = 0; offset < 2; ++offset) {
+        data[index++] = guid.Data2 >> (offset * 4);
+    }
+    for (int offset = 0; offset < 2; ++offset) {
+        data[index++] = guid.Data3 >> (offset * 4);
+    }
+    for (int offset = 0; offset < 8; ++offset) {
+        data[index++] = guid.Data4[offset];
+    }
+    return {data};
 }

@@ -8,27 +8,35 @@
 
 #include "CustomPtr.h"
 #include "SerializePtr.h"
+#include "../../General/Cipher.h"
+
+enum AliveState
+{
+    AliveTrue, AliveFalse, AliveNone
+};
+
+enum EnableState
+{
+    EnableTrue, EnableFalse, EnableNone
+};
 
 class CustomEntity : public CustomPtr, public SerializePtr {
 public:
-    const std::string id;
+    const std::string guid;
+    EnableState isEnable;
+    AliveState isAlive;
 public:
     CustomEntity();
 //    std::string Type() override;
     ~CustomEntity() override = default;
-    bool IsAsset() override;
-public:
-    virtual void Initial() = 0;
-    virtual void Enable() = 0;
-    virtual void Invoke() = 0;
-    virtual void Disable() = 0;
-    virtual void Release() = 0;
-public:
-    bool isEnable{};
-    bool isAlive{};
+    bool IsAsset() final ;
+    virtual bool IsGameObject() = 0;
+    static void SerializeFinish();
 protected:
     var<CustomPtr> SerializeInPtr(cereal::BinaryInputArchive& archive);
     void SerializeOutPtr(cereal::BinaryOutputArchive& archive, var<CustomPtr>& ptr);
+public:
+    static std::unordered_map<std::string, var<CustomEntity>> entityMap;   //只用于初始的序列化
 };
 
 

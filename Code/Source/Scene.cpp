@@ -3,90 +3,142 @@
 //
 
 #include "Scenes/Scene.h"
-#include "../Include/General/Queue.h"
-#include "Scenes/SceneManager.h"
-#include "../Include/General/Map.h"
+
+#include <utility>
+#include "Scenes/GameObject.h"
+#include "cereal/types/string.hpp"
+#include "../Include/General/Deque.h"
 
 REFLECT_REGISTER(Scene) /* NOLINT */
 
 void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
-    SceneManager::entityMap.clear();
-    unsigned int count;
+    int count;
     archive(count);
-    std::string guid, type;
-    for (unsigned int index = 0; index < count; ++index) {
-        archive(guid, type);
-        auto entity = SceneManager::entityMap[guid];
-        if (entity == nullptr) {
-            entity = safe_cast<CustomEntity>(Reflect::Instance(type));
-            Map::Insert(SceneManager::entityMap, guid, entity);
+    std::string type;
+    std::deque<var<GameObject>> goes;
+    std::string guid;
+    for (int index = 0; index < count; ++index) {
+        try {
+            archive(guid);
+            std::cout << guid << std::endl;
+        } catch (...) {
+
         }
-        entity->SerializeIn(archive);
-        this->entitiesInitial.push(entity);
+//        auto entity = CustomEntity::entityMap[guid];
+//        if (entity == nullptr) {
+//            entity = safe_cast<CustomEntity>(Reflect::Instance(type));
+//            Map::Insert(CustomEntity::entityMap, guid, entity);
+//        }
+//        entity->SerializeIn(archive);
+//        if (entity->IsGameObject())
+//            goes.push_back(safe_cast<GameObject>(entity));
     }
+//    for (auto go : goes) {
+//        this->AddGameObject(go);
+//    }
+    CustomEntity::SerializeFinish();
 }
 
 void Scene::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
-    SceneManager::entityMap.clear();
-    Queue::Iterator<var<CustomEntity>>(entitiesInitial, [](var<CustomEntity>& entity) { Map::Insert(SceneManager::entityMap, entity->id, entity); });
-    Queue::Iterator<var<CustomEntity>>(entitiesEnable, [](var<CustomEntity>& entity) { Map::Insert(SceneManager::entityMap, entity->id, entity); });
-    Queue::Iterator<var<CustomEntity>>(entitiesInvoke, [](var<CustomEntity>& entity) { Map::Insert(SceneManager::entityMap, entity->id, entity); });
-    Queue::Iterator<var<CustomEntity>>(entitiesDisable, [](var<CustomEntity>& entity) { Map::Insert(SceneManager::entityMap, entity->id, entity); });
-    Queue::Iterator<var<CustomEntity>>(entitiesRelease, [](var<CustomEntity>& entity) { Map::Insert(SceneManager::entityMap, entity->id, entity); });
-
-    archive(SceneManager::entityMap.size());
-    for (auto entity : SceneManager::entityMap) {
-        archive(entity.first, entity.second->Type());
+    int count = (int)this->gameObjects.size();
+    archive(count);
+    std::string guid, type;
+    for (const auto& go : this->gameObjects) {
+        guid = go->guid;
+        std::cout << go->guid << 1 << std::endl;
+        archive(guid);
+//        go->SerializeOut(archive);
     }
-        //添加所有entities到map中
-//    Queue::Iterator<var<CustomEntity>>(entitiesInitial, [this](var<CustomEntity>& entity) {
-//
-//    });
+//    CustomEntity::SerializeFinish();
 }
 
 void Scene::Initial() {
-    Queue::IteratorRemove<var<CustomEntity>>(entitiesInitial, [this](var<CustomEntity>& entity) {
-        entity->Initial();
-        entitiesEnable.push(entity);
-    });
-};
+    for (const auto& com: this->componentInitial) {
+        com->Enable();
+        this->componentEnable.push_back(com);
+    }
+    this->componentInitial.clear();
+}
 
 void Scene::Enable() {
-    Queue::IteratorRemove<var<CustomEntity>>(entitiesInitial, [this](var<CustomEntity>& entity) {
-        entity->Enable();
-        entitiesInvoke.push(entity);
-    });
+    for (const auto& com: this->componentEnable) {
+        if (com->isEnable == EnableTrue)
+            com->Enable();
+        this->componentInvoke.push_back(com);
+    }
+    this->componentEnable.clear();
 }
 
 void Scene::Invoke() {
-    Queue::IteratorRemoveBool<var<CustomEntity>>(entitiesInvoke, [this](var<CustomEntity>& entity) {
-        entity->Invoke();
-        if (entity->isEnable)
-            return true;
-        else {
-            entitiesDisable.push(entity);
-            return false;
-        }
-        return true;
-    });
+    unsigned int invalidCom = 0;
+    for (const auto& com: this->componentInvoke) {
+        if (com->isAlive)
+            com->Invoke();
+        else if (com->isAlive == AliveState::AliveFalse) {
+            this->componentDisable.push_back(com);
+        } else
+            invalidCom++;
+    }
+    //移动元素到无效元素位置
+    if (invalidCom > (this->componentInvoke.size() / 3)) {
+        Deque::ClearUp<var<Component>>(this->componentInvoke, [](var<Component> &com) {
+            return com->isAlive == AliveNone || com->isEnable == EnableNone;
+        });
+    }
 }
 
 void Scene::Disable() {
-    Queue::IteratorRemove<var<CustomEntity>>(entitiesInitial, [this](var<CustomEntity>& entity) {
-        entity->Disable();
-        entitiesIdle.push(entity);
-    });
-    Queue::IteratorRemoveBool<var<CustomEntity>>(entitiesInitial, [this](var<CustomEntity>& entity) {
-        if (entity->isEnable)
-            entitiesInvoke.push(entity);
-        else if (entity->isAlive)
-            entitiesRelease.push(entity);
-        else
-            return true;
-        return false;
-    });
+    for (const auto& com: this->componentDisable) {
+        com->Disable();
+        this->componentIdle.push_back(com);
+    }
+    this->componentDisable.clear();
+
+    unsigned int invalidCom = 0;
+    for (const auto& com: this->componentIdle) {
+        if (com->isAlive == AliveState::AliveFalse) {
+            this->componentRelease.push_back(com);
+            com->isAlive = AliveState::AliveNone;
+        }
+        else if (com->isEnable == EnableState::EnableFalse) {
+            this->componentEnable.push_back(com);
+            com->isEnable = EnableState::EnableNone;
+        }
+        else if (com->isEnable == EnableState::EnableNone || com->isAlive == AliveState::AliveNone)
+            invalidCom++;
+    }
+    if (invalidCom > (this->componentIdle.size() / 3))
+    {
+        Deque::ClearUp<var<Component>>(this->componentIdle, [](var<Component>& com) {
+            return com->isAlive == AliveNone || com->isEnable == EnableNone;
+        });
+    }
 }
 
 void Scene::Release() {
-    Queue::IteratorRemove<var<CustomEntity>>(entitiesRelease, [](var<CustomEntity>& entity) { entity->Release(); });
+    for (const auto& com: this->componentRelease) {
+        com->Release();
+    }
+    this->componentRelease.clear();
+}
+
+void Scene::AddGameObject(std::shared_ptr<GameObject>& go) {
+    this->gameObjects.push_back(go);
+}
+
+void Scene::AddGameObject(std::string name) {
+    auto go = new_ptr<GameObject>();
+    go->name = std::move(name);
+    this->AddGameObject(go);
+}
+
+void Scene::AddComponent(std::shared_ptr<GameObject>& go, std::shared_ptr<Component>& com) {
+    this->componentInitial.push_back(com);
+}
+
+void Scene::AddComponent(std::shared_ptr<GameObject> go, std::string& com) {
+    var<Component> c = safe_cast<Component>(Reflect::Instance(com));
+    if (c == nullptr)
+        return;
+    this->AddComponent(go, c);
 }

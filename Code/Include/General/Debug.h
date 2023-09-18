@@ -9,7 +9,7 @@
 
 class Debug {
 public:
-    static void LogInfo(const std::string& context, const std::string& title = "");
+    static void Info(const std::string& context, const std::string& title = "");
 };
 
 

@@ -10,6 +10,9 @@
 #include "../Include/General/Cipher.h"
 
 //REFLECT_REGISTER(CustomEntity)
+
+std::unordered_map<std::string, var<CustomEntity>> CustomEntity::entityMap;
+
 var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive) {
     bool isAsset;
     std::string identity;
@@ -17,12 +20,12 @@ var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive)
     if (isAsset) {
         return AssetManager::Instance(identity);
     } else {
-        auto entity = Map::Find(SceneManager::entityMap, identity);
+        auto entity = Map::Find(entityMap, identity);
         std::string type;
         archive(type);
         if (entity == nullptr) {
             entity = safe_cast<CustomEntity>(Reflect::Instance(type));
-            Map::Insert(SceneManager::entityMap, identity, entity);
+            Map::Insert(entityMap, identity, entity);
         }
         return entity;
     }
@@ -34,7 +37,7 @@ void CustomEntity::SerializeOutPtr(cereal::BinaryOutputArchive &archive, std::sh
     if (isAsset)
         archive(safe_cast<CustomAsset>(ptr)->path);
     else {
-        archive(safe_cast<CustomEntity>(ptr)->id);
+//        archive(safe_cast<CustomEntity>(ptr)->guid);
         archive(ptr->Type());
     }
 }
@@ -43,6 +46,11 @@ bool CustomEntity::IsAsset() {
     return false;
 }
 
-CustomEntity::CustomEntity() : id(Cipher::Guid()) {
+CustomEntity::CustomEntity() : guid(Cipher::Guid()) {
+    this->isEnable = EnableTrue;
+    this->isAlive = AliveTrue;
+}
+
+void CustomEntity::SerializeFinish() {
 
 }

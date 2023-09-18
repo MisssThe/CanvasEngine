@@ -1,5 +1,6 @@
 //
 // Created by Administrator on 2023/9/14.
+// 小心unsigned int/float/double，没有做对应支持会造成bad alloc
 //
 
 #ifndef CODE_SERIALIZEPTR_H

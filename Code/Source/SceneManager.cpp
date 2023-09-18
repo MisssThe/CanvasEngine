@@ -8,7 +8,6 @@
 
 std::queue<var<Scene>> SceneManager::scenes;
 //var<Scene> SceneManager::target = nullptr;
-std::unordered_map<std::string, var<CustomEntity>> SceneManager::entityMap;
 
 void SceneManager::Invoke() {
     Queue::Iterator<var<Scene>>(scenes, [](var<Scene> &scene) { scene->Initial(); });

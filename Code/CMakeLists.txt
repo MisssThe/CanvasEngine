@@ -4,7 +4,7 @@ project(Code)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 
 
 set(FRAMEWORK_INCLUDE  ${PROJECT_SOURCE_DIR}/Include/Framework)
@@ -23,10 +23,10 @@ set(GENERAL
         Source/Debug.cpp
         Include/General/Debug.h
         Source/Time.cpp
-        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h)
+        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h)
 
 set(Entity
-        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h)
+        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h Source/Component.cpp Include/Framework/Scenes/Component.h)
 
 set(Asset
         Include/Engine/Graphic/TextureAsset.cpp

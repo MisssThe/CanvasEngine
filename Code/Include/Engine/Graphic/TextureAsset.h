@@ -15,13 +15,13 @@
 //class TextureAsset : public CustomEntity {
 class TextureAsset : public CustomAsset {
 public:
+    float a,b,c;
+    std::string d,e;
+public:
     std::string Type() override;
-
 protected:
     void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
-
     void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
-
 public:
     ~TextureAsset() override = default;
 };

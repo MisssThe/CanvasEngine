@@ -5,15 +5,13 @@
 #ifndef CODE_CUSTOMASSET_H
 #define CODE_CUSTOMASSET_H
 
-#include "cereal/types/string.hpp"
-#include "cereal/archives/binary.hpp"
 #include "../CustomPtr.h"
 #include "SerializePtr.h"
 
 class CustomAsset : public CustomPtr, public SerializePtr {
 public:
     std::string Type() override;
-    bool IsAsset() override;
+    bool IsAsset() final ;
     ~CustomAsset() override;
 public:
     std::string name;
