@@ -10,6 +10,8 @@
 class Debug {
 public:
     static void Info(const std::string& context, const std::string& title = "");
+    static void Warm(const std::string& context, const std::string& title = "");
+    static void Error(const std::string& context, const std::string& title = "");
 };
 
 

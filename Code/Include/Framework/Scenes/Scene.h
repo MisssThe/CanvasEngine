@@ -23,7 +23,7 @@ public:
     void Disable();
     void Release();
     void AddGameObject(var<GameObject>& go);
-    void AddGameObject(std::string name);
+    var<GameObject> AddGameObject(std::string name);
     void AddComponent(var<GameObject>& go, var<Component>& com);
     void AddComponent(var<GameObject> go, std::string& com);
 protected:

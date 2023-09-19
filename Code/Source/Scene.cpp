@@ -8,6 +8,8 @@
 #include "Scenes/GameObject.h"
 #include "cereal/types/string.hpp"
 #include "../Include/General/Deque.h"
+#include "../Include/General/Map.h"
+#include "../Include/General/Queue.h"
 
 REFLECT_REGISTER(Scene) /* NOLINT */
 
@@ -16,40 +18,32 @@ void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
     archive(count);
     std::string type;
     std::deque<var<GameObject>> goes;
-    std::string guid;
+    Cipher::GUID guid;
     for (int index = 0; index < count; ++index) {
-        try {
-            archive(guid);
-            std::cout << guid << std::endl;
-        } catch (...) {
-
+        archive(guid, type);
+        auto entity = CustomEntity::entityMap[guid];
+        if (entity == nullptr) {
+            entity = safe_cast<CustomEntity>(Reflect::Instance(type));
+            CustomEntity::entityMap.insert(std::pair(guid,entity));
         }
-//        auto entity = CustomEntity::entityMap[guid];
-//        if (entity == nullptr) {
-//            entity = safe_cast<CustomEntity>(Reflect::Instance(type));
-//            Map::Insert(CustomEntity::entityMap, guid, entity);
-//        }
-//        entity->SerializeIn(archive);
-//        if (entity->IsGameObject())
-//            goes.push_back(safe_cast<GameObject>(entity));
+        entity->SerializeIn(archive);
+        if (entity->IsGameObject())
+            goes.push_back(safe_cast<GameObject>(entity));
     }
-//    for (auto go : goes) {
-//        this->AddGameObject(go);
-//    }
+    for (auto go : goes) {
+        this->AddGameObject(go);
+    }
     CustomEntity::SerializeFinish();
 }
 
 void Scene::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
     int count = (int)this->gameObjects.size();
     archive(count);
-    std::string guid, type;
     for (const auto& go : this->gameObjects) {
-        guid = go->guid;
-        std::cout << go->guid << 1 << std::endl;
-        archive(guid);
-//        go->SerializeOut(archive);
+        archive(go->guid, go->Type());
+        go->SerializeOut(archive);
     }
-//    CustomEntity::SerializeFinish();
+    CustomEntity::SerializeFinish();
 }
 
 void Scene::Initial() {
@@ -124,12 +118,16 @@ void Scene::Release() {
 
 void Scene::AddGameObject(std::shared_ptr<GameObject>& go) {
     this->gameObjects.push_back(go);
+    Queue::Iterator<var<Component>>(go->components, [this](var<Component>& com) {
+        this->componentInitial.push_back(com);
+    });
 }
 
-void Scene::AddGameObject(std::string name) {
+var<GameObject> Scene::AddGameObject(std::string name) {
     auto go = new_ptr<GameObject>();
     go->name = std::move(name);
     this->AddGameObject(go);
+    return go;
 }
 
 void Scene::AddComponent(std::shared_ptr<GameObject>& go, std::shared_ptr<Component>& com) {

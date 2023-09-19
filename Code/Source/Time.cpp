@@ -51,3 +51,7 @@ void Time::UpdateFrame() {
 unsigned long int Time::FrameTime() {
     return Time::frame;
 }
+
+unsigned long int Time::SystemTime() {
+    return NowTime();
+}

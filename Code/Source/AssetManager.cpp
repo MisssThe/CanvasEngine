@@ -5,11 +5,12 @@
 #include <fstream>
 #include "../Include/Framework/Assets/AssetManager.h"
 #include "../Include/General/Map.h"
+#include "../Include/General/Debug.h"
 
 std::unordered_map<std::string, var<CustomAsset>> AssetManager::assetMap;
 
 bool AssetManager::Instance(const std::string &path, std::shared_ptr<CustomAsset>& asset) {
-    if (path.empty() || asset == nullptr || assetMap.find(path) != nullptr)
+    if (path.empty() || asset == nullptr || assetMap.find(path) != assetMap.end())
         return false;
     std::ifstream is(path);
     if (!is.is_open())
@@ -31,19 +32,24 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
     if (ca != assetMap.end())
         return ca->second;
     std::ifstream is(path);
-    if (!is.is_open())
+    if (!is.is_open()) {
+        Debug::Warm("Error Path","Asset Manager");
         return nullptr;
+    }
     cereal::BinaryInputArchive bia(is);
     std::string type;
     bia(type);
     var<CustomAsset> cai = nullptr;
     auto temp = Reflect::Instance(type);
-    if (temp == nullptr)
+    if (temp == nullptr) {
+        Debug::Warm("Error Value Type","Asset Manager");
         return nullptr;
+    }
     try {
         cai = safe_cast<CustomAsset>(temp);
     } catch (...) {
         //return empty and delete this file
+        Debug::Warm("Error Value Type, Cast Failed","Asset Manager");
         return nullptr;
     }
     cai->SerializeIn(bia);

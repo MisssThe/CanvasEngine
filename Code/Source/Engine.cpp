@@ -7,6 +7,7 @@
 #include "Assets/AssetManager.h"
 #include "Scenes/SceneManager.h"
 #include "../Include/Engine/Graphic/TextureAsset.h"
+#include "../Include/Engine/Transform.h"
 
 void *Engine::operator new(size_t size) {
     return std::malloc(size);
@@ -36,12 +37,17 @@ void Engine::Invoke() {
 //    ta->d = "ddddd";
 //    ta->e = "eeeee";
 var<Scene> s = new_ptr<Scene>();
+var go = new_ptr<GameObject>();
+go->name = "test";
+//go->AddComponent("Transform");
     for (int i = 0; i < 100; ++i) {
-        s->AddGameObject("test"+std::to_string(i));
+        safe_cast<Transform>(s->AddGameObject("go" )->AddComponent("Transform"))->x = i * 12;
     }
-AssetManager::Create("aaa.te",s);
+//AssetManager::Create("aaa.te",s);
     std::cout << "--------------------------------------------------------------"<<std::endl;
-//    auto a = AssetManager::Instance("aaa.te");
+//    var<Scene> a = safe_cast<Scene>(AssetManager::Instance("aaa.te"));
+    auto scene = SceneManager::Load("aaa.te", true);
+//    SceneManager::Invoke();
 //    std::cout << a->Type();
 //    SceneManager::Load("test.scene");
 //    SceneManager::Invoke();

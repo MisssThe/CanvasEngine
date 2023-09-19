@@ -17,6 +17,7 @@ private:
     static unsigned long int last;
     static unsigned long int frame;
 public:
+    static unsigned long int SystemTime();                               //系统时间
     static unsigned long int CanvasTime();                               //程序运行时间
     static std::string CanvasTimeWithStr();                              //程序运行时间(输出格式（时：分：秒：毫秒）)
     static std::string CanvasTimeToStr(unsigned long int time);          //程序运行时间(输出格式（时：分：秒：毫秒）)

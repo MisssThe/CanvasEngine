@@ -9,6 +9,7 @@
 #include "CustomPtr.h"
 #include "SerializePtr.h"
 #include "../../General/Cipher.h"
+#include <map>
 
 enum AliveState
 {
@@ -22,7 +23,7 @@ enum EnableState
 
 class CustomEntity : public CustomPtr, public SerializePtr {
 public:
-    const std::string guid;
+    const Cipher::GUID guid;
     EnableState isEnable;
     AliveState isAlive;
 public:
@@ -36,7 +37,7 @@ protected:
     var<CustomPtr> SerializeInPtr(cereal::BinaryInputArchive& archive);
     void SerializeOutPtr(cereal::BinaryOutputArchive& archive, var<CustomPtr>& ptr);
 public:
-    static std::unordered_map<std::string, var<CustomEntity>> entityMap;   //只用于初始的序列化
+    static std::map<Cipher::GUID, var<CustomEntity>> entityMap;   //只用于初始的序列化
 };
 
 

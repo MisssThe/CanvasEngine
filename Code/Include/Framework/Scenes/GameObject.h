@@ -8,17 +8,18 @@
 
 #include <queue>
 #include "CustomEntity.h"
+#include "Component.h"
 
-class Component;
 
 class GameObject : public CustomEntity {
 protected:
     void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
     void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
 public:
-    bool IsGameObject() final ;
+    bool IsGameObject() final;
     std::string Type() override;
     ~GameObject() override = default;
+    var<Component> AddComponent(const std::string& com);
 public:
     std::string name;
     std::queue<var<Component>> components;

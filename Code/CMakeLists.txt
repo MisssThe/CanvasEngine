@@ -26,7 +26,7 @@ set(GENERAL
         Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h)
 
 set(Entity
-        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h Source/Component.cpp Include/Framework/Scenes/Component.h)
+        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h Source/Component.cpp Include/Framework/Scenes/Component.h Include/Engine/Transform.cpp Include/Engine/Transform.h)
 
 set(Asset
         Include/Engine/Graphic/TextureAsset.cpp
@@ -34,6 +34,10 @@ set(Asset
         Source/Scene.cpp
         Include/Framework/Scenes/Scene.h)
 
-add_executable(Code main.cpp  ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL}
-        Source/Engine.cpp
-        Include/Engine.h)
+if (CMAKE_HOST_WIN32)
+    add_executable(Code main.cpp  ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)
+elseif (CMAKE_HOST_APPLE)
+    add_executable(Code main.cpp ${FRAMEWORK} ${Entity} ${Asset} ${GENERAL} Source/Engine.cpp Include/Engine.h)
+elseif (CMAKE_HOST_UNIX)
+    set(LINUX 1)
+endif()

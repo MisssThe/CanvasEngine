@@ -11,6 +11,16 @@ void Debug::Info(const std::string& context, const std::string& title) {
     std::cout << "[" <<Time::CanvasTimeWithStr() <<"] [" << title <<"]: " << context << std::endl;
 }
 
+void Debug::Warm(const std::string &context, const std::string &title) {
+    std::cout << "[" <<Time::CanvasTimeWithStr() <<"] [" << title <<"]: " << context << std::endl;
+
+}
+
+void Debug::Error(const std::string &context, const std::string &title) {
+    std::cout << "[" <<Time::CanvasTimeWithStr() <<"] [" << title <<"]: " << context << std::endl;
+
+}
+
 //void Debug::Warn(const std::string& title, std::initializer_list<std::string> context) {
 //    std::cout << "\033[33m[" <<
 //              Time::CanvasTimeWithStr() <<
