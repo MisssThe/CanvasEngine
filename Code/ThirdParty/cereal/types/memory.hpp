@@ -2,7 +2,7 @@
     \brief Support for types found in \<memory\>
     \ingroup STLSupport */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -420,6 +420,6 @@ namespace cereal
 } // namespace cereal
 
 // automatically include polymorphic support
-#include "polymorphic.hpp"
+#include "cereal/types/polymorphic.hpp"
 
 #endif // CEREAL_TYPES_SHARED_PTR_HPP_

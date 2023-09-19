@@ -2,7 +2,7 @@
     \brief Support for types found in \<stack\>
     \ingroup STLSupport */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@
 #include <stack>
 
 // The default container for stack is deque, so let's include that too
-#include "deque.hpp"
+#include "cereal/types/deque.hpp"
 
 namespace cereal
 {

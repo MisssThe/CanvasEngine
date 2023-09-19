@@ -1,7 +1,7 @@
 /*! \file cereal.hpp
     \brief Main cereal functionality */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
 #include <cstdint>
 #include <functional>
 
-#include "macros.hpp"
+#include "cereal/macros.hpp"
 #include "cereal/details/traits.hpp"
 #include "cereal/details/helpers.hpp"
 #include "cereal/types/base_class.hpp"

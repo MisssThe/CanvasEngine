@@ -16,13 +16,13 @@
 #define CEREAL_RAPIDJSON_STRINGBUFFER_H_
 
 #include "stream.h"
-#include "cereal/external/rapidjson/internal/stack.h"
+#include "internal/stack.h"
 
 #if CEREAL_RAPIDJSON_HAS_CXX11_RVALUE_REFS
 #include <utility> // std::move
 #endif
 
-#include "cereal/external/rapidjson/internal/stack.h"
+#include "internal/stack.h"
 
 #if defined(__clang__)
 CEREAL_RAPIDJSON_DIAG_PUSH

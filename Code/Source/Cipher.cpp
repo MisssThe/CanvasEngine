@@ -37,3 +37,7 @@ bool Cipher::GUID::operator==(const Cipher::GUID &n) const {
 bool Cipher::GUID::operator<(const Cipher::GUID &c) const {
     return c.id1 < this->id1 && c.id2 < this->id2 && c.id3 < this->id3 && c.id4 < this->id4;
 }
+
+std::string Cipher::GUID::ToString() const {
+    return std::to_string(this->id1) + std::to_string(this->id2) + std::to_string(this->id3) + std::to_string(this->id4);
+}

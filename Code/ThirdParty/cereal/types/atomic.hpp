@@ -2,7 +2,7 @@
     \brief Support for types found in \<atomic\>
     \ingroup STLSupport */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,7 @@
 #ifndef CEREAL_TYPES_ATOMIC_HPP_
 #define CEREAL_TYPES_ATOMIC_HPP_
 
-#include "cereal/cereal.hpp"
+#include <cereal/cereal.hpp>
 #include <atomic>
 
 namespace cereal

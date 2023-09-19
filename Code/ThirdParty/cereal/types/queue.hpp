@@ -2,7 +2,7 @@
     \brief Support for types found in \<queue\>
     \ingroup STLSupport */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -34,9 +34,9 @@
 #include <queue>
 
 // The default container for queue is deque, so let's include that too
-#include "deque.hpp"
+#include "cereal/types/deque.hpp"
 // The default comparator for queue is less
-#include "functional.hpp"
+#include "cereal/types/functional.hpp"
 
 namespace cereal
 {

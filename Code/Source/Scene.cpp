@@ -21,11 +21,13 @@ void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
     Cipher::GUID guid;
     for (int index = 0; index < count; ++index) {
         archive(guid, type);
-        auto entity = CustomEntity::entityMap[guid];
+        auto a = CustomEntity::entityMap;
+        auto entity = CustomEntity::entityMap.Find(guid);
         if (entity == nullptr) {
             entity = safe_cast<CustomEntity>(Reflect::Instance(type));
-            CustomEntity::entityMap.insert(std::pair(guid,entity));
+            CustomEntity::entityMap.Insert(guid,entity);
         }
+        a = CustomEntity::entityMap;
         entity->SerializeIn(archive);
         if (entity->IsGameObject())
             goes.push_back(safe_cast<GameObject>(entity));

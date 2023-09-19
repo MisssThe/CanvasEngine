@@ -15,8 +15,8 @@
 #ifndef CEREAL_RAPIDJSON_INTERNAL_REGEX_H_
 #define CEREAL_RAPIDJSON_INTERNAL_REGEX_H_
 
-#include "cereal/external/rapidjson/allocators.h"
-#include "cereal/external/rapidjson/stream.h"
+#include "../allocators.h"
+#include "../stream.h"
 #include "stack.h"
 
 #ifdef __clang__

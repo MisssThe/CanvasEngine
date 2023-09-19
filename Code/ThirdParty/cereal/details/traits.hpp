@@ -2,7 +2,7 @@
     \brief Internal type trait support
     \ingroup Internal */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -247,19 +247,19 @@ namespace cereal
     CEREAL_MAKE_HAS_NON_MEMBER_TEST(versioned_serialize, CEREAL_SERIALIZE_FUNCTION_NAME, CEREAL_MAKE_VERSIONED_TEST);
 
     // ######################################################################
-    // Member _Load
+    // Member Load
     CEREAL_MAKE_HAS_MEMBER_TEST(load, load,);
 
     // ######################################################################
-    // Member _Load (versioned)
+    // Member Load (versioned)
     CEREAL_MAKE_HAS_MEMBER_TEST(load, versioned_load, CEREAL_MAKE_VERSIONED_TEST);
 
     // ######################################################################
-    // Non Member _Load
+    // Non Member Load
     CEREAL_MAKE_HAS_NON_MEMBER_TEST(load, CEREAL_LOAD_FUNCTION_NAME,);
 
     // ######################################################################
-    // Non Member _Load (versioned)
+    // Non Member Load (versioned)
     CEREAL_MAKE_HAS_NON_MEMBER_TEST(versioned_load, CEREAL_LOAD_FUNCTION_NAME, CEREAL_MAKE_VERSIONED_TEST);
 
     // ######################################################################
@@ -598,7 +598,7 @@ namespace cereal
     #undef CEREAL_MAKE_HAS_NON_MEMBER_SAVE_MINIMAL_TEST
 
     // ######################################################################
-    // _Load Minimal Utilities
+    // Load Minimal Utilities
     namespace detail
     {
       //! Used to help strip away conversion wrappers
@@ -767,13 +767,13 @@ namespace cereal
       detail::has_member_##load_test_name##_wrapper<T, A, detail::has_member_##load_test_name##_impl<T, A>::value>::value> {};
 
     // ######################################################################
-    // Member _Load Minimal
+    // Member Load Minimal
     CEREAL_MAKE_HAS_MEMBER_LOAD_MINIMAL_IMPL(load_minimal, )
     CEREAL_MAKE_HAS_MEMBER_LOAD_MINIMAL_HELPERS_IMPL(load_minimal, save_minimal, save, )
     CEREAL_MAKE_HAS_MEMBER_LOAD_MINIMAL_TEST(load_minimal, load)
 
     // ######################################################################
-    // Member _Load Minimal (versioned)
+    // Member Load Minimal (versioned)
     CEREAL_MAKE_HAS_MEMBER_LOAD_MINIMAL_IMPL(versioned_load_minimal, CEREAL_MAKE_VERSIONED_TEST)
     CEREAL_MAKE_HAS_MEMBER_LOAD_MINIMAL_HELPERS_IMPL(versioned_load_minimal, versioned_save_minimal, versioned_save, CEREAL_MAKE_VERSIONED_TEST)
     CEREAL_MAKE_HAS_MEMBER_LOAD_MINIMAL_TEST(versioned_load_minimal, versioned_load)
@@ -784,7 +784,7 @@ namespace cereal
     #undef CEREAL_MAKE_HAS_MEMBER_LOAD_MINIMAL_TEST
 
     // ######################################################################
-    // Non-Member _Load Minimal
+    // Non-Member Load Minimal
     namespace detail
     {
       #ifdef CEREAL_OLDER_GCC
@@ -867,11 +867,11 @@ namespace cereal
       detail::has_non_member_##test_name##_wrapper<T, A, detail::has_non_member_##test_name##_impl<T, A>::exists>::value> {};
 
     // ######################################################################
-    // Non-Member _Load Minimal
+    // Non-Member Load Minimal
     CEREAL_MAKE_HAS_NON_MEMBER_LOAD_MINIMAL_TEST(load_minimal, save_minimal, )
 
     // ######################################################################
-    // Non-Member _Load Minimal (versioned)
+    // Non-Member Load Minimal (versioned)
     CEREAL_MAKE_HAS_NON_MEMBER_LOAD_MINIMAL_TEST(versioned_load_minimal, versioned_save_minimal, CEREAL_MAKE_VERSIONED_TEST)
 
     // ######################################################################
@@ -1061,7 +1061,7 @@ namespace cereal
     #undef CEREAL_MAKE_IS_SPECIALIZED
 
     // ######################################################################
-    // detects if a type has any _active minimal output serialization
+    // detects if a type has any active minimal output serialization
     template <class T, class OutputArchive>
     struct has_minimal_output_serialization : std::integral_constant<bool,
       is_specialized_member_save_minimal<T, OutputArchive>::value ||
@@ -1073,7 +1073,7 @@ namespace cereal
          is_specialized_member_save<T, OutputArchive>::value))> {};
 
     // ######################################################################
-    // detects if a type has any _active minimal input serialization
+    // detects if a type has any active minimal input serialization
     template <class T, class InputArchive>
     struct has_minimal_input_serialization : std::integral_constant<bool,
       is_specialized_member_load_minimal<T, InputArchive>::value ||

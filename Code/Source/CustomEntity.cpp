@@ -10,7 +10,7 @@
 #include "../Include/General/Cipher.h"
 
 //REFLECT_REGISTER(CustomEntity)
-std::map<Cipher::GUID, var<CustomEntity>> CustomEntity::entityMap;   //只用于初始的序列化
+GuidMap<var<CustomEntity>> CustomEntity::entityMap;   //只用于初始的序列化
 
 var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive) {
     bool isAsset;
@@ -23,13 +23,13 @@ var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive)
         Cipher::GUID id;
         std::string type;
         archive(id, type);
-        auto mf = entityMap.find(id);
+        auto mf = entityMap.Find(id);
         var<CustomEntity> entity;
-        if (mf == entityMap.end()) {
+        if (mf == nullptr) {
             entity = safe_cast<CustomEntity>(Reflect::Instance(type));
-            entityMap.insert(std::pair(id,entity));
+            entityMap.Insert(id,entity);
         } else {
-            entity = mf->second;
+            entity = mf;
         }
         return entity;
     }
@@ -42,6 +42,7 @@ void CustomEntity::SerializeOutPtr(cereal::BinaryOutputArchive &archive, std::sh
         archive(safe_cast<CustomAsset>(ptr)->path);
     else {
         archive(safe_cast<CustomEntity>(ptr)->guid,ptr->Type());
+
     }
 }
 

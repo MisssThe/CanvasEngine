@@ -41,9 +41,11 @@ var go = new_ptr<GameObject>();
 go->name = "test";
 //go->AddComponent("Transform");
     for (int i = 0; i < 100; ++i) {
-        safe_cast<Transform>(s->AddGameObject("go" )->AddComponent("Transform"))->x = i * 12;
+        auto go = s->AddGameObject("go"+i );
+        safe_cast<Transform>(go->AddComponent("Transform"))->x = i *12;
+        go->AddComponent("Renderer");
     }
-//AssetManager::Create("aaa.te",s);
+//    AssetManager::Create("aaa.te",s);
     std::cout << "--------------------------------------------------------------"<<std::endl;
 //    var<Scene> a = safe_cast<Scene>(AssetManager::Instance("aaa.te"));
     auto scene = SceneManager::Load("aaa.te", true);

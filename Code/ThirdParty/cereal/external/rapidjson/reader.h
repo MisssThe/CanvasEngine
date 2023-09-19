@@ -20,9 +20,9 @@
 #include "allocators.h"
 #include "stream.h"
 #include "encodedstream.h"
-#include "cereal/external/rapidjson/internal/meta.h"
-#include "cereal/external/rapidjson/internal/stack.h"
-#include "cereal/external/rapidjson/internal/strtod.h"
+#include "internal/meta.h"
+#include "internal/stack.h"
+#include "internal/strtod.h"
 #include <limits>
 
 #if defined(CEREAL_RAPIDJSON_SIMD) && defined(_MSC_VER)
@@ -122,7 +122,7 @@ CEREAL_RAPIDJSON_DIAG_OFF(effc++)
     CEREAL_RAPIDJSON_MULTILINEMACRO_END
 #endif
 
-#include "cereal/external/rapidjson/error/error.h" // ParseErrorCode, ParseResult
+#include "error/error.h" // ParseErrorCode, ParseResult
 
 CEREAL_RAPIDJSON_NAMESPACE_BEGIN
 

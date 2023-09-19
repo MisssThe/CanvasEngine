@@ -15,7 +15,7 @@
 #ifndef CEREAL_RAPIDJSON_ERROR_ERROR_H_
 #define CEREAL_RAPIDJSON_ERROR_ERROR_H_
 
-#include "cereal/external/rapidjson/rapidjson.h"
+#include "../rapidjson.h"
 
 #ifdef __clang__
 CEREAL_RAPIDJSON_DIAG_PUSH

@@ -15,7 +15,7 @@
 #ifndef CEREAL_RAPIDJSON_INTERNAL_META_H_
 #define CEREAL_RAPIDJSON_INTERNAL_META_H_
 
-#include "cereal/external/rapidjson/rapidjson.h"
+#include "../rapidjson.h"
 
 #ifdef __GNUC__
 CEREAL_RAPIDJSON_DIAG_PUSH

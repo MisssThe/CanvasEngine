@@ -2,7 +2,7 @@
     \brief Archive adapters that provide additional functionality
            on top of an existing archive */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without

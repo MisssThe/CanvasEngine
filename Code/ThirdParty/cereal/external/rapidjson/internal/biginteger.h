@@ -15,7 +15,7 @@
 #ifndef CEREAL_RAPIDJSON_BIGINTEGER_H_
 #define CEREAL_RAPIDJSON_BIGINTEGER_H_
 
-#include "cereal/external/rapidjson/rapidjson.h"
+#include "../rapidjson.h"
 
 #if defined(_MSC_VER) && !__INTEL_COMPILER && defined(_M_AMD64)
 #include <intrin.h> // for _umul128

@@ -2,7 +2,7 @@
     \brief Support for std::variant
     \ingroup STLSupport */
 /*
-  Copyright (c) cereal, 2017, Randolph Voorhies, Shane Grant, Juan Pedro
+  Copyright (c) 2014, 2017, Randolph Voorhies, Shane Grant, Juan Pedro
   Bolivar Puente. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without

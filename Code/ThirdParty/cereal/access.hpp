@@ -1,7 +1,7 @@
 /*! \file access.hpp
     \brief Access control and default construction */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -34,8 +34,8 @@
 #include <cstdint>
 #include <functional>
 
-#include "macros.hpp"
-#include "specialize.hpp"
+#include "cereal/macros.hpp"
+#include "cereal/specialize.hpp"
 #include "cereal/details/helpers.hpp"
 
 namespace cereal

@@ -26,7 +26,7 @@ set(GENERAL
         Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h)
 
 set(Entity
-        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h Source/Component.cpp Include/Framework/Scenes/Component.h Include/Engine/Transform.cpp Include/Engine/Transform.h)
+        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h Source/Component.cpp Include/Framework/Scenes/Component.h Source/Transform.cpp Include/Engine/Transform.h Source/Renderer.cpp Include/Engine/Renderer.h)
 
 set(Asset
         Include/Engine/Graphic/TextureAsset.cpp

@@ -16,7 +16,7 @@
 #define CEREAL_RAPIDJSON_POINTER_H_
 
 #include "document.h"
-#include "cereal/external/rapidjson/internal/itoa.h"
+#include "internal/itoa.h"
 
 #ifdef __clang__
 CEREAL_RAPIDJSON_DIAG_PUSH

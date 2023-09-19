@@ -16,7 +16,7 @@
 #define CEREAL_RAPIDJSON_MEMORYBUFFER_H_
 
 #include "stream.h"
-#include "cereal/external/rapidjson/internal/stack.h"
+#include "internal/stack.h"
 
 CEREAL_RAPIDJSON_NAMESPACE_BEGIN
 

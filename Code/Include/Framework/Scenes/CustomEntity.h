@@ -37,7 +37,7 @@ protected:
     var<CustomPtr> SerializeInPtr(cereal::BinaryInputArchive& archive);
     void SerializeOutPtr(cereal::BinaryOutputArchive& archive, var<CustomPtr>& ptr);
 public:
-    static std::map<Cipher::GUID, var<CustomEntity>> entityMap;   //只用于初始的序列化
+    static GuidMap<var<CustomEntity>> entityMap;   //只用于初始的序列化
 };
 
 

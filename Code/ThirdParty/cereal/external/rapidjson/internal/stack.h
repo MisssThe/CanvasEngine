@@ -15,7 +15,7 @@
 #ifndef CEREAL_RAPIDJSON_INTERNAL_STACK_H_
 #define CEREAL_RAPIDJSON_INTERNAL_STACK_H_
 
-#include "cereal/external/rapidjson/allocators.h"
+#include "../allocators.h"
 #include "swap.h"
 #include <cstddef>
 

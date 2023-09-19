@@ -2,7 +2,7 @@
     \brief Internal polymorphism support
     \ingroup Internal */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -45,8 +45,8 @@
 #ifndef CEREAL_DETAILS_POLYMORPHIC_IMPL_HPP_
 #define CEREAL_DETAILS_POLYMORPHIC_IMPL_HPP_
 
-#include "polymorphic_impl_fwd.hpp"
-#include "static_object.hpp"
+#include "cereal/details/polymorphic_impl_fwd.hpp"
+#include "cereal/details/static_object.hpp"
 #include "cereal/types/memory.hpp"
 #include "cereal/types/string.hpp"
 #include <functional>
@@ -278,7 +278,7 @@ namespace cereal
         // Find all chainable unregistered relations
         /* The strategy here is to process only the nodes in the class hierarchy graph that have been
            affected by the new insertion. The aglorithm iteratively processes a node an ensures that it
-           is updated with all new shortest length paths. It then rocesses the parents of the _active node,
+           is updated with all new shortest length paths. It then rocesses the parents of the active node,
            with the knowledge that all children have already been processed.
 
            Note that for the following, we'll use the nomenclature of parent and child to not confuse with
@@ -326,7 +326,7 @@ namespace cereal
             const auto parent = parentStack.top();
             parentStack.pop();
 
-            // _Update paths to all children marked dirty
+            // Update paths to all children marked dirty
             for( auto const & childPair : baseMap[parent] )
             {
               const auto child = childPair.first;

@@ -15,7 +15,7 @@
 #ifndef CEREAL_RAPIDJSON_INTERNAL_SWAP_H_
 #define CEREAL_RAPIDJSON_INTERNAL_SWAP_H_
 
-#include "cereal/external/rapidjson/rapidjson.h"
+#include "../rapidjson.h"
 
 #if defined(__clang__)
 CEREAL_RAPIDJSON_DIAG_PUSH

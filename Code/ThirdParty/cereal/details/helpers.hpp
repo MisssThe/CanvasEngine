@@ -2,7 +2,7 @@
     \brief Internal helper functionality
     \ingroup Internal */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@
 #include <stdexcept>
 
 #include "cereal/macros.hpp"
-#include "static_object.hpp"
+#include "cereal/details/static_object.hpp"
 
 namespace cereal
 {

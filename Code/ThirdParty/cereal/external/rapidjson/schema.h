@@ -33,7 +33,7 @@
 #endif
 
 #if CEREAL_RAPIDJSON_SCHEMA_USE_INTERNALREGEX
-#include "cereal/external/rapidjson/internal/regex.h"
+#include "internal/regex.h"
 #elif CEREAL_RAPIDJSON_SCHEMA_USE_STDREGEX
 #include <regex>
 #endif

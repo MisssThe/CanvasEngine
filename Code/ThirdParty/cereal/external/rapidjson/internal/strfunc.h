@@ -15,7 +15,7 @@
 #ifndef CEREAL_RAPIDJSON_INTERNAL_STRFUNC_H_
 #define CEREAL_RAPIDJSON_INTERNAL_STRFUNC_H_
 
-#include "cereal/external/rapidjson/stream.h"
+#include "../stream.h"
 #include <cwchar>
 
 CEREAL_RAPIDJSON_NAMESPACE_BEGIN

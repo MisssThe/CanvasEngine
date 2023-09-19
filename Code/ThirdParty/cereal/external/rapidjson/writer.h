@@ -16,11 +16,11 @@
 #define CEREAL_RAPIDJSON_WRITER_H_
 
 #include "stream.h"
-#include "cereal/external/rapidjson/internal/meta.h"
-#include "cereal/external/rapidjson/internal/stack.h"
-#include "cereal/external/rapidjson/internal/strfunc.h"
-#include "cereal/external/rapidjson/internal/dtoa.h"
-#include "cereal/external/rapidjson/internal/itoa.h"
+#include "internal/meta.h"
+#include "internal/stack.h"
+#include "internal/strfunc.h"
+#include "internal/dtoa.h"
+#include "internal/itoa.h"
 #include "stringbuffer.h"
 #include <new>      // placement new
 

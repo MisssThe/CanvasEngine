@@ -15,7 +15,7 @@
 #ifndef CEREAL_RAPIDJSON_ITOA_
 #define CEREAL_RAPIDJSON_ITOA_
 
-#include "cereal/external/rapidjson/rapidjson.h"
+#include "../rapidjson.h"
 
 CEREAL_RAPIDJSON_NAMESPACE_BEGIN
 namespace internal {

@@ -2,7 +2,7 @@
     \brief Support for pointers to polymorphic base classes
     \ingroup OtherTypes */
 /*
-  Copyright (c) cereal, Randolph Voorhies, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@
 #define CEREAL_TYPES_POLYMORPHIC_HPP_
 
 #include "cereal/cereal.hpp"
-#include "memory.hpp"
+#include "cereal/types/memory.hpp"
 
 #include "cereal/details/util.hpp"
 #include "cereal/details/helpers.hpp"
