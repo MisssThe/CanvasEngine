@@ -13,44 +13,88 @@
 
 REFLECT_REGISTER(Scene) /* NOLINT */
 
+void Scene::SerializeInDeque(cereal::BinaryInputArchive &archive) {
+    int count;
+    archive(count);
+    std::string type;
+    long ptr;
+    for (int index = 0; index < count; ++index) {
+        archive(ptr, type);
+        auto f = CustomEntity::entityMap.find(ptr);
+        var<CustomEntity> ce;
+        if (f != CustomEntity::entityMap.end())
+            ce = f->second;
+        else {
+            ce = safe_cast<CustomEntity>(Reflect::Instance(type));
+            ce->SerializeIn(archive);
+            CustomEntity::entityMap.insert(std::pair(ptr, ce));
+        }
+    }
+}
+
 void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
     int count;
     archive(count);
     std::string type;
+    long ptr;
     std::deque<var<GameObject>> goes;
-    Cipher::GUID guid;
     for (int index = 0; index < count; ++index) {
-        archive(guid, type);
-        auto a = CustomEntity::entityMap;
-        auto entity = CustomEntity::entityMap.Find(guid);
-        if (entity == nullptr) {
-            entity = safe_cast<CustomEntity>(Reflect::Instance(type));
-            CustomEntity::entityMap.Insert(guid,entity);
+        archive(ptr, type);
+        auto f = CustomEntity::entityMap.find(ptr);
+        var<CustomEntity> ce;
+        if (f != CustomEntity::entityMap.end())
+            ce = f->second;
+        else {
+            ce = safe_cast<CustomEntity>(Reflect::Instance(type));
+            ce->SerializeIn(archive);
+            CustomEntity::entityMap.insert(std::pair(ptr, ce));
         }
-        a = CustomEntity::entityMap;
-        entity->SerializeIn(archive);
-        if (entity->IsGameObject())
-            goes.push_back(safe_cast<GameObject>(entity));
+        goes.push_back(safe_cast<GameObject>(ce));
     }
+    this->SerializeInDeque(archive);
+    this->SerializeInDeque(archive);
+    this->SerializeInDeque(archive);
+    this->SerializeInDeque(archive);
+    this->SerializeInDeque(archive);
+    CustomEntity::SerializeFinish();
+
     for (auto go : goes) {
         this->AddGameObject(go);
     }
-    CustomEntity::SerializeFinish();
+}
+
+void Scene::SerializeOutDeque(cereal::BinaryOutputArchive &archive, std::deque<std::shared_ptr<Component>>& que) {
+    int count = (int)que.size();
+    archive(count);
+    for (const auto& q : que) {
+        auto ptr = reinterpret_cast<long>(q.get());
+        archive(ptr, q->Type());
+        q->SerializeOut(archive);
+    }
 }
 
 void Scene::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
+    //收集所有game object和component
+    //直接用地址作key
     int count = (int)this->gameObjects.size();
     archive(count);
     for (const auto& go : this->gameObjects) {
-        archive(go->guid, go->Type());
+        auto ptr = reinterpret_cast<long>(go.get());
+        archive(ptr, go->Type());
         go->SerializeOut(archive);
     }
+    this->SerializeOutDeque(archive, this->componentInitial);
+    this->SerializeOutDeque(archive, this->componentEnable);
+    this->SerializeOutDeque(archive, this->componentInvoke);
+    this->SerializeOutDeque(archive, this->componentDisable);
+    this->SerializeOutDeque(archive, this->componentIdle);
+
     CustomEntity::SerializeFinish();
 }
 
 void Scene::Initial() {
     for (const auto& com: this->componentInitial) {
-        com->Enable();
+        com->Initial();
         this->componentEnable.push_back(com);
     }
     this->componentInitial.clear();

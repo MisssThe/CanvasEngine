@@ -10,6 +10,7 @@
 
 class SceneManager {
 public:
+    static var<Scene> Create(bool isSingle = true);
     static var<Scene> Load(const std::string& path, bool isSingle = true);
     static void UnLoad(const std::shared_ptr<Scene>& scene);
     static void Invoke();

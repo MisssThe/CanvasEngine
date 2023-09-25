@@ -36,22 +36,24 @@ void Engine::Invoke() {
 //    ta->c = 111;
 //    ta->d = "ddddd";
 //    ta->e = "eeeee";
-var<Scene> s = new_ptr<Scene>();
+var<Scene> s = SceneManager::Create();
 var go = new_ptr<GameObject>();
 go->name = "test";
 //go->AddComponent("Transform");
-    for (int i = 0; i < 100; ++i) {
-        auto go = s->AddGameObject("go"+i );
+    for (int i = 0; i < 10; ++i) {
+        auto go = s->AddGameObject(&"go"[i] );
         safe_cast<Transform>(go->AddComponent("Transform"))->x = i *12;
         go->AddComponent("Renderer");
     }
-//    AssetManager::Create("aaa.te",s);
+    SceneManager::Invoke();
+    SceneManager::Invoke();
+    SceneManager::Invoke();
+
+    AssetManager::Create("aaa.test",s);
     std::cout << "--------------------------------------------------------------"<<std::endl;
-//    var<Scene> a = safe_cast<Scene>(AssetManager::Instance("aaa.te"));
-    auto scene = SceneManager::Load("aaa.te", true);
+//    auto scene = SceneManager::Load("aaa.test", true);
 //    SceneManager::Invoke();
 //    std::cout << a->Type();
 //    SceneManager::Load("test.scene");
-//    SceneManager::Invoke();
 //    }
 }

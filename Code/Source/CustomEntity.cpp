@@ -10,7 +10,7 @@
 #include "../Include/General/Cipher.h"
 
 //REFLECT_REGISTER(CustomEntity)
-GuidMap<var<CustomEntity>> CustomEntity::entityMap;   //只用于初始的序列化
+std::unordered_map<long, var<CustomEntity> > CustomEntity::entityMap;   //只用于初始的序列化
 
 var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive) {
     bool isAsset;
@@ -20,19 +20,20 @@ var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive)
         archive(identity);
         return AssetManager::Instance(identity);
     } else {
-        Cipher::GUID id;
+        long id;
         std::string type;
         archive(id, type);
-        auto mf = entityMap.Find(id);
+        auto mf = entityMap.find(id);
         var<CustomEntity> entity;
-        if (mf == nullptr) {
+        if (mf == entityMap.end()) {
             entity = safe_cast<CustomEntity>(Reflect::Instance(type));
-            entityMap.Insert(id,entity);
+            entityMap.insert(std::pair( id,entity));
         } else {
-            entity = mf;
+            entity = mf->second;
         }
         return entity;
     }
+    return nullptr;
 }
 
 void CustomEntity::SerializeOutPtr(cereal::BinaryOutputArchive &archive, std::shared_ptr<CustomPtr>& ptr) {
@@ -41,8 +42,8 @@ void CustomEntity::SerializeOutPtr(cereal::BinaryOutputArchive &archive, std::sh
     if (isAsset)
         archive(safe_cast<CustomAsset>(ptr)->path);
     else {
-        archive(safe_cast<CustomEntity>(ptr)->guid,ptr->Type());
-
+        auto p = reinterpret_cast<long>(ptr.get());
+        archive(p, ptr->Type());
     }
 }
 
@@ -56,5 +57,5 @@ CustomEntity::CustomEntity() : guid(Cipher::Guid()) {
 }
 
 void CustomEntity::SerializeFinish() {
-
+    CustomEntity::entityMap.clear();
 }

@@ -31,3 +31,10 @@ var<Scene> SceneManager::Load(const std::string& path, bool isSingle) {
 void SceneManager::UnLoad(const std::shared_ptr<Scene>& scene) {
 
 }
+
+var<Scene> SceneManager::Create(bool isSingle) {
+    if (isSingle)
+        Queue::Iterator<var<Scene>>(scenes, [](var<Scene>& scene) { UnLoad(scenes.front()); });
+    auto scene = new_ptr<Scene>();
+    return scene;
+}

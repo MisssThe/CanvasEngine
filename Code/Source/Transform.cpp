@@ -7,7 +7,7 @@
 REFLECT_REGISTER(Transform)
 
 void Transform::Initial() {
-
+    std::cout << this->x << "," << this->y << "," << this->z << std::endl;
 }
 
 void Transform::Enable() {
@@ -27,9 +27,9 @@ void Transform::Release() {
 }
 
 void Transform::SerializeInInternal(cereal::BinaryInputArchive &archive) {
-
+    archive(this->x,y,z);
 }
 
 void Transform::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
-
+    archive(this->x,y,z);
 }
