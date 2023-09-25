@@ -56,8 +56,8 @@ void load()
 void Engine::Invoke() {
 //create();
     load();
-//    while (true) {
-//        SceneManager::Invoke();
-//        Graphic::Invoke();
-//    }
+    while (true) {
+        SceneManager::Invoke();
+        Graphic::Invoke();
+    }
 }

@@ -7,12 +7,13 @@
 REFLECT_REGISTER(GlobalSetting) /* NOLINT */
 
 GraphicType GlobalSetting::graphicType;
+PipelineType GlobalSetting::pipelineType;
 int GlobalSetting::windowWidth, GlobalSetting::windowHeight;
 
 void GlobalSetting::SerializeInInternal(inputArchive &archive) {
-    archive(graphicType, windowWidth, windowHeight);
+    archive(graphicType, pipelineType, windowWidth, windowHeight);
 }
 
 void GlobalSetting::SerializeOutInternal(outputArchive &archive) {
-    archive(graphicType, windowWidth, windowHeight);
+    archive(graphicType, pipelineType, windowWidth, windowHeight);
 }

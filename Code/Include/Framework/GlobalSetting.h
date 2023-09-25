@@ -18,6 +18,7 @@ protected:
 public:
     //Graphic
     static GraphicType graphicType;
+    static PipelineType pipelineType;
     static int windowWidth, windowHeight;
 };
 

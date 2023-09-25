@@ -7,10 +7,16 @@
 #define CODE_GRAPHIC_H
 
 #include "Core/GraphicCore.h"
+#include "Pipeline/GraphicPipeline.h"
 
 enum GraphicType
 {
     OpenGL, Metal, DXD, Vulkan
+};
+
+enum PipelineType
+{
+    Forward
 };
 
 class Renderer;
@@ -23,6 +29,7 @@ public:
     static void Register(var<Renderer> renderer);
 private:
     static var<GraphicCore> core;
+    static var<GraphicPipeline> pipeline;
     static std::vector<var<Renderer>> renderers;
 };
 

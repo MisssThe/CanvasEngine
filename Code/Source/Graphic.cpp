@@ -5,8 +5,10 @@
 #include "../Include/Core/Graphic/Graphic.h"
 #include "../Include/Core/Graphic/Core/GraphicOpenGLCore.h"
 #include "GlobalSetting.h"
+#include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h"
 
 var<GraphicCore> Graphic::core;
+var<GraphicPipeline> Graphic::pipeline;
 std::vector<var<Renderer>> Graphic::renderers;
 
 void Graphic::Initial() {
@@ -19,6 +21,11 @@ void Graphic::Initial() {
         case DXD:
             break;
         case Vulkan:
+            break;
+    }
+    switch (GlobalSetting::pipelineType) {
+        case Forward:
+            pipeline = cast<GraphicPipeline>(new_ptr<ForwardPipeline>());
             break;
     }
 }

@@ -7,12 +7,12 @@
 
 
 #include "CustomPtr.h"
+#include "../RenderData.h"
 
 class GraphicPipeline : public CustomPtr {
 public:
-    std::string Type() override;
-
     ~GraphicPipeline() override = default;
+    virtual void Invoke(var<RenderData> data) = 0;
 };
 
 

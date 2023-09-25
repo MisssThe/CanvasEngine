@@ -17,8 +17,7 @@ if (CMAKE_HOST_WIN32)
     set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_Windows/include)
 elseif (CMAKE_HOST_APPLE)
     set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_MacOS/include)
-elseif (CMAKE_HOST_UNIX)
-
+#elseif (CMAKE_HOST_UNIX)
 endif()
 
 include_directories(
@@ -63,7 +62,7 @@ set(Core
         Source/Graphic.cpp Include/Core/Graphic/Graphic.h
         Source/GraphicOpenGLCore.cpp Include/Core/Graphic/Core/GraphicOpenGLCore.h
         Source/RenderData.cpp Include/Core/Graphic/RenderData.h
-        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h)
+        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h)
 
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)
@@ -71,8 +70,7 @@ if (CMAKE_HOST_WIN32)
 elseif (CMAKE_HOST_APPLE)
     add_executable(Code main.cpp glad.c ${FRAMEWORK} ${Entity} ${Asset} ${Core} ${GENERAL} Source/Engine.cpp Include/Engine.h)
     set(GLFW_LIB ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_MacOS/lib/libglfw.dylib)
-elseif (CMAKE_HOST_UNIX)
-
+#elseif (CMAKE_HOST_UNIX)
 endif()
 
 target_link_libraries(Code ${GLFW_LIB})

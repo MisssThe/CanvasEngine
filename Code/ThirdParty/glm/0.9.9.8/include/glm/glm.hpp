@@ -3,7 +3,7 @@
 ///
 /// @defgroup core Core features
 ///
-/// @brief Features that implement in C++ the GLSL specification as closely as possible.
+/// @brief ForwardFeatures that implement in C++ the GLSL specification as closely as possible.
 ///
 /// The GLM core consists of C++ types that mirror GLSL types and
 /// C++ functions that mirror the GLSL functions.

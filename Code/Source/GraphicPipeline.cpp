@@ -4,4 +4,4 @@
 
 #include "../Include/Core/Graphic/Pipeline/GraphicPipeline.h"
 
-REFLECT_REGISTER(GraphicPipeline) /* NOLINT */
+//REFLECT_REGISTER(GraphicPipeline) /* NOLINT */
