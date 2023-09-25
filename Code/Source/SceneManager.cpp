@@ -36,5 +36,6 @@ var<Scene> SceneManager::Create(bool isSingle) {
     if (isSingle)
         Queue::Iterator<var<Scene>>(scenes, [](var<Scene>& scene) { UnLoad(scenes.front()); });
     auto scene = new_ptr<Scene>();
+    scenes.push(scene);
     return scene;
 }

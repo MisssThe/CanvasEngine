@@ -28,12 +28,3 @@ void GameObject::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
 bool GameObject::IsGameObject() {
     return true;
 }
-
-var<Component> GameObject::AddComponent(const std::string& com) {
-    auto c = Reflect::Instance(com);
-    if (c == nullptr)
-        return nullptr;
-    var<Component> ct = safe_cast<Component>(c);
-    this->components.push(ct);
-    return ct;
-}

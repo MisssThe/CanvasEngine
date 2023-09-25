@@ -26,33 +26,33 @@ Engine::~Engine() {
     Debug::Info("Release Engine", "Engine");
 }
 
+void create()
+{
+    var<Scene> s = SceneManager::Create();
+    for (int i = 0; i < 7000; ++i) {
+        auto go = s->AddGameObject(&"go"[i] );
+//        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i *12;
+//        s->AddComponent(go, "Renderer");
+//        s->AddComponent(go, "Renderer");
+//        s->AddComponent(go, "Renderer");
+//        s->AddComponent(go, "Renderer");
+    }
+    AssetManager::Create("aaa.test",s);
+}
+
+void load()
+{
+    auto scene = SceneManager::Load("aaa.test", true);
+}
+
 void Engine::Invoke() {
 //    while (true)
 //    {
-
-//    var<TextureAsset> ta = new_ptr<TextureAsset>();
-//    ta->a = 1;
-//    ta->b = 11;
-//    ta->c = 111;
-//    ta->d = "ddddd";
-//    ta->e = "eeeee";
-var<Scene> s = SceneManager::Create();
-var go = new_ptr<GameObject>();
-go->name = "test";
-//go->AddComponent("Transform");
-    for (int i = 0; i < 10; ++i) {
-        auto go = s->AddGameObject(&"go"[i] );
-        safe_cast<Transform>(go->AddComponent("Transform"))->x = i *12;
-        go->AddComponent("Renderer");
-    }
-    SceneManager::Invoke();
-    SceneManager::Invoke();
-    SceneManager::Invoke();
-
-    AssetManager::Create("aaa.test",s);
+//create();
+load();
     std::cout << "--------------------------------------------------------------"<<std::endl;
-//    auto scene = SceneManager::Load("aaa.test", true);
-//    SceneManager::Invoke();
+    SceneManager::Invoke();
+//    std::cout << a->Type();
 //    std::cout << a->Type();
 //    SceneManager::Load("test.scene");
 //    }

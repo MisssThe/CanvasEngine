@@ -24,8 +24,9 @@ public:
     void Release();
     void AddGameObject(var<GameObject>& go);
     var<GameObject> AddGameObject(std::string name);
-    void AddComponent(var<GameObject>& go, var<Component>& com);
-    void AddComponent(var<GameObject> go, std::string& com);
+    void AddComponent(const var<GameObject>& go, var<Component>& com);
+    var<Component> AddComponent(const std::shared_ptr<GameObject>& go, std::string& com);
+    var<Component> AddComponent(const std::shared_ptr<GameObject>& go, const std::string com);
 protected:
     void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
     void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;

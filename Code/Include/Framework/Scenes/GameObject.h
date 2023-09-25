@@ -19,7 +19,6 @@ public:
     bool IsGameObject() final;
     std::string Type() override;
     ~GameObject() override = default;
-    var<Component> AddComponent(const std::string& com);
 public:
     std::string name;
     std::queue<var<Component>> components;

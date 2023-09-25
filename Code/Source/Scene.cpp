@@ -17,18 +17,19 @@ void Scene::SerializeInDeque(cereal::BinaryInputArchive &archive) {
     int count;
     archive(count);
     std::string type;
-    long ptr;
+    long long ptr;
     for (int index = 0; index < count; ++index) {
         archive(ptr, type);
         auto f = CustomEntity::entityMap.find(ptr);
         var<CustomEntity> ce;
+        //正常情况下不会出现component不存在的情况
         if (f != CustomEntity::entityMap.end())
             ce = f->second;
         else {
             ce = safe_cast<CustomEntity>(Reflect::Instance(type));
-            ce->SerializeIn(archive);
             CustomEntity::entityMap.insert(std::pair(ptr, ce));
         }
+        ce->SerializeIn(archive);
     }
 }
 
@@ -36,7 +37,7 @@ void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
     int count;
     archive(count);
     std::string type;
-    long ptr;
+    long long ptr;
     std::deque<var<GameObject>> goes;
     for (int index = 0; index < count; ++index) {
         archive(ptr, type);
@@ -67,7 +68,7 @@ void Scene::SerializeOutDeque(cereal::BinaryOutputArchive &archive, std::deque<s
     int count = (int)que.size();
     archive(count);
     for (const auto& q : que) {
-        auto ptr = reinterpret_cast<long>(q.get());
+        auto ptr = reinterpret_cast<long long>(q.get());
         archive(ptr, q->Type());
         q->SerializeOut(archive);
     }
@@ -79,7 +80,7 @@ void Scene::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
     int count = (int)this->gameObjects.size();
     archive(count);
     for (const auto& go : this->gameObjects) {
-        auto ptr = reinterpret_cast<long>(go.get());
+        auto ptr = reinterpret_cast<long long>(go.get());
         archive(ptr, go->Type());
         go->SerializeOut(archive);
     }
@@ -176,13 +177,23 @@ var<GameObject> Scene::AddGameObject(std::string name) {
     return go;
 }
 
-void Scene::AddComponent(std::shared_ptr<GameObject>& go, std::shared_ptr<Component>& com) {
+void Scene::AddComponent(const std::shared_ptr<GameObject>& go, std::shared_ptr<Component>& com) {
     this->componentInitial.push_back(com);
+    go->components.push(com);
 }
 
-void Scene::AddComponent(std::shared_ptr<GameObject> go, std::string& com) {
+var<Component> Scene::AddComponent(const std::shared_ptr<GameObject>& go, const std::string com) {
     var<Component> c = safe_cast<Component>(Reflect::Instance(com));
     if (c == nullptr)
-        return;
+        return nullptr;
     this->AddComponent(go, c);
+    return c;
+}
+
+var<Component> Scene::AddComponent(const std::shared_ptr<GameObject>& go, std::string& com) {
+    var<Component> c = safe_cast<Component>(Reflect::Instance(com));
+    if (c == nullptr)
+        return nullptr;
+    this->AddComponent(go, c);
+    return c;
 }
