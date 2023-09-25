@@ -68,9 +68,11 @@ set(Core
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)
     set(GLFW_LIB ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_Windows/lib-mingw-w64/libglfw3.a) #编译动态库就报错
-    target_link_libraries(Code ${GLFW_LIB})
 elseif (CMAKE_HOST_APPLE)
     add_executable(Code main.cpp glad.c ${FRAMEWORK} ${Entity} ${Asset} ${Core} ${GENERAL} Source/Engine.cpp Include/Engine.h)
+    set(GLFW_LIB ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_MacOS/lib/libglfw.dylib)
 elseif (CMAKE_HOST_UNIX)
 
 endif()
+
+target_link_libraries(Code ${GLFW_LIB})
