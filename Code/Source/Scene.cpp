@@ -13,13 +13,15 @@
 
 REFLECT_REGISTER(Scene) /* NOLINT */
 
-void Scene::SerializeInDeque(cereal::BinaryInputArchive &archive) {
+void Scene::SerializeInDeque(inputArchive &archive) {
     int count;
     archive(count);
     std::string type;
     long long ptr;
+    EnableState isEnable;
+    AliveState isAlive;
     for (int index = 0; index < count; ++index) {
-        archive(ptr, type);
+        archive(ptr, type, isAlive, isEnable);
         auto f = CustomEntity::entityMap.find(ptr);
         var<CustomEntity> ce;
         //正常情况下不会出现component不存在的情况
@@ -29,18 +31,22 @@ void Scene::SerializeInDeque(cereal::BinaryInputArchive &archive) {
             ce = safe_cast<CustomEntity>(Reflect::Instance(type));
             CustomEntity::entityMap.insert(std::pair(ptr, ce));
         }
+        ce->isAlive = isAlive;
+        ce->isEnable = isEnable;
         ce->SerializeIn(archive);
     }
 }
 
-void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
+void Scene::SerializeInInternal(inputArchive &archive) {
     int count;
     archive(count);
     std::string type;
     long long ptr;
+    EnableState isEnable;
+    AliveState isAlive;
     std::deque<var<GameObject>> goes;
     for (int index = 0; index < count; ++index) {
-        archive(ptr, type);
+        archive(ptr, type, isAlive, isEnable);
         auto f = CustomEntity::entityMap.find(ptr);
         var<CustomEntity> ce;
         if (f != CustomEntity::entityMap.end())
@@ -50,6 +56,8 @@ void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
             ce->SerializeIn(archive);
             CustomEntity::entityMap.insert(std::pair(ptr, ce));
         }
+        ce->isAlive = isAlive;
+        ce->isEnable = isEnable;
         goes.push_back(safe_cast<GameObject>(ce));
     }
     this->SerializeInDeque(archive);
@@ -64,24 +72,24 @@ void Scene::SerializeInInternal(cereal::BinaryInputArchive &archive) {
     }
 }
 
-void Scene::SerializeOutDeque(cereal::BinaryOutputArchive &archive, std::deque<std::shared_ptr<Component>>& que) {
+void Scene::SerializeOutDeque(outputArchive &archive, std::deque<std::shared_ptr<Component>>& que) {
     int count = (int)que.size();
     archive(count);
     for (const auto& q : que) {
         auto ptr = reinterpret_cast<long long>(q.get());
-        archive(ptr, q->Type());
+        archive(ptr, q->Type(), q->isAlive, q->isEnable);
         q->SerializeOut(archive);
     }
 }
 
-void Scene::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
+void Scene::SerializeOutInternal(outputArchive &archive) {
     //收集所有game object和component
     //直接用地址作key
     int count = (int)this->gameObjects.size();
     archive(count);
     for (const auto& go : this->gameObjects) {
         auto ptr = reinterpret_cast<long long>(go.get());
-        archive(ptr, go->Type());
+        archive(ptr, go->Type(), go->isAlive, go->isEnable);
         go->SerializeOut(archive);
     }
     this->SerializeOutDeque(archive, this->componentInitial);
@@ -103,9 +111,12 @@ void Scene::Initial() {
 
 void Scene::Enable() {
     for (const auto& com: this->componentEnable) {
-        if (com->isEnable == EnableTrue)
+        if (com->isEnable == EnableTrue) {
             com->Enable();
-        this->componentInvoke.push_back(com);
+            this->componentInvoke.push_back(com);
+        } else {
+            this->componentIdle.push_back(com);
+        }
     }
     this->componentEnable.clear();
 }
@@ -113,9 +124,9 @@ void Scene::Enable() {
 void Scene::Invoke() {
     unsigned int invalidCom = 0;
     for (const auto& com: this->componentInvoke) {
-        if (com->isAlive)
+        if (com->isEnable == EnableTrue)
             com->Invoke();
-        else if (com->isAlive == AliveState::AliveFalse) {
+        else if (com->isEnable == EnableFalse) {
             this->componentDisable.push_back(com);
         } else
             invalidCom++;
@@ -131,7 +142,12 @@ void Scene::Invoke() {
 void Scene::Disable() {
     for (const auto& com: this->componentDisable) {
         com->Disable();
-        this->componentIdle.push_back(com);
+        if (com->isAlive == AliveFalse)
+            this->componentRelease.push_back(com);
+        else {
+            com->isEnable = EnableNone;
+            this->componentIdle.push_back(com);
+        }
     }
     this->componentDisable.clear();
 
@@ -141,9 +157,9 @@ void Scene::Disable() {
             this->componentRelease.push_back(com);
             com->isAlive = AliveState::AliveNone;
         }
-        else if (com->isEnable == EnableState::EnableFalse) {
+        else if (com->isEnable == EnableState::EnableTrue) {
             this->componentEnable.push_back(com);
-            com->isEnable = EnableState::EnableNone;
+            com->isEnable = EnableState::EnableTrue;
         }
         else if (com->isEnable == EnableState::EnableNone || com->isAlive == AliveState::AliveNone)
             invalidCom++;
@@ -151,7 +167,7 @@ void Scene::Disable() {
     if (invalidCom > (this->componentIdle.size() / 3))
     {
         Deque::ClearUp<var<Component>>(this->componentIdle, [](var<Component>& com) {
-            return com->isAlive == AliveNone || com->isEnable == EnableNone;
+            return com->isAlive == AliveFalse || com->isEnable == EnableTrue;
         });
     }
 }

@@ -6,10 +6,10 @@
 
 REFLECT_REGISTER(TestAsset)
 
-void TestAsset::SerializeInInternal(cereal::BinaryInputArchive &archive) {
+void TestAsset::SerializeInInternal(inputArchive &archive) {
 archive(this->guid);
 }
 
-void TestAsset::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
+void TestAsset::SerializeOutInternal(outputArchive &archive) {
 archive(this->guid);
 }

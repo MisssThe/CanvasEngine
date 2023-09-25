@@ -7,18 +7,18 @@
 
 REFLECT_REGISTER(GameObject) /* NOLINT */
 
-void GameObject::SerializeInInternal(cereal::BinaryInputArchive &archive) {
+void GameObject::SerializeInInternal(inputArchive &archive) {
     int count = 0;
-    archive(this->name, count);
+    archive(count);
     for (int index = 0; index < count; ++index) {
         auto com = this->SerializeInPtr(archive);
         this->components.push(safe_cast<Component>(com));
     }
 }
 
-void GameObject::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
-    int count = this->components.size();
-    archive(this->name, count);
+void GameObject::SerializeOutInternal(outputArchive &archive) {
+    int count = components.size();
+    archive(count);
     Queue::Iterator<var<Component>>(this->components, [&archive, this](var<Component>& component) {
         auto comPtr = cast<CustomPtr>(component);
         this->SerializeOutPtr(archive, comPtr);
@@ -27,4 +27,18 @@ void GameObject::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
 
 bool GameObject::IsGameObject() {
     return true;
+}
+
+void GameObject::SetActive(bool flag) {
+    this->isEnable = flag? EnableTrue : EnableFalse;
+    Queue::IteratorRemove<var<Component>>(this->components, [&flag](var<Component>& com) {
+        com->SetActive(flag);
+    });
+}
+
+void GameObject::Destroy() {
+    this->isAlive = AliveFalse;
+    Queue::IteratorRemove<var<Component>>(this->components, [](var<Component>& com) {
+        com->Destroy();
+    });
 }

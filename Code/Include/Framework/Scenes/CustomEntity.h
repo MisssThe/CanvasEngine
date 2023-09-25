@@ -23,7 +23,6 @@ enum EnableState
 
 class CustomEntity : public CustomPtr, public SerializePtr {
 public:
-    const Cipher::GUID guid;
     EnableState isEnable;
     AliveState isAlive;
 public:
@@ -33,9 +32,11 @@ public:
     bool IsAsset() final ;
     virtual bool IsGameObject() = 0;
     static void SerializeFinish();
+    virtual void SetActive(bool flag) = 0;
+    virtual void Destroy() = 0;
 protected:
-    var<CustomPtr> SerializeInPtr(cereal::BinaryInputArchive& archive);
-    void SerializeOutPtr(cereal::BinaryOutputArchive& archive, var<CustomPtr>& ptr);
+    var<CustomPtr> SerializeInPtr(inputArchive& archive);
+    void SerializeOutPtr(outputArchive& archive, var<CustomPtr>& ptr);
 public:
     static std::unordered_map<long long, var<CustomEntity>> entityMap;   //只用于初始的序列化
 };

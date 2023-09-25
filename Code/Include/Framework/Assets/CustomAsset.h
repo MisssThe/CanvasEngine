@@ -17,8 +17,8 @@ public:
     std::string name;
     std::string path;
 protected:
-    var<CustomAsset> SerializeInPtr(cereal::BinaryInputArchive& archive);
-    void SerializeOutPtr(cereal::BinaryOutputArchive& archive, var<CustomAsset> asset);
+    var<CustomAsset> SerializeInPtr(inputArchive& archive);
+    void SerializeOutPtr(outputArchive& archive, var<CustomAsset> asset);
 };
 
 

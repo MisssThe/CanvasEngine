@@ -28,11 +28,11 @@ public:
     var<Component> AddComponent(const std::shared_ptr<GameObject>& go, std::string& com);
     var<Component> AddComponent(const std::shared_ptr<GameObject>& go, const std::string com);
 protected:
-    void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
-    void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
+    void SerializeInInternal(inputArchive &archive) override;
+    void SerializeOutInternal(outputArchive &archive) override;
 private:
-    void SerializeInDeque(cereal::BinaryInputArchive &archive);
-    void SerializeOutDeque(cereal::BinaryOutputArchive &archive, std::deque<var<Component>>& que);
+    void SerializeInDeque(inputArchive &archive);
+    void SerializeOutDeque(outputArchive &archive, std::deque<var<Component>>& que);
 private:
     //为了保证数据紧密，将component额外存放在Scene中用以遍历
     //component在使用中以低增删、高遍历的形式运行

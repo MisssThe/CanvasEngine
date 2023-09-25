@@ -20,8 +20,8 @@ public:
 public:
     std::string Type() override;
 protected:
-    void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
-    void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
+    void SerializeInInternal(inputArchive &archive) override;
+    void SerializeOutInternal(outputArchive &archive) override;
 public:
     ~TextureAsset() override = default;
 };

@@ -9,7 +9,7 @@ std::string CustomAsset::Type() {
     return "Asset";
 }
 
-var<CustomAsset> CustomAsset::SerializeInPtr(cereal::BinaryInputArchive &archive) {
+var<CustomAsset> CustomAsset::SerializeInPtr(inputArchive &archive) {
     std::string ptrPath;
     archive(ptrPath);
     if (ptrPath == "Invalid")
@@ -18,7 +18,7 @@ var<CustomAsset> CustomAsset::SerializeInPtr(cereal::BinaryInputArchive &archive
 }
 
 
-void CustomAsset::SerializeOutPtr(cereal::BinaryOutputArchive &archive, std::shared_ptr<CustomAsset> asset) {
+void CustomAsset::SerializeOutPtr(outputArchive &archive, std::shared_ptr<CustomAsset> asset) {
     std::string ptrPath = "Invalid";
     if (asset != nullptr)
         ptrPath = asset->path;

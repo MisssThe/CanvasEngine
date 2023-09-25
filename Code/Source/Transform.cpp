@@ -26,10 +26,10 @@ void Transform::Release() {
 
 }
 
-void Transform::SerializeInInternal(cereal::BinaryInputArchive &archive) {
+void Transform::SerializeInInternal(inputArchive &archive) {
     archive(this->x,y,z);
 }
 
-void Transform::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
+void Transform::SerializeOutInternal(outputArchive &archive) {
     archive(this->x,y,z);
 }

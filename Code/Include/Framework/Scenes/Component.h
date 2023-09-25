@@ -16,7 +16,9 @@ public:
     virtual void Invoke() = 0;
     virtual void Disable() = 0;
     virtual void Release() = 0;
-    bool IsGameObject() final ;
+    bool IsGameObject() override final;
+    void SetActive(bool flag) override final;
+    void Destroy() override final;
 };
 
 

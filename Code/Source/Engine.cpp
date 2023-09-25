@@ -6,7 +6,6 @@
 #include "../Include/General/Debug.h"
 #include "Assets/AssetManager.h"
 #include "Scenes/SceneManager.h"
-#include "../Include/Engine/Graphic/TextureAsset.h"
 #include "../Include/Engine/Transform.h"
 
 void *Engine::operator new(size_t size) {
@@ -29,31 +28,27 @@ Engine::~Engine() {
 void create()
 {
     var<Scene> s = SceneManager::Create();
-    for (int i = 0; i < 7000; ++i) {
-        auto go = s->AddGameObject(&"go"[i] );
-//        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i *12;
-//        s->AddComponent(go, "Renderer");
-//        s->AddComponent(go, "Renderer");
-//        s->AddComponent(go, "Renderer");
-//        s->AddComponent(go, "Renderer");
+    for (int i = 0; i < 70; ++i) {
+        auto go = s->AddGameObject("go");
+        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i *12;
+        s->AddComponent(go, "Renderer");
     }
+    Debug::Info("--------------------------------------------------------------");
     AssetManager::Create("aaa.test",s);
+    Debug::Info("--------------------------------------------------------------");
 }
 
 void load()
 {
+    Debug::Info("--------------------------------------------------------------");
     auto scene = SceneManager::Load("aaa.test", true);
+    Debug::Info("--------------------------------------------------------------");
 }
 
 void Engine::Invoke() {
-//    while (true)
-//    {
 //create();
-load();
-    std::cout << "--------------------------------------------------------------"<<std::endl;
-    SceneManager::Invoke();
-//    std::cout << a->Type();
-//    std::cout << a->Type();
-//    SceneManager::Load("test.scene");
-//    }
+    load();
+    while (true) {
+        SceneManager::Invoke();
+    }
 }

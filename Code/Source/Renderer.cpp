@@ -26,10 +26,10 @@ void Renderer::Release() {
 
 }
 
-void Renderer::SerializeInInternal(cereal::BinaryInputArchive &archive) {
+void Renderer::SerializeInInternal(inputArchive &archive) {
 
 }
 
-void Renderer::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
+void Renderer::SerializeOutInternal(outputArchive &archive) {
 
 }

@@ -13,10 +13,12 @@
 
 class GameObject : public CustomEntity {
 protected:
-    void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
-    void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
+    void SerializeInInternal(inputArchive &archive) override;
+    void SerializeOutInternal(outputArchive &archive) override;
 public:
-    bool IsGameObject() final;
+    void SetActive(bool flag) override final;
+    void Destroy() override final;
+    bool IsGameObject() override final;
     std::string Type() override;
     ~GameObject() override = default;
 public:

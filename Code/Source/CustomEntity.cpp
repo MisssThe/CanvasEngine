@@ -12,7 +12,7 @@
 //REFLECT_REGISTER(CustomEntity)
 std::unordered_map<long long, var<CustomEntity> > CustomEntity::entityMap;   //只用于初始的序列化
 
-var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive) {
+var<CustomPtr> CustomEntity::SerializeInPtr(inputArchive &archive) {
     bool isAsset;
     archive(isAsset);
     if (isAsset) {
@@ -35,7 +35,7 @@ var<CustomPtr> CustomEntity::SerializeInPtr(cereal::BinaryInputArchive &archive)
     }
 }
 
-void CustomEntity::SerializeOutPtr(cereal::BinaryOutputArchive &archive, std::shared_ptr<CustomPtr>& ptr) {
+void CustomEntity::SerializeOutPtr(outputArchive &archive, std::shared_ptr<CustomPtr>& ptr) {
     bool isAsset = ptr->IsAsset();
     archive(isAsset);
     if (isAsset)
@@ -50,7 +50,7 @@ bool CustomEntity::IsAsset() {
     return false;
 }
 
-CustomEntity::CustomEntity() : guid(Cipher::Guid()) {
+CustomEntity::CustomEntity() {
     this->isEnable = EnableTrue;
     this->isAlive = AliveTrue;
 }

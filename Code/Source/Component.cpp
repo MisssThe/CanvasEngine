@@ -8,3 +8,11 @@
 bool Component::IsGameObject() {
     return false;
 }
+
+void Component::SetActive(bool flag) {
+    this->isEnable = flag? EnableTrue : EnableFalse;
+}
+
+void Component::Destroy() {
+    this->isAlive = AliveFalse;
+}

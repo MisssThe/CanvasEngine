@@ -4,10 +4,10 @@
 
 #include "SerializePtr.h"
 
-void SerializePtr::SerializeIn(cereal::BinaryInputArchive &archive) {
+void SerializePtr::SerializeIn(inputArchive &archive) {
     this->SerializeInInternal(archive);
 }
 
-void SerializePtr::SerializeOut(cereal::BinaryOutputArchive &archive) {
+void SerializePtr::SerializeOut(outputArchive &archive) {
     this->SerializeOutInternal(archive);
 }

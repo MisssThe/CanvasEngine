@@ -17,8 +17,8 @@ public:
     void Disable() override;
     void Release() override;
 protected:
-    void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
-    void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
+    void SerializeInInternal(inputArchive &archive) override;
+    void SerializeOutInternal(outputArchive &archive) override;
 };
 
 

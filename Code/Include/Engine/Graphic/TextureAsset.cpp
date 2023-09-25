@@ -6,10 +6,10 @@
 
 REFLECT_REGISTER(TextureAsset) /* NOLINT */
 
-void TextureAsset::SerializeInInternal(cereal::BinaryInputArchive &archive) {
+void TextureAsset::SerializeInInternal(inputArchive &archive) {
     archive(a, b, c, d, e);
 }
 
-void TextureAsset::SerializeOutInternal(cereal::BinaryOutputArchive &archive) {
+void TextureAsset::SerializeOutInternal(outputArchive &archive) {
     archive(a, b, c, d, e);
 }

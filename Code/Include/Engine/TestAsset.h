@@ -16,9 +16,9 @@ public:
     ~TestAsset() override = default;
 
 protected:
-    void SerializeInInternal(cereal::BinaryInputArchive &archive) override;
+    void SerializeInInternal(inputArchive &archive) override;
 
-    void SerializeOutInternal(cereal::BinaryOutputArchive &archive) override;
+    void SerializeOutInternal(outputArchive &archive) override;
 };
 
 

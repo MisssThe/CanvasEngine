@@ -15,7 +15,7 @@ bool AssetManager::Instance(const std::string &path, std::shared_ptr<CustomAsset
     std::ifstream is(path);
     if (!is.is_open())
         return false;
-    cereal::BinaryInputArchive bia(is);
+    inputArchive bia(is);
     std::string type;
     bia(type);
     asset->SerializeIn(bia);
@@ -31,12 +31,12 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
     auto ca = assetMap.find(path);
     if (ca != assetMap.end())
         return ca->second;
-    std::ifstream is(path);
+    std::ifstream is(path, std::ios::binary);
     if (!is.is_open()) {
         Debug::Warm("Error Path","Asset Manager");
         return nullptr;
     }
-    cereal::BinaryInputArchive bia(is);
+    inputArchive bia(is);
     std::string type;
     bia(type);
     var<CustomAsset> cai = nullptr;
@@ -62,10 +62,10 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
 bool AssetManager::Create(const std::string &path, const std::shared_ptr<CustomAsset>& ca) {
     if (ca == nullptr || path.empty())
         return false;
-    std::ofstream os(path);
+    std::ofstream os(path, std::ios::binary);
     if (!os.is_open())
         return false;
-    cereal::BinaryOutputArchive boa(os);
+    outputArchive boa(os);
     boa(ca->Type());
     ca->SerializeOut(boa);
     ca->path = path;
