@@ -35,7 +35,7 @@ set(Asset
         Include/Engine/Graphic/TextureAsset.cpp
         Include/Engine/Graphic/TextureAsset.h
         Source/Scene.cpp
-        Include/Framework/Scenes/Scene.h Include/Engine/TestAsset.cpp Include/Engine/TestAsset.h)
+        Include/Framework/Scenes/Scene.h)
 
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp  ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)
