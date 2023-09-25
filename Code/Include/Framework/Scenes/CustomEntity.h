@@ -29,7 +29,6 @@ public:
     CustomEntity();
 //    std::string Type() override;
     ~CustomEntity() override = default;
-    bool IsAsset() final ;
     virtual bool IsGameObject() = 0;
     static void SerializeFinish();
     virtual void SetActive(bool flag) = 0;

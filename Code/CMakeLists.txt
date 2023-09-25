@@ -11,9 +11,26 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../CanvasOut/Lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../CanvasOut/Bin)
 
 set(FRAMEWORK_INCLUDE  ${PROJECT_SOURCE_DIR}/Include/Framework)
-set(THIRD_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty)
+set(CEREAL_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/cereal)
+set(GLAD_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glad/4.6/include)
+if (CMAKE_HOST_WIN32)
+    set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_Windows/include)
+elseif (CMAKE_HOST_APPLE)
+    set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_MacOS/include)
+elseif (CMAKE_HOST_UNIX)
 
-include_directories(${FRAMEWORK_INCLUDE} ${THIRD_INCLUDE})
+endif()
+
+include_directories(
+        ${FRAMEWORK_INCLUDE}
+        ${GLFW_INCLUDE}
+        ${GLAD_INCLUDE}
+        ${CEREAL_INCLUDE}
+)
+
+#link_directories(
+#        ${GLFW_INCLUDE}
+#)
 
 set(FRAMEWORK
         Source/CustomPtr.cpp Include/Framework/CustomPtr.h
@@ -29,18 +46,31 @@ set(GENERAL
         Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h)
 
 set(Entity
-        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h Source/GameObject.cpp Include/Framework/Scenes/GameObject.h Source/Component.cpp Include/Framework/Scenes/Component.h Source/Transform.cpp Include/Engine/Transform.h Source/Renderer.cpp Include/Engine/Renderer.h)
+        Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h
+        Source/GameObject.cpp Include/Framework/Scenes/GameObject.h
+        Source/Component.cpp Include/Framework/Scenes/Component.h
+        Source/Transform.cpp Include/Engine/Transform.h
+        Source/Renderer.cpp Include/Core/Graphic/Renderer.h
+        Source/GraphicCore.cpp Include/Core/Graphic/Core/GraphicCore.h)
 
 set(Asset
-        Include/Engine/Graphic/TextureAsset.cpp
-        Include/Engine/Graphic/TextureAsset.h
+        Source/TextureAsset.cpp
+        Include/Core/Graphic/TextureAsset.h
         Source/Scene.cpp
-        Include/Framework/Scenes/Scene.h)
+        Include/Framework/Scenes/Scene.h Source/GlobalSetting.cpp Include/Framework/GlobalSetting.h Source/ShaderAsset.cpp Include/Core/Graphic/Assets/ShaderAsset.h Source/MeshAsset.cpp Include/Core/Graphic/Assets/MeshAsset.h Source/TextureAsset.cpp Include/Core/Graphic/Assets/TextureAsset.h Source/MaterialAsset.cpp Include/Core/Graphic/Assets/MaterialAsset.h)
+
+set(Core
+        Source/Graphic.cpp Include/Core/Graphic/Graphic.h
+        Source/GraphicOpenGLCore.cpp Include/Core/Graphic/Core/GraphicOpenGLCore.h
+        Source/RenderData.cpp Include/Core/Graphic/RenderData.h
+        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h)
 
 if (CMAKE_HOST_WIN32)
-    add_executable(Code main.cpp  ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)
+    add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)
+    set(GLFW_LIB ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_Windows/lib-mingw-w64/libglfw3.a) #编译动态库就报错
+    target_link_libraries(Code ${GLFW_LIB})
 elseif (CMAKE_HOST_APPLE)
-    add_executable(Code main.cpp ${FRAMEWORK} ${Entity} ${Asset} ${GENERAL} Source/Engine.cpp Include/Engine.h)
+    add_executable(Code main.cpp glad.c ${FRAMEWORK} ${Entity} ${Asset} ${Core} ${GENERAL} Source/Engine.cpp Include/Engine.h)
 elseif (CMAKE_HOST_UNIX)
-    set(LINUX 1)
+
 endif()

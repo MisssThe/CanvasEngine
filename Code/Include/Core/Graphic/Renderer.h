@@ -19,6 +19,8 @@ public:
 protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;
+public:
+
 };
 
 

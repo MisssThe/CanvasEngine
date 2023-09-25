@@ -46,10 +46,6 @@ void CustomEntity::SerializeOutPtr(outputArchive &archive, std::shared_ptr<Custo
     }
 }
 
-bool CustomEntity::IsAsset() {
-    return false;
-}
-
 CustomEntity::CustomEntity() {
     this->isEnable = EnableTrue;
     this->isAlive = AliveTrue;

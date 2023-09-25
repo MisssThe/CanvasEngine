@@ -20,3 +20,7 @@ bool Reflect::Register(const std::string &type, const std::function<std::shared_
 }
 
 CustomPtr::~CustomPtr() = default;
+
+bool CustomPtr::IsAsset() {
+    return false;
+}

@@ -7,6 +7,8 @@
 #include "Assets/AssetManager.h"
 #include "Scenes/SceneManager.h"
 #include "../Include/Engine/Transform.h"
+#include "../Include/Core/Graphic/Graphic.h"
+#include "GlobalSetting.h"
 
 void *Engine::operator new(size_t size) {
     return std::malloc(size);
@@ -18,9 +20,15 @@ void Engine::operator delete(void *p) {
 
 Engine::Engine() {
     Debug::Info("Init Engine", "Engine");
+    var<GlobalSetting> gs = safe_cast<GlobalSetting>( AssetManager::Instance("GlobalSetting.setting"));
+    //初始化core 组件
+    Graphic::Initial();
+    //加载默认（之前）场景
 }
 
 Engine::~Engine() {
+    //销毁所有数据
+    Graphic::Release();
     AssetManager::Release();
     Debug::Info("Release Engine", "Engine");
 }
@@ -48,7 +56,8 @@ void load()
 void Engine::Invoke() {
 //create();
     load();
-    while (true) {
-        SceneManager::Invoke();
-    }
+//    while (true) {
+//        SceneManager::Invoke();
+//        Graphic::Invoke();
+//    }
 }

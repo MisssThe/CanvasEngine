@@ -52,7 +52,11 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
         Debug::Warm("Error Value Type, Cast Failed","Asset Manager");
         return nullptr;
     }
-    cai->SerializeIn(bia);
+    try {
+        cai->SerializeIn(bia);
+    } catch(...) {
+        Debug::Warm("Asset Has Change","Asset Manager");
+    }
     cai->path = path;
     cai->name = "!";
     Map::Insert(assetMap, path, cai);

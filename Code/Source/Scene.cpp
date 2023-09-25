@@ -37,6 +37,16 @@ void Scene::SerializeInDeque(inputArchive &archive) {
     }
 }
 
+void Scene::SerializeOutDeque(outputArchive &archive, std::deque<std::shared_ptr<Component>>& que) {
+    int count = (int)que.size();
+    archive(count);
+    for (const auto& q : que) {
+        auto ptr = reinterpret_cast<long long>(q.get());
+        archive(ptr, q->Type(), q->isAlive, q->isEnable);
+        q->SerializeOut(archive);
+    }
+}
+
 void Scene::SerializeInInternal(inputArchive &archive) {
     int count;
     archive(count);
@@ -65,20 +75,13 @@ void Scene::SerializeInInternal(inputArchive &archive) {
     this->SerializeInDeque(archive);
     this->SerializeInDeque(archive);
     this->SerializeInDeque(archive);
+
+    //序列化core
+
     CustomEntity::SerializeFinish();
 
     for (auto go : goes) {
         this->AddGameObject(go);
-    }
-}
-
-void Scene::SerializeOutDeque(outputArchive &archive, std::deque<std::shared_ptr<Component>>& que) {
-    int count = (int)que.size();
-    archive(count);
-    for (const auto& q : que) {
-        auto ptr = reinterpret_cast<long long>(q.get());
-        archive(ptr, q->Type(), q->isAlive, q->isEnable);
-        q->SerializeOut(archive);
     }
 }
 
@@ -98,6 +101,7 @@ void Scene::SerializeOutInternal(outputArchive &archive) {
     this->SerializeOutDeque(archive, this->componentDisable);
     this->SerializeOutDeque(archive, this->componentIdle);
 
+    //序列化core
     CustomEntity::SerializeFinish();
 }
 
