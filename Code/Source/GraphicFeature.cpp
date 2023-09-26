@@ -4,4 +4,4 @@
 
 #include "../Include/Core/Graphic/Pipeline/GraphicFeature.h"
 
-REFLECT_REGISTER(GraphicFeature)
+//REFLECT_REGISTER(GraphicFeature)

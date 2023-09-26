@@ -7,11 +7,12 @@
 
 
 #include "CustomPtr.h"
+#include "../RenderData.h"
 
 class GraphicFeature : public CustomPtr {
 public:
-    std::string Type() override;
     ~GraphicFeature() override = default;
+    virtual void Invoke(var<RenderData> data) = 0;
 };
 
 

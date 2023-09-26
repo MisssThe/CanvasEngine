@@ -18,6 +18,7 @@ public:
     void Clear();
 public:
     var<GraphicCore> core;
+    std::vector<var<Renderer>> renderers;
 };
 
 

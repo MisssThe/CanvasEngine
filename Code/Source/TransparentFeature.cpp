@@ -5,3 +5,7 @@
 #include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h"
 
 REFLECT_REGISTER(TransparentFeature) /* NOLINT */
+
+void TransparentFeature::Invoke(std::shared_ptr<RenderData> data) {
+
+}

@@ -10,6 +10,7 @@
 
 class TransparentFeature : public GraphicFeature {
 public:
+    void Invoke(std::shared_ptr<RenderData> data) override;
     std::string Type() override;
     ~TransparentFeature() override = default;
 };

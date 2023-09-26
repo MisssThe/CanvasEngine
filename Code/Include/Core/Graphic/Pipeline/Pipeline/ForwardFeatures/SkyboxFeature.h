@@ -9,6 +9,7 @@
 
 class SkyboxFeature : public GraphicFeature {
 public:
+    void Invoke(std::shared_ptr<RenderData> data) override;
     std::string Type() override;
     ~SkyboxFeature() override = default;
 };

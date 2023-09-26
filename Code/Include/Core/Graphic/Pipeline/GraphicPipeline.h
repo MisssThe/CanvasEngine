@@ -8,7 +8,6 @@
 
 #include <queue>
 #include "CustomPtr.h"
-#include "../RenderData.h"
 #include "GraphicFeature.h"
 
 class GraphicPipeline : public CustomPtr {

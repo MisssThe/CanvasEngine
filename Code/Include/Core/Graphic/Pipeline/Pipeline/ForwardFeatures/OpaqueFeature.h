@@ -11,6 +11,7 @@ class OpaqueFeature : public GraphicFeature{
 public:
     std::string Type() override;
     ~OpaqueFeature() override = default;
+    void Invoke(std::shared_ptr<RenderData> data) override;
 };
 
 
