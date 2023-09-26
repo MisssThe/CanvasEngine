@@ -11,6 +11,7 @@
 
 class ForwardPipeline : public GraphicPipeline {
 public:
+    ForwardPipeline();
     std::string Type() override;
     void Invoke(std::shared_ptr<RenderData> data) override;
     ~ForwardPipeline() override = default;

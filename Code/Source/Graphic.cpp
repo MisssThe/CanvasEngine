@@ -6,6 +6,7 @@
 #include "../Include/Core/Graphic/Core/GraphicOpenGLCore.h"
 #include "GlobalSetting.h"
 #include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h"
+#include "../Include/Engine.h"
 
 var<GraphicCore> Graphic::core;
 var<GraphicPipeline> Graphic::pipeline;
@@ -22,17 +23,27 @@ void Graphic::Initial() {
             break;
         case Vulkan:
             break;
+        default:
+            core = cast<GraphicCore>(new_ptr<GraphicOpenGLCore>());
     }
     switch (GlobalSetting::pipelineType) {
         case Forward:
             pipeline = cast<GraphicPipeline>(new_ptr<ForwardPipeline>());
             break;
+        default:
+            pipeline = cast<GraphicPipeline>(new_ptr<ForwardPipeline>());
     }
+    Engine::RegisterClose([]() {
+        return core->IsExist();
+    });
 }
 
 void Graphic::Invoke() {
     //整理render数据
+    var<RenderData> data = new_ptr<RenderData>();
+    data->core = core;
     //调用render pipeline
+    pipeline->Invoke(data);
     //释放所有数据
     renderers.clear();
 }

@@ -14,6 +14,7 @@ public:
     ~GraphicOpenGLCore() override;
     std::string Type() override;
 public:
+    bool IsExist() override;
     void BeginFrame() override;
     void EndFrame() override;
     void DrawRenderers(std::vector<Renderer>& renderers) override;

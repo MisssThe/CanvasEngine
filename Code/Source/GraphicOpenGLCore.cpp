@@ -5,15 +5,13 @@
 #include "../Include/Core/Graphic/Core/GraphicOpenGLCore.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
 #include "GlobalSetting.h"
 #include "../Include/General/Debug.h"
 
 REFLECT_REGISTER(GraphicOpenGLCore) /* NOLINT */
-GLFWwindow* window = nullptr;
 
+GLFWwindow* window = nullptr;
 GraphicOpenGLCore::GraphicOpenGLCore() {
-    //初始化window、context
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -21,18 +19,16 @@ GraphicOpenGLCore::GraphicOpenGLCore() {
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-    window = glfwCreateWindow(GlobalSetting::windowWidth, GlobalSetting::windowHeight, "LearnOpenGL", nullptr, nullptr);
-    if (window == nullptr) {
-        Debug::Error("Failed to create GLFW window", "OpenGL Core");
+    window = glfwCreateWindow(GlobalSetting::windowWidth, GlobalSetting::windowHeight, GlobalSetting::windowName.c_str(), nullptr, nullptr);
+    if (window == nullptr)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
-        return;
     }
     glfwMakeContextCurrent(window);
-//    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        Debug::Error("Failed to initialize GLAD", "OpenGL Core");
-        return;
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
     }
 }
 
@@ -56,4 +52,8 @@ void GraphicOpenGLCore::BeginFrame() {
 void GraphicOpenGLCore::EndFrame() {
     glfwSwapBuffers(window);
     glfwPollEvents();
+}
+
+bool GraphicOpenGLCore::IsExist() {
+    return !glfwWindowShouldClose(window);
 }

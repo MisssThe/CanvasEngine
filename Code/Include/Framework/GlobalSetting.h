@@ -20,6 +20,7 @@ public:
     static GraphicType graphicType;
     static PipelineType pipelineType;
     static int windowWidth, windowHeight;
+    static std::string windowName;
 };
 
 

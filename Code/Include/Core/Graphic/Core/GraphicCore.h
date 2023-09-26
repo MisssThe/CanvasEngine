@@ -13,6 +13,7 @@ public:
     ~GraphicCore() override = default;
 public:
 //    virtual void DrawRenderer();
+    virtual bool IsExist() = 0;
     virtual void BeginFrame() = 0;
     virtual void DrawRenderers(std::vector<Renderer>& renderers) = 0;
     virtual void EndFrame() = 0;

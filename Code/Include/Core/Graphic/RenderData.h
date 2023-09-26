@@ -7,6 +7,7 @@
 
 
 #include "CustomPtr.h"
+#include "Core/GraphicCore.h"
 
 class RenderData : public CustomPtr {
 public:
@@ -15,6 +16,8 @@ public:
 public:
     void Update();
     void Clear();
+public:
+    var<GraphicCore> core;
 };
 
 

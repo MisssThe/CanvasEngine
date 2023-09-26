@@ -9,15 +9,22 @@
 
 
 #include <cstdlib>
+#include <functional>
+#include <queue>
 
 class Engine {
 public:
     Engine();
     ~Engine();
     void Invoke();
+    static void RegisterClose(std::function<bool()> call);
+private:
+    bool IsExist();
 private:
     void* operator new(size_t size);
     void operator delete(void* p);
+private:
+    static std::queue<std::function<bool()>> closes;
 };
 
 

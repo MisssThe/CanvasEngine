@@ -6,6 +6,11 @@
 
 REFLECT_REGISTER(ForwardPipeline) /* NOLINT */
 
-void ForwardPipeline::Invoke(std::shared_ptr<RenderData> data) {
+ForwardPipeline::ForwardPipeline() {
+    //条件相关feature
+}
 
+void ForwardPipeline::Invoke(std::shared_ptr<RenderData> data) {
+    data->core->BeginFrame();
+    data->core->EndFrame();
 }
