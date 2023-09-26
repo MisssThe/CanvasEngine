@@ -5,17 +5,11 @@
 #ifndef CODE_OPAQUEFEATURE_H
 #define CODE_OPAQUEFEATURE_H
 
+#include "../../GraphicFeature.h"
 
-#include "CustomPtr.h"
-//#include "Assets/CustomAsset.h"
-//#include "CustomEntity.h"
-
-class OpaqueFeature : public CustomPtr {
-//class OpaqueFeature : public CustomAsset {
-//class OpaqueFeature : public CustomEntity {
+class OpaqueFeature : public GraphicFeature{
 public:
     std::string Type() override;
-
     ~OpaqueFeature() override = default;
 };
 

@@ -5,17 +5,11 @@
 #ifndef CODE_SKYBOXFEATURE_H
 #define CODE_SKYBOXFEATURE_H
 
+#include "../../GraphicFeature.h"
 
-#include "CustomPtr.h"
-//#include "Assets/CustomAsset.h"
-//#include "CustomEntity.h"
-
-class SkyboxFeature : public CustomPtr {
-//class SkyboxFeature : public CustomAsset {
-//class SkyboxFeature : public CustomEntity {
+class SkyboxFeature : public GraphicFeature {
 public:
     std::string Type() override;
-
     ~SkyboxFeature() override = default;
 };
 

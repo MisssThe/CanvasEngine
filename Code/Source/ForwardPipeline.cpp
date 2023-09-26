@@ -3,14 +3,21 @@
 //
 
 #include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h"
+#include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h"
+#include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h"
+#include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h"
 
 REFLECT_REGISTER(ForwardPipeline) /* NOLINT */
 
 ForwardPipeline::ForwardPipeline() {
-    //条件相关feature
+    //创建相关feature
+    this->features.push(cast<GraphicFeature>(new_ptr<OpaqueFeature>()));
+    this->features.push(cast<GraphicFeature>(new_ptr<SkyboxFeature>()));
+    this->features.push(cast<GraphicFeature>(new_ptr<TransparentFeature>()));
 }
 
 void ForwardPipeline::Invoke(std::shared_ptr<RenderData> data) {
     data->core->BeginFrame();
+
     data->core->EndFrame();
 }

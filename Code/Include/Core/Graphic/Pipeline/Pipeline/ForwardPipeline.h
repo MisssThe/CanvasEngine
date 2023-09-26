@@ -8,7 +8,6 @@
 
 #include "CustomPtr.h"
 #include "../GraphicPipeline.h"
-
 class ForwardPipeline : public GraphicPipeline {
 public:
     ForwardPipeline();
