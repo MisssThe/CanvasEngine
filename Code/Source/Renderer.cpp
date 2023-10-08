@@ -12,7 +12,7 @@ void Renderer::Initial() {
 }
 
 void Renderer::Enable() {
-    Graphic::Register(var<Renderer>(this));
+    Graphic::Register(shared_from_this());
 }
 
 void Renderer::Invoke() {
@@ -20,7 +20,7 @@ void Renderer::Invoke() {
 }
 
 void Renderer::Disable() {
-    Graphic::Register(var<Renderer>(this));
+//    Graphic::Register(var<Renderer>(this));
 }
 
 void Renderer::Release() {

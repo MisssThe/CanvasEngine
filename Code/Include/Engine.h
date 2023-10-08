@@ -17,7 +17,7 @@ public:
     Engine();
     ~Engine();
     void Invoke();
-    static void RegisterClose(std::function<bool()> call);
+    static void RegisterClose(const std::function<bool()>& call);
 private:
     bool IsExist();
 private:

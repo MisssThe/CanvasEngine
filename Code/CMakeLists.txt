@@ -42,7 +42,7 @@ set(GENERAL
         Source/Debug.cpp
         Include/General/Debug.h
         Source/Time.cpp
-        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h)
+        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h Source/IO.cpp Include/General/IO.h)
 
 set(Entity
         Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h
@@ -56,13 +56,13 @@ set(Asset
         Source/TextureAsset.cpp
         Include/Core/Graphic/TextureAsset.h
         Source/Scene.cpp
-        Include/Framework/Scenes/Scene.h Source/GlobalSetting.cpp Include/Framework/GlobalSetting.h Source/ShaderAsset.cpp Include/Core/Graphic/Assets/ShaderAsset.h Source/MeshAsset.cpp Include/Core/Graphic/Assets/MeshAsset.h Source/TextureAsset.cpp Include/Core/Graphic/Assets/TextureAsset.h Source/MaterialAsset.cpp Include/Core/Graphic/Assets/MaterialAsset.h)
+        Include/Framework/Scenes/Scene.h Source/GlobalSetting.cpp Include/Framework/GlobalSetting.h Source/ShaderAsset.cpp Include/Core/Graphic/Assets/ShaderAsset.h Source/MeshAsset.cpp Include/Core/Graphic/Assets/MeshAsset.h Source/TextureAsset.cpp Include/Core/Graphic/Assets/TextureAsset.h Source/MaterialAsset.cpp Include/Core/Graphic/Assets/MaterialAsset.h Source/AssetLog.cpp Include/Framework/Assets/AssetLog.h)
 
 set(Core
         Source/Graphic.cpp Include/Core/Graphic/Graphic.h
         Source/GraphicOpenGLCore.cpp Include/Core/Graphic/Core/GraphicOpenGLCore.h
         Source/RenderData.cpp Include/Core/Graphic/RenderData.h
-        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h)
+        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h Source/ShaderLoader.cpp Include/Core/Graphic/AssetsLoader/ShaderLoader.h Source/MeshLoader.cpp Include/Core/Graphic/AssetsLoader/MeshLoader.h)
 
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)

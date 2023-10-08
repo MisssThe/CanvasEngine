@@ -14,6 +14,16 @@ protected:
 public:
     std::string Type() override;
     ~MaterialAsset() override = default;
+public:
+    struct MaterialInfo
+    {
+    public:
+        bool flag;
+        float info[4];
+        std::string path;
+    };
+    std::unordered_map<std::string, MaterialInfo> properties;
+    std::string shaderPath;
 };
 
 

@@ -7,7 +7,7 @@
 
 #include "Scenes/Component.h"
 
-class Renderer : public Component {
+class Renderer : public Component, public std::enable_shared_from_this<Renderer> {
 public:
     std::string Type() override;
     ~Renderer() override = default;

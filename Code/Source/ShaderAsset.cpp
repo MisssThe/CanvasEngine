@@ -3,5 +3,14 @@
 //
 
 #include "../Include/Core/Graphic/Assets/ShaderAsset.h"
+#include <cereal/types/unordered_map.hpp>
 
-REFLECT_REGISTER(ShaderAsset) /* NOLINT */
+[[maybe_unused]] REFLECT_REGISTER(ShaderAsset) /* NOLINT */
+
+void ShaderAsset::SerializeInInternal(inputArchive &archive) {
+    archive(this->vertCode, this->fragCode, this->properties);
+}
+
+void ShaderAsset::SerializeOutInternal(outputArchive &archive) {
+    archive(this->vertCode, this->fragCode, this->properties);
+}

@@ -6,8 +6,11 @@
 #include "../Include/Framework/Assets/AssetManager.h"
 #include "../Include/General/Map.h"
 #include "../Include/General/Debug.h"
+#include <filesystem>
 
 std::unordered_map<std::string, var<CustomAsset>> AssetManager::assetMap;
+std::deque<std::function<void(std::string&)>> AssetManager::refreshes; /* NOLINT */
+var<AssetLog> AssetManager::assetLog;
 
 bool AssetManager::Instance(const std::string &path, std::shared_ptr<CustomAsset>& asset) {
     if (path.empty() || asset == nullptr || assetMap.find(path) != assetMap.end())
@@ -33,7 +36,7 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
         return ca->second;
     std::ifstream is(path, std::ios::binary);
     if (!is.is_open()) {
-        Debug::Warm("Error Path","Asset Manager");
+        Debug::Warm("Error Path [" + path + "]","Asset Manager");
         return nullptr;
     }
     inputArchive bia(is);
@@ -89,4 +92,28 @@ void AssetManager::Save(const std::shared_ptr<CustomAsset> &ca) {
     if (ca == nullptr)
         return;
     Create(ca->path, ca);
+}
+
+void AssetManager::Refresh() {
+    //扫描并处理所有改动文件
+    for (const auto & file : std::filesystem::recursive_directory_iterator("Assets"))
+    {
+        std::string p = file.path().string();
+        if (AssetManager::assetLog->Replace(p)) {
+            for (auto call : refreshes) {
+                call(p);
+            }
+        }
+    }
+}
+
+bool AssetManager::RegisterRefresh(std::function<void(std::string &)> call) {
+    refreshes.push_back(call);
+    return true;
+}
+
+void AssetManager::Initial() {
+    //加载日志文件
+    assetLog = safe_cast<AssetLog>(AssetManager::Instance("Assets/Global/AssetLog.al"));
+    Refresh();
 }

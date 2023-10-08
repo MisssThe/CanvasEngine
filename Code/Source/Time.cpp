@@ -11,21 +11,21 @@ unsigned long int NowTime()
     return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
-unsigned long int Time::begin = NowTime();
-unsigned long int Time::now = NowTime();
-unsigned long int Time::last = NowTime();
-unsigned long int Time::frame = 0;
+unsigned long  long int Time::begin = NowTime();
+unsigned long  long int Time::now = NowTime();
+unsigned long  long int Time::last = NowTime();
+unsigned long  long int Time::frame = 0;
 
 std::string Time::CanvasTimeWithStr() {
     unsigned long int time = CanvasTime();
     return Time::CanvasTimeToStr(time);
 }
 
-unsigned long int Time::CanvasTime() {
+unsigned long  long int Time::CanvasTime() {
     return NowTime() - Time::begin;
 }
 
-std::string Time::CanvasTimeToStr(unsigned long int time) {
+std::string Time::CanvasTimeToStr(unsigned long  long int time) {
     int millisecond = time % (1000);
     time /= 1000;
     int second = time % 60;
@@ -35,7 +35,7 @@ std::string Time::CanvasTimeToStr(unsigned long int time) {
     return std::to_string(hour) + ":" + std::to_string(minute) + ":" + std::to_string(second) + ":" + std::to_string(millisecond);
 }
 
-unsigned long int Time::UseTime(std::function<void()> func) {
+unsigned long long int Time::UseTime(std::function<void()> func) {
     unsigned long int start = CanvasTime();
     func();
     unsigned long int end = CanvasTime();
@@ -48,10 +48,10 @@ void Time::UpdateFrame() {
     Time::last = Time::now;
 }
 
-unsigned long int Time::FrameTime() {
+unsigned long  long int Time::FrameTime() {
     return Time::frame;
 }
 
-unsigned long int Time::SystemTime() {
+unsigned long  long int Time::SystemTime() {
     return NowTime();
 }

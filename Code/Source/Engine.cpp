@@ -11,7 +11,7 @@
 #include "GlobalSetting.h"
 #include "../Include/General/Queue.h"
 
-std::queue<std::function<bool()>> Engine::closes;
+std::queue<std::function<bool()>> Engine::closes; //NOLINT
 
 void *Engine::operator new(size_t size) {
     return std::malloc(size);
@@ -23,7 +23,8 @@ void Engine::operator delete(void *p) {
 
 Engine::Engine() {
     Debug::Info("Init Engine", "Engine");
-    var<GlobalSetting> gs = safe_cast<GlobalSetting>( AssetManager::Instance("GlobalSetting.setting"));
+    AssetManager::Initial();
+    var<GlobalSetting> gs = safe_cast<GlobalSetting>( AssetManager::Instance("Assets/Global/GlobalSetting.setting"));
     gs->windowWidth = 1920;
     gs->windowHeight = 1080;
     gs->windowName = "Canvas";
@@ -44,39 +45,39 @@ void create()
     var<Scene> s = SceneManager::Create();
     for (int i = 0; i < 70; ++i) {
         auto go = s->AddGameObject("go");
-        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i *12;
+        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i * 12;
         s->AddComponent(go, "Renderer");
     }
     Debug::Info("--------------------------------------------------------------");
-    AssetManager::Create("aaa.test",s);
+    AssetManager::Create("Assets/Scene/aaa.scene",s);
     Debug::Info("--------------------------------------------------------------");
 }
 
 void load()
 {
     Debug::Info("--------------------------------------------------------------");
-    auto scene = SceneManager::Load("aaa.test", true);
+    auto scene = SceneManager::Load("Assets/Scene/aaa.scene", true);
     Debug::Info("--------------------------------------------------------------");
 }
 
 void Engine::Invoke() {
 //create();
     load();
-    while (this->IsExist()) {
-        SceneManager::Invoke();
-        Graphic::Invoke();
-    }
+//    while (this->IsExist()) {
+//        SceneManager::Invoke();
+//        Graphic::Invoke();
+//    }
 }
 
-void Engine::RegisterClose(std::function<bool()> call) {
+void Engine::RegisterClose(const std::function<bool()>& call) {
     closes.push(call);
 }
 
 bool Engine::IsExist() {
-    if (this->closes.size() < 1)
+    if (Engine::closes.empty())
         return false;
     bool result = true;
-    Queue::Iterator<std::function<bool()>>(this->closes, [&result](std::function<bool()>& call) {
+    Queue::Iterator<std::function<bool()>>(Engine::closes, [&result](std::function<bool()>& call) {
         result &= call();
     });
     return result;
