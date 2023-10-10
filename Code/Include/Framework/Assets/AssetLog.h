@@ -18,6 +18,8 @@ protected:
     void SerializeOutInternal(outputArchive &archive) override;
 private:
     std::unordered_map<std::string, unsigned long long> info;
+public:
+    int interval;
 };
 
 

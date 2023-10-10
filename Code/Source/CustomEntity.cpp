@@ -35,7 +35,7 @@ var<CustomPtr> CustomEntity::SerializeInPtr(inputArchive &archive) {
     }
 }
 
-void CustomEntity::SerializeOutPtr(outputArchive &archive, std::shared_ptr<CustomPtr>& ptr) {
+void CustomEntity::SerializeOutPtr(outputArchive &archive, std::shared_ptr<CustomPtr> ptr) {
     bool isAsset = ptr->IsAsset();
     archive(isAsset);
     if (isAsset)
@@ -53,4 +53,8 @@ CustomEntity::CustomEntity() {
 
 void CustomEntity::SerializeFinish() {
     CustomEntity::entityMap.clear();
+}
+
+bool CustomEntity::IsAsset() {
+    return false;
 }

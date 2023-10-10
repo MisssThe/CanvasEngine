@@ -10,7 +10,7 @@
 
 var<GraphicCore> Graphic::core;
 var<GraphicPipeline> Graphic::pipeline;
-std::vector<var<Renderer>> Graphic::renderers;
+var<RenderData> Graphic::renderData;
 
 void Graphic::Initial() {
     switch (GlobalSetting::graphicType) {
@@ -36,22 +36,22 @@ void Graphic::Initial() {
     Engine::RegisterClose([]() {
         return core->IsExist();
     });
+    renderData = new_ptr<RenderData>();
 }
 
 void Graphic::Invoke() {
     //整理render数据
-    var<RenderData> data = new_ptr<RenderData>();
-    data->core = core;
+    renderData->core = core;
+    renderData->Invoke();
     //调用render pipeline
-    pipeline->Invoke(data);
-    //释放所有数据
-    renderers.clear();
+    pipeline->Invoke(renderData);
 }
 
 void Graphic::Release() {
-
+    CameraManager::Release();
+    LightManager::Release();
 }
 
-void Graphic::Register(std::shared_ptr<Renderer> renderer) {
-    renderers.push_back(renderer);
-}
+//void Graphic::Register(std::shared_ptr<Renderer> renderer) {
+//    renderers.push_back(renderer);
+//}

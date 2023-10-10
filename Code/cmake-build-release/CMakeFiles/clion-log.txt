@@ -1,0 +1,4 @@
+"G:\Assets\Application\CLion 2021.3.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=G:/Assets/Application/CLion 2021.3.4/bin/ninja/win/ninja.exe" -G Ninja F:\Project\Fork\CanvasEngine\Code
+-- Configuring done
+-- Generating done
+-- Build files have been written to: F:/Project/Fork/CanvasEngine/Code/cmake-build-release

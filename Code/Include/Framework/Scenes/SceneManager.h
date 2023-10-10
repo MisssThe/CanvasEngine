@@ -15,8 +15,6 @@ public:
     static void UnLoad(const std::shared_ptr<Scene>& scene);
     static void Invoke();
 public:
-//    static var<Scene> target;
-private:
     static std::queue<var<Scene>> scenes;
 };
 

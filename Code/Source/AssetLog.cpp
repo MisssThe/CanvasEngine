@@ -9,11 +9,11 @@
 REFLECT_REGISTER(AssetLog) /* NOLINT */
 
 void AssetLog::SerializeInInternal(inputArchive &archive) {
-    archive(this->info);
+    archive(this->info, this->interval);
 }
 
 void AssetLog::SerializeOutInternal(outputArchive &archive) {
-    archive(this->info);
+    archive(this->info, this->interval);
 }
 
 bool AssetLog::Replace(const std::string& path) {
@@ -27,5 +27,5 @@ bool AssetLog::Replace(const std::string& path) {
         this->info[path] = time;
         return true;
     }
-    return true;
+    return false;
 }

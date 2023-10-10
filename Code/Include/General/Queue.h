@@ -41,6 +41,12 @@ public:
             q.pop();
         }
     }
+
+    template<class T> static void Clear(std::queue<T>& q)
+    {
+        std::queue<T> empty;
+        swap(empty, q);
+    }
 };
 
 

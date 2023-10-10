@@ -27,6 +27,7 @@ public:
     AliveState isAlive;
 public:
     CustomEntity();
+    bool IsAsset() override final;
 //    std::string Type() override;
     ~CustomEntity() override = default;
     virtual bool IsGameObject() = 0;
@@ -35,7 +36,7 @@ public:
     virtual void Destroy() = 0;
 protected:
     var<CustomPtr> SerializeInPtr(inputArchive& archive);
-    void SerializeOutPtr(outputArchive& archive, var<CustomPtr>& ptr);
+    void SerializeOutPtr(outputArchive& archive, var<CustomPtr> ptr);
 public:
     static std::unordered_map<long long, var<CustomEntity>> entityMap;   //只用于初始的序列化
 };

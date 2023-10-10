@@ -6,7 +6,7 @@
 #define CODE_GRAPHICCORE_H
 
 #include "CustomPtr.h"
-#include "../Renderer.h"
+#include "../RenderData/Components/Renderer.h"
 
 class GraphicCore : public CustomPtr {
 public:

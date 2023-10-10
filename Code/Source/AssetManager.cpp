@@ -6,11 +6,13 @@
 #include "../Include/Framework/Assets/AssetManager.h"
 #include "../Include/General/Map.h"
 #include "../Include/General/Debug.h"
+#include "../Include/General/IO.h"
 #include <filesystem>
 
 std::unordered_map<std::string, var<CustomAsset>> AssetManager::assetMap;
 std::deque<std::function<void(std::string&)>> AssetManager::refreshes; /* NOLINT */
 var<AssetLog> AssetManager::assetLog;
+int AssetManager::interval;
 
 bool AssetManager::Instance(const std::string &path, std::shared_ptr<CustomAsset>& asset) {
     if (path.empty() || asset == nullptr || assetMap.find(path) != assetMap.end())
@@ -95,12 +97,16 @@ void AssetManager::Save(const std::shared_ptr<CustomAsset> &ca) {
 }
 
 void AssetManager::Refresh() {
+    if (interval++ < assetLog->interval)
+        return;
+    interval = 0;
     //扫描并处理所有改动文件
-    for (const auto & file : std::filesystem::recursive_directory_iterator("Assets"))
-    {
+    for (const auto &file: std::filesystem::recursive_directory_iterator("Assets")) {
         std::string p = file.path().string();
+        if (IO::IsDirectory(p))
+            continue;
         if (AssetManager::assetLog->Replace(p)) {
-            for (auto call : refreshes) {
+            for (const auto &call: refreshes) {
                 call(p);
             }
         }
@@ -115,5 +121,7 @@ bool AssetManager::RegisterRefresh(std::function<void(std::string &)> call) {
 void AssetManager::Initial() {
     //加载日志文件
     assetLog = safe_cast<AssetLog>(AssetManager::Instance("Assets/Global/AssetLog.al"));
+    assetLog->interval = 360;
+    AssetManager::interval = assetLog->interval + 1;
     Refresh();
 }

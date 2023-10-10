@@ -10,6 +10,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ../CanvasOut/Arc)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../CanvasOut/Lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../CanvasOut/Bin)
 
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+
 set(FRAMEWORK_INCLUDE  ${PROJECT_SOURCE_DIR}/Include/Framework)
 set(CEREAL_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/cereal)
 set(GLAD_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glad/4.6/include)
@@ -49,12 +51,11 @@ set(Entity
         Source/GameObject.cpp Include/Framework/Scenes/GameObject.h
         Source/Component.cpp Include/Framework/Scenes/Component.h
         Source/Transform.cpp Include/Engine/Transform.h
-        Source/Renderer.cpp Include/Core/Graphic/Renderer.h
+        Source/Renderer.cpp Include/Core/Graphic/RenderData/Components/Renderer.h
         Source/GraphicCore.cpp Include/Core/Graphic/Core/GraphicCore.h)
 
 set(Asset
         Source/TextureAsset.cpp
-        Include/Core/Graphic/TextureAsset.h
         Source/Scene.cpp
         Include/Framework/Scenes/Scene.h Source/GlobalSetting.cpp Include/Framework/GlobalSetting.h Source/ShaderAsset.cpp Include/Core/Graphic/Assets/ShaderAsset.h Source/MeshAsset.cpp Include/Core/Graphic/Assets/MeshAsset.h Source/TextureAsset.cpp Include/Core/Graphic/Assets/TextureAsset.h Source/MaterialAsset.cpp Include/Core/Graphic/Assets/MaterialAsset.h Source/AssetLog.cpp Include/Framework/Assets/AssetLog.h)
 
@@ -62,7 +63,7 @@ set(Core
         Source/Graphic.cpp Include/Core/Graphic/Graphic.h
         Source/GraphicOpenGLCore.cpp Include/Core/Graphic/Core/GraphicOpenGLCore.h
         Source/RenderData.cpp Include/Core/Graphic/RenderData.h
-        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h Source/ShaderLoader.cpp Include/Core/Graphic/AssetsLoader/ShaderLoader.h Source/MeshLoader.cpp Include/Core/Graphic/AssetsLoader/MeshLoader.h)
+        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h Source/ShaderLoader.cpp Include/Core/Graphic/AssetsLoader/ShaderLoader.h Source/MeshLoader.cpp Include/Core/Graphic/AssetsLoader/MeshLoader.h Source/CameraManager.cpp Include/Core/Graphic/RenderData/CameraManager.h Source/Camera.cpp Include/Core/Graphic/RenderData/Components/Camera.h Source/Light.cpp Include/Core/Graphic/RenderData/Components/Light.h Source/LightManager.cpp Include/Core/Graphic/RenderData/LightManager.h Source/RendererManager.cpp Include/Core/Graphic/RenderData/RendererManager.h)
 
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)

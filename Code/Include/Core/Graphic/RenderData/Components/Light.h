@@ -1,16 +1,17 @@
 //
-// Created by MisThe on 2023/9/19.
+// Created by Administrator on 2023/10/10.
 //
 
-#ifndef CODE_RENDERER_H
-#define CODE_RENDERER_H
+#ifndef CODE_LIGHT_H
+#define CODE_LIGHT_H
+
 
 #include "Scenes/Component.h"
 
-class Renderer : public Component, public std::enable_shared_from_this<Renderer> {
+class Light : public Component, public std::enable_shared_from_this<Light> {
 public:
     std::string Type() override;
-    ~Renderer() override = default;
+    ~Light() override = default;
     void Initial() override;
     void Enable() override;
     void Invoke() override;
@@ -19,9 +20,7 @@ public:
 protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;
-public:
-
 };
 
 
-#endif //CODE_RENDERER_H
+#endif //CODE_LIGHT_H

@@ -8,7 +8,6 @@
 #include "../Include/Core/Graphic/Assets/ShaderAsset.h"
 
 bool ShaderRegister = AssetManager::RegisterRefresh([](std::string& path){
-    std::cout << path << std::endl;
     if (path.find("Shader") == path.npos)
         return;
     ShaderLoader::Load(path);
@@ -23,7 +22,6 @@ void ShaderLoader::LoadGLSL(const std::string &path) {
     std::string extension = IO::ExtendName(path);
     std::string name = IO::FileName(path);
     std::string newPath = "Caches/Shader/" + name + ".shader";
-    std::cout << newPath << std::endl;
     var<ShaderAsset> shaderAsset;
     if (IO::Exist(newPath))
         shaderAsset = safe_cast<ShaderAsset>(AssetManager::Instance(newPath));
@@ -31,8 +29,9 @@ void ShaderLoader::LoadGLSL(const std::string &path) {
         shaderAsset = new_ptr<ShaderAsset>();
         AssetManager::Create(newPath, shaderAsset);
     }
-//    if (path == "vert")
-//    {
-//
-//    }
+    if (extension == "vert") {
+        IO::ReadFileAsString(path, shaderAsset->vertCode);
+    } else if (extension == "frag") {
+        IO::ReadFileAsString(path, shaderAsset->fragCode);
+    }
 }

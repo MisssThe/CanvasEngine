@@ -11,14 +11,15 @@ class Component : public CustomEntity {
 public:
     ~Component() override = default;
 public:
-    virtual void Initial() = 0;
-    virtual void Enable() = 0;
-    virtual void Invoke() = 0;
-    virtual void Disable() = 0;
-    virtual void Release() = 0;
-    bool IsGameObject() override final;
-    void SetActive(bool flag) override final;
-    void Destroy() override final;
+    //避免存虚函数占用内存
+    virtual void Initial();
+    virtual void Enable();
+    virtual void Invoke();
+    virtual void Disable();
+    virtual void Release();
+    bool IsGameObject() final;
+    void SetActive(bool flag) final;
+    void Destroy() final;
 };
 
 

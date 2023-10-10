@@ -16,3 +16,23 @@ void Component::SetActive(bool flag) {
 void Component::Destroy() {
     this->isAlive = AliveFalse;
 }
+
+void Component::Initial() {
+    //ignore
+}
+
+void Component::Enable() {
+    //ignore
+}
+
+void Component::Invoke() {
+    //ignore
+}
+
+void Component::Disable() {
+    //ignore
+}
+
+void Component::Release() {
+    //ignore
+}

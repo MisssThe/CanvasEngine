@@ -217,3 +217,12 @@ var<Component> Scene::AddComponent(const std::shared_ptr<GameObject>& go, std::s
     this->AddComponent(go, c);
     return c;
 }
+
+void Scene::GetActivateComponents(const std::string &type, std::vector<std::shared_ptr<Component>> &components) {
+    components.clear();
+    for (const auto& com : this->componentInvoke) {
+        if (com->isEnable == EnableTrue && com->Type() != type)
+            continue;
+        components.push_back(com);
+    }
+}

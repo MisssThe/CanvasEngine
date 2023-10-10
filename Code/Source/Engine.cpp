@@ -6,7 +6,6 @@
 #include "../Include/General/Debug.h"
 #include "Assets/AssetManager.h"
 #include "Scenes/SceneManager.h"
-#include "../Include/Engine/Transform.h"
 #include "../Include/Core/Graphic/Graphic.h"
 #include "GlobalSetting.h"
 #include "../Include/General/Queue.h"
@@ -42,15 +41,15 @@ Engine::~Engine() {
 
 void create()
 {
-    var<Scene> s = SceneManager::Create();
-    for (int i = 0; i < 70; ++i) {
-        auto go = s->AddGameObject("go");
-        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i * 12;
-        s->AddComponent(go, "Renderer");
-    }
-    Debug::Info("--------------------------------------------------------------");
-    AssetManager::Create("Assets/Scene/aaa.scene",s);
-    Debug::Info("--------------------------------------------------------------");
+//    var<Scene> s = SceneManager::Create();
+//    for (int i = 0; i < 70; ++i) {
+//        auto go = s->AddGameObject("go");
+//        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i * 12;
+//        s->AddComponent(go, "Renderer");
+//    }
+//    Debug::Info("--------------------------------------------------------------");
+//    AssetManager::Create("Assets/Scene/aaa.scene",s);
+//    Debug::Info("--------------------------------------------------------------");
 }
 
 void load()
@@ -63,17 +62,19 @@ void load()
 void Engine::Invoke() {
 //create();
     load();
-//    while (this->IsExist()) {
-//        SceneManager::Invoke();
-//        Graphic::Invoke();
-//    }
+    while (this->IsExist()) {
+        SceneManager::Invoke();
+        Graphic::Invoke();
+    }
 }
 
 void Engine::RegisterClose(const std::function<bool()>& call) {
     closes.push(call);
 }
 
-bool Engine::IsExist() {
+bool Engine::IsExist() const {
+    if (this->isExist)
+        return false;
     if (Engine::closes.empty())
         return false;
     bool result = true;

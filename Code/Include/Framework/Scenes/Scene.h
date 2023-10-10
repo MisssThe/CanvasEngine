@@ -27,6 +27,7 @@ public:
     void AddComponent(const var<GameObject>& go, var<Component>& com);
     var<Component> AddComponent(const std::shared_ptr<GameObject>& go, std::string& com);
     var<Component> AddComponent(const std::shared_ptr<GameObject>& go, const std::string com);
+    void GetActivateComponents(const std::string& type, std::vector<var<Component>>& components);
 protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;

@@ -13,6 +13,8 @@ public:
     static std::string ExtendName(const std::string& path);
     static std::string FileName(const std::string& path);
     static bool Exist(const std::string& path);
+    static bool IsDirectory(const std::string& path);
+    static void ReadFileAsString(const std::string& path, std::string& info);
 };
 
 

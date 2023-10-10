@@ -8,17 +8,21 @@
 
 #include "CustomPtr.h"
 #include "Core/GraphicCore.h"
+#include "RenderData/CameraManager.h"
+#include "RenderData/LightManager.h"
 
 class RenderData : public CustomPtr {
 public:
     std::string Type() override;
     ~RenderData() override = default;
 public:
-    void Update();
-    void Clear();
+    RenderData();
+    void Invoke();
 public:
     var<GraphicCore> core;
-    std::vector<var<Renderer>> renderers;
+    std::queue<std::shared_ptr<Renderer>> renderers;
+    var<CameraManager::CameraInfo> cameraInfo;
+    var<LightManager::LightInfo> lightInfo;
 };
 
 
