@@ -2,7 +2,7 @@
 // Created by Administrator on 2023/9/25.
 //
 
-#include "../Include/Core/Graphic/Core/GraphicOpenGLCore.h"
+#include "../Include/Core/Graphic/Core/OpenGL/GraphicOpenGLCore.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "GlobalSetting.h"
@@ -41,6 +41,7 @@ void GraphicOpenGLCore::DrawRenderers(std::vector<Renderer>& renderers) {
     for (auto renderer : renderers) {
         //绑定对应资源
         //调用绘制接口
+        glDrawElements()
     }
 }
 

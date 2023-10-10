@@ -3,7 +3,7 @@
 //
 
 #include "../Include/Core/Graphic/Graphic.h"
-#include "../Include/Core/Graphic/Core/GraphicOpenGLCore.h"
+#include "../Include/Core/Graphic/Core/OpenGL/GraphicOpenGLCore.h"
 #include "GlobalSetting.h"
 #include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h"
 #include "../Include/Engine.h"
@@ -51,7 +51,3 @@ void Graphic::Release() {
     CameraManager::Release();
     LightManager::Release();
 }
-
-//void Graphic::Register(std::shared_ptr<Renderer> renderer) {
-//    renderers.push_back(renderer);
-//}

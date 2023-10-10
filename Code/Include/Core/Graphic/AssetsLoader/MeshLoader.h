@@ -5,18 +5,11 @@
 #ifndef CODE_MESHLOADER_H
 #define CODE_MESHLOADER_H
 
+#include <string>
 
-#include "CustomPtr.h"
-//#include "Assets/CustomAsset.h"
-//#include "CustomEntity.h"
-
-class MeshLoader : public CustomPtr {
-//class MeshLoader : public CustomAsset {
-//class MeshLoader : public CustomEntity {
+class MeshLoader  {
 public:
-    std::string Type() override;
-
-    ~MeshLoader() override = default;
+    static void Load(const std::string& path);
 };
 
 

@@ -6,7 +6,7 @@
 #define CODE_GRAPHICOPENGLCORE_H
 
 
-#include "GraphicCore.h"
+#include "../GraphicCore.h"
 
 class GraphicOpenGLCore : public GraphicCore {
 public:

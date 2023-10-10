@@ -26,7 +26,6 @@ public:
     static void Initial();
     static void Invoke();
     static void Release();
-    static bool IsClose();
 private:
     static var<GraphicCore> core;
     static var<GraphicPipeline> pipeline;

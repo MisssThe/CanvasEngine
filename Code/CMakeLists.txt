@@ -17,6 +17,7 @@ set(CEREAL_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/cereal)
 set(GLAD_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glad/4.6/include)
 if (CMAKE_HOST_WIN32)
     set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_Windows/include)
+    set(ASSIMP_INCLUDE ${PROJECT_SOURCE_DIR}/ThirdParty/assimp/5.2.5_Windows/include)
 elseif (CMAKE_HOST_APPLE)
     set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_MacOS/include)
 #elseif (CMAKE_HOST_UNIX)
@@ -28,10 +29,6 @@ include_directories(
         ${GLAD_INCLUDE}
         ${CEREAL_INCLUDE}
 )
-
-#link_directories(
-#        ${GLFW_INCLUDE}
-#)
 
 set(FRAMEWORK
         Source/CustomPtr.cpp Include/Framework/CustomPtr.h
@@ -61,7 +58,7 @@ set(Asset
 
 set(Core
         Source/Graphic.cpp Include/Core/Graphic/Graphic.h
-        Source/GraphicOpenGLCore.cpp Include/Core/Graphic/Core/GraphicOpenGLCore.h
+        Source/GraphicOpenGLCore.cpp Include/Core/Graphic/Core/OpenGL/GraphicOpenGLCore.h
         Source/RenderData.cpp Include/Core/Graphic/RenderData.h
         Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h Source/ShaderLoader.cpp Include/Core/Graphic/AssetsLoader/ShaderLoader.h Source/MeshLoader.cpp Include/Core/Graphic/AssetsLoader/MeshLoader.h Source/CameraManager.cpp Include/Core/Graphic/RenderData/CameraManager.h Source/Camera.cpp Include/Core/Graphic/RenderData/Components/Camera.h Source/Light.cpp Include/Core/Graphic/RenderData/Components/Light.h Source/LightManager.cpp Include/Core/Graphic/RenderData/LightManager.h Source/RendererManager.cpp Include/Core/Graphic/RenderData/RendererManager.h)
 

@@ -8,13 +8,13 @@
 #include "../Include/Core/Graphic/Assets/ShaderAsset.h"
 
 bool ShaderRegister = AssetManager::RegisterRefresh([](std::string& path){
-    if (path.find("Shader") == path.npos)
+    if (path.find("Shader") == std::string::npos)
         return;
     ShaderLoader::Load(path);
 });
 
 void ShaderLoader::Load(const std::string& path) {
-    if (path.find("GLSL") != path.npos)
+    if (path.find("GLSL") != std::string::npos)
         LoadGLSL(path);
 }
 
