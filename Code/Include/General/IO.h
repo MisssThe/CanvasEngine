@@ -6,6 +6,7 @@
 #define CODE_IO_H
 
 #include <string>
+#include <functional>
 
 class IO {
 public:
@@ -15,6 +16,7 @@ public:
     static bool Exist(const std::string& path);
     static bool IsDirectory(const std::string& path);
     static void ReadFileAsString(const std::string& path, std::string& info);
+    static void ReadFilePerLine(const std::string& path, std::function<void(std::string&)> call);
 };
 
 

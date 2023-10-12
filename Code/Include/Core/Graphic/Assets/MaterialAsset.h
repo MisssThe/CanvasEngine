@@ -6,6 +6,8 @@
 #define CODE_MATERIALASSET_H
 
 #include "Assets/CustomAsset.h"
+#include "ShaderAsset.h"
+#include "TextureAsset.h"
 
 class MaterialAsset : public CustomAsset {
 protected:
@@ -20,10 +22,12 @@ public:
     public:
         bool flag;
         float info[4];
-        std::string path;
+        var<TextureAsset> texture;
+        void serialize(inputArchive &archive);
+        void serialize(outputArchive &archive);
     };
     std::unordered_map<std::string, MaterialInfo> properties;
-    std::string shaderPath;
+    var<ShaderAsset> shader;
 };
 
 

@@ -9,6 +9,7 @@
 #include "../Include/Core/Graphic/Graphic.h"
 #include "GlobalSetting.h"
 #include "../Include/General/Queue.h"
+#include "../Include/Engine/Transform.h"
 
 std::queue<std::function<bool()>> Engine::closes; //NOLINT
 
@@ -41,15 +42,20 @@ Engine::~Engine() {
 
 void create()
 {
-//    var<Scene> s = SceneManager::Create();
-//    for (int i = 0; i < 70; ++i) {
-//        auto go = s->AddGameObject("go");
-//        safe_cast<Transform>(s->AddComponent(go, "Transform"))->x = i * 12;
-//        s->AddComponent(go, "Renderer");
-//    }
-//    Debug::Info("--------------------------------------------------------------");
-//    AssetManager::Create("Assets/Scene/aaa.scene",s);
-//    Debug::Info("--------------------------------------------------------------");
+    var<MaterialAsset> lit = new_ptr<MaterialAsset>();
+    lit->shader = safe_cast<ShaderAsset>(AssetManager::Instance("Caches/Shader/unlit.shader"));
+    AssetManager::Create("Caches/Material/lit.mat", lit);
+    var<Scene> s = SceneManager::Create();
+    for (int i = 0; i < 70; ++i) {
+        auto go = s->AddGameObject("go");
+        var<Renderer> renderer = safe_cast<Renderer>(s->AddComponent(go, "Renderer"));
+        s->AddComponent(go, "Transform");
+        renderer->material = safe_cast<MaterialAsset>( AssetManager::Instance("Caches/Material/lit.mat"));
+        renderer->mesh = safe_cast<MeshAsset>( AssetManager::Instance("Caches/Mesh/canvas.mesh"));
+    }
+    Debug::Info("--------------------------------------------------------------");
+    AssetManager::Create("Assets/Scene/aaa.scene",s);
+    Debug::Info("--------------------------------------------------------------");
 }
 
 void load()

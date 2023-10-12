@@ -6,10 +6,13 @@
 #define CODE_MESHLOADER_H
 
 #include <string>
+#include "../Assets/MeshAsset.h"
 
 class MeshLoader  {
 public:
     static void Load(const std::string& path);
+private:
+    static void LoadOBJ(const std::string& path, var<MeshAsset> meshAsset);
 };
 
 

@@ -5,18 +5,16 @@
 #ifndef CODE_TEXTUREASSET_H
 #define CODE_TEXTUREASSET_H
 
+#include "Assets/CustomAsset.h"
 
-#include "CustomPtr.h"
-//#include "Assets/CustomAsset.h"
-//#include "CustomEntity.h"
-
-class TextureAsset : public CustomPtr {
-//class TextureAsset : public CustomAsset {
-//class TextureAsset : public CustomEntity {
+class TextureAsset : public CustomAsset {
 public:
     std::string Type() override;
-
     ~TextureAsset() override = default;
+
+protected:
+    void SerializeInInternal(inputArchive &archive) override;
+    void SerializeOutInternal(outputArchive &archive) override;
 };
 
 

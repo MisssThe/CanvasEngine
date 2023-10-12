@@ -7,7 +7,7 @@
 REFLECT_REGISTER(Transform)
 
 void Transform::Initial() {
-    std::cout << this->x << "," << this->y << "," << this->z << std::endl;
+
 }
 
 void Transform::Enable() {
@@ -15,7 +15,7 @@ void Transform::Enable() {
 }
 
 void Transform::Invoke() {
-    std::cout << this->x << "," << this->y << "," << this->z << std::endl;
+
 }
 
 void Transform::Disable() {

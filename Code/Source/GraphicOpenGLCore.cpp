@@ -41,7 +41,8 @@ void GraphicOpenGLCore::DrawRenderers(std::vector<Renderer>& renderers) {
     for (auto renderer : renderers) {
         //绑定对应资源
         //调用绘制接口
-        glDrawElements()
+        Debug::Info("draw renderer");
+//        glDrawElements()
     }
 }
 

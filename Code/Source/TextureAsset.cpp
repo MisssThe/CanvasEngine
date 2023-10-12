@@ -5,3 +5,11 @@
 #include "../Include/Core/Graphic/Assets/TextureAsset.h"
 
 REFLECT_REGISTER(TextureAsset) /* NOLINT */
+
+void TextureAsset::SerializeInInternal(inputArchive &archive) {
+
+}
+
+void TextureAsset::SerializeOutInternal(outputArchive &archive) {
+
+}

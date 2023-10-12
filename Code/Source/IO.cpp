@@ -36,11 +36,24 @@ bool IO::IsDirectory(const std::string &path) {
 void IO::ReadFileAsString(const std::string &path, std::string &info) {
     std::ifstream is(path);
     if (!is.is_open()) {
-        is.close();
         return;
     }
     std::stringstream ss;
     ss << is.rdbuf();
     info = ss.str();
+    is.close();
+}
+
+void IO::ReadFilePerLine(const std::string &path, std::function<void(std::string&)> call) {
+    std::ifstream is(path, std::ios::in);
+    if(!is.is_open())
+        return;
+    std::string strLine;
+    while(getline(is, strLine))
+    {
+        if(strLine.empty())
+            continue;
+        call(strLine);
+    }
     is.close();
 }

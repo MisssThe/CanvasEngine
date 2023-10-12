@@ -41,7 +41,7 @@ set(GENERAL
         Source/Debug.cpp
         Include/General/Debug.h
         Source/Time.cpp
-        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h Source/IO.cpp Include/General/IO.h)
+        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h Source/IO.cpp Include/General/IO.h Source/String.cpp Include/General/String.h)
 
 set(Entity
         Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h

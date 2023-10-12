@@ -8,12 +8,13 @@
 
 
 #include <string>
+#include "../Assets/ShaderAsset.h"
 
 class ShaderLoader {
 public:
     static void Load(const std::string& path);
 private:
-    static void LoadGLSL(const std::string& path);
+    static void LoadGLSL(const std::string& path, var<ShaderAsset> shaderAsset);
 };
 
 
