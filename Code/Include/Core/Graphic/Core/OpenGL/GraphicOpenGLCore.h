@@ -18,6 +18,8 @@ public:
     void BeginFrame() override;
     void EndFrame() override;
     void DrawRenderers(std::vector<Renderer>& renderers) override;
+
+    void DrawRenderer(std::shared_ptr<Renderer> &renderer) override;
 };
 
 

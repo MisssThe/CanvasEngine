@@ -59,3 +59,7 @@ void GraphicOpenGLCore::EndFrame() {
 bool GraphicOpenGLCore::IsExist() {
     return !glfwWindowShouldClose(window);
 }
+
+void GraphicOpenGLCore::DrawRenderer(std::shared_ptr<Renderer> &renderer) {
+
+}

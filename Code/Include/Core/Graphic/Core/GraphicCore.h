@@ -16,7 +16,9 @@ public:
     virtual bool IsExist() = 0;
     virtual void BeginFrame() = 0;
     virtual void DrawRenderers(std::vector<Renderer>& renderers) = 0;
+    virtual void DrawRenderer(var<Renderer>& renderer) = 0;
     virtual void EndFrame() = 0;
+    bool IsAsset() final;
 };
 
 

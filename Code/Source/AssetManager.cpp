@@ -25,7 +25,7 @@ bool AssetManager::Instance(const std::string &path, std::shared_ptr<CustomAsset
     bia(type);
     asset->SerializeIn(bia);
     asset->path = path;
-    asset->name = "!";
+    asset->name = IO::FileName(path);
     Map::Insert(assetMap, path, asset);
     return true;
 }
@@ -63,7 +63,7 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
         Debug::Warm("Asset Has Change","Asset Manager");
     }
     cai->path = path;
-    cai->name = "!";
+    cai->name = IO::FileName(path);
     Map::Insert(assetMap, path, cai);
     is.close();
     return cai;

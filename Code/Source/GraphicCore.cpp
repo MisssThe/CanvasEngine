@@ -5,3 +5,6 @@
 #include "../Include/Core/Graphic/Core/GraphicCore.h"
 
 //REFLECT_REGISTER(GraphicCore) /* NOLINT */
+bool GraphicCore::IsAsset() {
+    return false;
+}

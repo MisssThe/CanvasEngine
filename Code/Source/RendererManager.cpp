@@ -9,7 +9,7 @@ std::queue<var<Renderer>> RendererManager::renderers;
 
 void RendererManager::Invoke() {
     Queue::IteratorRemoveBool<var<Renderer>>(renderers, [](var<Renderer>& renderer){
-        return renderer->isEnable;
+        return renderer->isEnable == EnableTrue;
     });
 }
 
