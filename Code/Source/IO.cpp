@@ -6,6 +6,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <sstream>
 
 long long IO::FileFinalModifyTime(const std::string& path) {
     auto epoch = std::filesystem::last_write_time(path).time_since_epoch();

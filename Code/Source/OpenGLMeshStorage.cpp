@@ -15,5 +15,5 @@ void OpenGLMeshStorage::Bind(std::shared_ptr<MeshAsset> mesh) {
 }
 
 unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset> mesh) {
-
+    return 0;
 }
