@@ -8,6 +8,7 @@
 REFLECT_REGISTER(OpaqueFeature) /* NOLINT */
 
 void OpaqueFeature::Invoke(std::shared_ptr<RenderData> data) {
+    data->core->DrawRenderers(data->renderers);
     Queue::Iterator<var<Renderer>>(data->renderers, [&data](var<Renderer> &renderer) {
         data->core->DrawRenderer(renderer);
     });

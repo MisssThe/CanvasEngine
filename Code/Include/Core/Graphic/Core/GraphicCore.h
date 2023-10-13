@@ -5,6 +5,7 @@
 #ifndef CODE_GRAPHICCORE_H
 #define CODE_GRAPHICCORE_H
 
+#include <queue>
 #include "CustomPtr.h"
 #include "../RenderData/Components/Renderer.h"
 
@@ -15,7 +16,7 @@ public:
 //    virtual void DrawRenderer();
     virtual bool IsExist() = 0;
     virtual void BeginFrame() = 0;
-    virtual void DrawRenderers(std::vector<Renderer>& renderers) = 0;
+    virtual void DrawRenderers(std::queue<std::shared_ptr<Renderer>>& renderers) = 0;
     virtual void DrawRenderer(var<Renderer>& renderer) = 0;
     virtual void EndFrame() = 0;
     bool IsAsset() final;

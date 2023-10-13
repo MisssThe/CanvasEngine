@@ -58,9 +58,23 @@ set(Asset
 
 set(Core
         Source/Graphic.cpp Include/Core/Graphic/Graphic.h
-        Source/GraphicOpenGLCore.cpp Include/Core/Graphic/Core/OpenGL/GraphicOpenGLCore.h
+        Source/OpenGLGraphicCore.cpp Include/Core/Graphic/Core/OpenGL/OpenGLGraphicCore.h
         Source/RenderData.cpp Include/Core/Graphic/RenderData.h
-        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h Source/ShaderLoader.cpp Include/Core/Graphic/AssetsLoader/ShaderLoader.h Source/MeshLoader.cpp Include/Core/Graphic/AssetsLoader/MeshLoader.h Source/CameraManager.cpp Include/Core/Graphic/RenderData/CameraManager.h Source/Camera.cpp Include/Core/Graphic/RenderData/Components/Camera.h Source/Light.cpp Include/Core/Graphic/RenderData/Components/Light.h Source/LightManager.cpp Include/Core/Graphic/RenderData/LightManager.h Source/RendererManager.cpp Include/Core/Graphic/RenderData/RendererManager.h)
+        Source/GraphicPipeline.cpp Include/Core/Graphic/Pipeline/GraphicPipeline.h
+        Source/GraphicFeature.cpp Include/Core/Graphic/Pipeline/GraphicFeature.h
+        Source/ForwardPipeline.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h
+        Source/OpaqueFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h
+        Source/SkyboxFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/SkyboxFeature.h
+        Source/TransparentFeature.cpp Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/TransparentFeature.h
+        Source/ShaderLoader.cpp Include/Core/Graphic/AssetsLoader/ShaderLoader.h
+        Source/MeshLoader.cpp Include/Core/Graphic/AssetsLoader/MeshLoader.h
+        Source/CameraManager.cpp Include/Core/Graphic/RenderData/CameraManager.h
+        Source/Camera.cpp Include/Core/Graphic/RenderData/Components/Camera.h
+        Source/Light.cpp Include/Core/Graphic/RenderData/Components/Light.h
+        Source/LightManager.cpp Include/Core/Graphic/RenderData/LightManager.h
+        Source/RendererManager.cpp Include/Core/Graphic/RenderData/RendererManager.h
+        Source/OpenGLShaderStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLShaderStorage.h
+        Source/OpenGLMeshStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLMeshStorage.h)
 
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)

@@ -12,6 +12,7 @@ class MeshAsset : public CustomAsset {
 public:
     std::string Type() override;
     ~MeshAsset() override = default;
+    void Clear();
 protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;
@@ -24,6 +25,10 @@ public:
     std::vector<float> texCoord2;
     std::vector<float> texCoord3;
     std::vector<unsigned int> face;
+    std::vector<float> compactnessInfo;
+public:
+    int indexCount;
+    int vertexCount;
 };
 
 

@@ -17,8 +17,21 @@ REFLECT_REGISTER(MeshAsset) /* NOLINT */
 
 void MeshAsset::SerializeInInternal(inputArchive &archive) {
     archive(position, color, normal, tangent, texCoord1, texCoord2, texCoord3, face);
+    this->indexCount = (int)face.size();
+    this->vertexCount = (int)position.size();
 }
 
 void MeshAsset::SerializeOutInternal(outputArchive &archive) {
     archive(position, color, normal, tangent, texCoord1, texCoord2, texCoord3, face);
+}
+
+void MeshAsset::Clear() {
+    position.clear();
+    color.clear();
+    normal.clear();
+    tangent.clear();
+    texCoord1.clear();
+    texCoord2.clear();
+    texCoord3.clear();
+    face.clear();
 }

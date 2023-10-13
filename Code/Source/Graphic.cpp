@@ -3,7 +3,7 @@
 //
 
 #include "../Include/Core/Graphic/Graphic.h"
-#include "../Include/Core/Graphic/Core/OpenGL/GraphicOpenGLCore.h"
+#include "../Include/Core/Graphic/Core/OpenGL/OpenGLGraphicCore.h"
 #include "GlobalSetting.h"
 #include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardPipeline.h"
 #include "../Include/Engine.h"
@@ -15,7 +15,7 @@ var<RenderData> Graphic::renderData;
 void Graphic::Initial() {
     switch (GlobalSetting::graphicType) {
         case OpenGL:
-            core = cast<GraphicCore>(new_ptr<GraphicOpenGLCore>());
+            core = cast<GraphicCore>(new_ptr<OpenGLGraphicCore>());
             break;
         case Metal:
             break;
@@ -24,7 +24,7 @@ void Graphic::Initial() {
         case Vulkan:
             break;
         default:
-            core = cast<GraphicCore>(new_ptr<GraphicOpenGLCore>());
+            core = cast<GraphicCore>(new_ptr<OpenGLGraphicCore>());
     }
     switch (GlobalSetting::pipelineType) {
         case Forward:
