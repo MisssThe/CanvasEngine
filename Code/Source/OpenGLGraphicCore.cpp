@@ -36,12 +36,14 @@ OpenGLGraphicCore::OpenGLGraphicCore() {
 }
 
 OpenGLGraphicCore::~OpenGLGraphicCore() {
+    this->meshStorage->Release();
+    this->shaderStorage->Release();
     glfwTerminate();
 }
 
 void OpenGLGraphicCore::BeginFrame() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.5f, 0.2f, 0.8f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void OpenGLGraphicCore::EndFrame() {
@@ -59,14 +61,14 @@ void OpenGLGraphicCore::DrawRenderer(std::shared_ptr<Renderer> &renderer) {
     int vertexCount = renderer->mesh->vertexCount;
     this->shaderStorage->Bind(renderer->material->shader);
     this->meshStorage->Bind(renderer->mesh);
-    for (auto info : renderer->material->properties)
-    {
-        this->shaderStorage->SetInfo(info.first, info.second);
-    }
-//    if (indexCount > 0)
-//        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
-//    else
-//        glDrawArrays(GL_TRIANGLES, vertexCount, GL_FLOAT);
+    this->shaderStorage->SetInfo(renderer->material);
+
+//    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+    if (indexCount > 0)
+        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+    else
+        glDrawArrays(GL_TRIANGLES, vertexCount, GL_FLOAT);
 }
 
 void OpenGLGraphicCore::DrawRenderers(std::queue<std::shared_ptr<Renderer>>& renderers) {

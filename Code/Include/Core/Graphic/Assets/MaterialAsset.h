@@ -28,6 +28,8 @@ public:
     };
     std::unordered_map<std::string, MaterialInfo> properties;
     var<ShaderAsset> shader;
+    bool depthTest = true;
+    bool depthWrite = true;
 };
 
 

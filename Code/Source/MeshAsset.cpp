@@ -16,13 +16,13 @@ REFLECT_REGISTER(MeshAsset) /* NOLINT */
 //std::vector<unsigned int> face;
 
 void MeshAsset::SerializeInInternal(inputArchive &archive) {
-    archive(position, color, normal, tangent, texCoord1, texCoord2, texCoord3, face);
+    archive(position, color, normal, tangent, texCoord1, texCoord2, texCoord3, face, this->compactnessInfo);
     this->indexCount = (int)face.size();
     this->vertexCount = (int)position.size();
 }
 
 void MeshAsset::SerializeOutInternal(outputArchive &archive) {
-    archive(position, color, normal, tangent, texCoord1, texCoord2, texCoord3, face);
+    archive(position, color, normal, tangent, texCoord1, texCoord2, texCoord3, face, this->compactnessInfo);
 }
 
 void MeshAsset::Clear() {

@@ -1,7 +1,6 @@
-uniform sampler2D tex;
-
+#version 330 core
+layout (location = 0) in vec3 aPos;
 void main()
 {
-    vec4 color = texture2D(tex,gl_TexCoord[0].st);
-    gl_FragColor = color;
+    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
 }

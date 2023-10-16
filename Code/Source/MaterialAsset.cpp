@@ -10,12 +10,12 @@ REFLECT_REGISTER(MaterialAsset) /* NOLINT */
 
 void MaterialAsset::SerializeInInternal(inputArchive &archive) {
     this->shader = safe_cast<ShaderAsset>( SerializeInPtr(archive));
-    archive(this->properties);
+    archive(this->properties, this->depthTest, this->depthWrite);
 }
 
 void MaterialAsset::SerializeOutInternal(outputArchive &archive) {
     SerializeOutPtr(archive, this->shader);
-    archive(this->properties);
+    archive(this->properties, this->depthTest, this->depthWrite);
 }
 
 void MaterialAsset::MaterialInfo::serialize(inputArchive &archive) {

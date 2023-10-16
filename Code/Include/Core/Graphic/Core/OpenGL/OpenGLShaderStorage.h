@@ -11,7 +11,12 @@
 class OpenGLShaderStorage {
 public:
     void Bind(var<ShaderAsset> shader);
-    void SetInfo(const std::string& type, MaterialAsset::MaterialInfo& info);
+    void SetInfo(var<MaterialAsset> info);
+    void Release();
+private:
+    unsigned int CompileShader(var<ShaderAsset> shader);
+private:
+    std::unordered_map<var<ShaderAsset>, unsigned int> shaders;
 };
 
 
