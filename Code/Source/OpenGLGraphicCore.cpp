@@ -57,8 +57,8 @@ bool OpenGLGraphicCore::IsExist() {
 
 void OpenGLGraphicCore::DrawRenderer(std::shared_ptr<Renderer> &renderer) {
     //Bind Info
-//    int indexCount = renderer->mesh->indexCount;
-//    int vertexCount = renderer->mesh->vertexCount;
+    int indexCount = renderer->mesh->indexCount;
+    int vertexCount = renderer->mesh->vertexCount;
     this->shaderStorage->Bind(renderer->material->shader);
     this->meshStorage->Bind(renderer->mesh);
     this->shaderStorage->SetInfo(renderer->material);
