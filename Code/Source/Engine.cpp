@@ -66,8 +66,8 @@ void load()
 }
 
 void Engine::Invoke() {
-create();
-//    load();
+//create();
+    load();
     while (this->IsExist()) {
         SceneManager::Invoke();
         Graphic::Invoke();
