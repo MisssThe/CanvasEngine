@@ -12,9 +12,6 @@ REFLECT_REGISTER(OpenGLGraphicCore) /* NOLINT */
 
 GLFWwindow* window = nullptr;
 OpenGLGraphicCore::OpenGLGraphicCore() {
-    this->meshStorage = new_ptr<OpenGLMeshStorage>();
-    this->shaderStorage = new_ptr<OpenGLShaderStorage>();
-
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -35,6 +32,10 @@ OpenGLGraphicCore::OpenGLGraphicCore() {
     }
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
+
+    this->meshStorage = new_ptr<OpenGLMeshStorage>();
+    this->shaderStorage = new_ptr<OpenGLShaderStorage>();
+    this->renderTextureStorage = new_ptr<OpenGLRenderTextureStorage>();
 }
 
 OpenGLGraphicCore::~OpenGLGraphicCore() {
@@ -74,7 +75,7 @@ void OpenGLGraphicCore::DrawRenderers(std::queue<std::shared_ptr<Renderer>>& ren
 
 }
 
-void OpenGLGraphicCore::SetTarget(std::shared_ptr<RenderTextureAsset> renderTexture) {
+void OpenGLGraphicCore::SetTarget(std::shared_ptr<RenderTexture> renderTexture) {
 
 }
 

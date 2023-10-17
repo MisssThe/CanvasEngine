@@ -189,12 +189,26 @@ build CMakeFiles/Code.dir/Source/OpenGLMeshStorage.cpp.obj: CXX_COMPILER__Code_u
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir\Source
 
-build CMakeFiles/Code.dir/Source/RenderTextureAsset.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/RenderTextureAsset.cpp || cmake_object_order_depends_target_Code
-  DEP_FILE = CMakeFiles\Code.dir\Source\RenderTextureAsset.cpp.obj.d
+build CMakeFiles/Code.dir/Source/OpenGLRenderTextureStorage.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/OpenGLRenderTextureStorage.cpp || cmake_object_order_depends_target_Code
+  DEP_FILE = CMakeFiles\Code.dir\Source\OpenGLRenderTextureStorage.cpp.obj.d
   FLAGS = -Wall -Werror -O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -IF:/Project/Fork/CanvasEngine/Code/Include/Framework -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glad/4.6/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/cereal
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir\Source
+
+build CMakeFiles/Code.dir/Source/OpenGLTextureStorage.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/OpenGLTextureStorage.cpp || cmake_object_order_depends_target_Code
+  DEP_FILE = CMakeFiles\Code.dir\Source\OpenGLTextureStorage.cpp.obj.d
+  FLAGS = -Wall -Werror -O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IF:/Project/Fork/CanvasEngine/Code/Include/Framework -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glad/4.6/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/cereal
+  OBJECT_DIR = CMakeFiles\Code.dir
+  OBJECT_FILE_DIR = CMakeFiles\Code.dir\Source
+
+build CMakeFiles/Code.dir/Include/Core/Graphic/Core/RenderTexture.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Include/Core/Graphic/Core/RenderTexture.cpp || cmake_object_order_depends_target_Code
+  DEP_FILE = CMakeFiles\Code.dir\Include\Core\Graphic\Core\RenderTexture.cpp.obj.d
+  FLAGS = -Wall -Werror -O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IF:/Project/Fork/CanvasEngine/Code/Include/Framework -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glad/4.6/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/cereal
+  OBJECT_DIR = CMakeFiles\Code.dir
+  OBJECT_FILE_DIR = CMakeFiles\Code.dir\Include\Core\Graphic\Core
 
 build CMakeFiles/Code.dir/Source/CustomEntity.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/CustomEntity.cpp || cmake_object_order_depends_target_Code
   DEP_FILE = CMakeFiles\Code.dir\Source\CustomEntity.cpp.obj.d
@@ -315,26 +329,19 @@ build CMakeFiles/Code.dir/Source/SceneManager.cpp.obj: CXX_COMPILER__Code_unscan
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir\Source
 
-build CMakeFiles/Code.dir/Source/SerializeBase.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/SerializeBase.cpp || cmake_object_order_depends_target_Code
-  DEP_FILE = CMakeFiles\Code.dir\Source\SerializeBase.cpp.obj.d
+build CMakeFiles/Code.dir/Source/SerializePtr.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/SerializePtr.cpp || cmake_object_order_depends_target_Code
+  DEP_FILE = CMakeFiles\Code.dir\Source\SerializePtr.cpp.obj.d
   FLAGS = -Wall -Werror -O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -IF:/Project/Fork/CanvasEngine/Code/Include/Framework -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glad/4.6/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/cereal
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir\Source
 
-build CMakeFiles/Code.dir/Source/SerializeValue.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/SerializeValue.cpp || cmake_object_order_depends_target_Code
-  DEP_FILE = CMakeFiles\Code.dir\Source\SerializeValue.cpp.obj.d
+build CMakeFiles/Code.dir/Source/CustomValue.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/CustomValue.cpp || cmake_object_order_depends_target_Code
+  DEP_FILE = CMakeFiles\Code.dir\Source\CustomValue.cpp.obj.d
   FLAGS = -Wall -Werror -O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -IF:/Project/Fork/CanvasEngine/Code/Include/Framework -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glad/4.6/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/cereal
   OBJECT_DIR = CMakeFiles\Code.dir
   OBJECT_FILE_DIR = CMakeFiles\Code.dir\Source
-
-build CMakeFiles/Code.dir/Include/Framework/SerializePtr.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Include/Framework/SerializePtr.cpp || cmake_object_order_depends_target_Code
-  DEP_FILE = CMakeFiles\Code.dir\Include\Framework\SerializePtr.cpp.obj.d
-  FLAGS = -Wall -Werror -O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IF:/Project/Fork/CanvasEngine/Code/Include/Framework -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/glad/4.6/include -IF:/Project/Fork/CanvasEngine/Code/ThirdParty/cereal
-  OBJECT_DIR = CMakeFiles\Code.dir
-  OBJECT_FILE_DIR = CMakeFiles\Code.dir\Include\Framework
 
 build CMakeFiles/Code.dir/Source/Debug.cpp.obj: CXX_COMPILER__Code_unscanned_Release F$:/Project/Fork/CanvasEngine/Code/Source/Debug.cpp || cmake_object_order_depends_target_Code
   DEP_FILE = CMakeFiles\Code.dir\Source\Debug.cpp.obj.d
@@ -400,7 +407,7 @@ build CMakeFiles/Code.dir/Source/Engine.cpp.obj: CXX_COMPILER__Code_unscanned_Re
 #############################################
 # Link the executable F:\Project\Fork\CanvasEngine\Code\CanvasOut\Bin\Code.exe
 
-build F$:/Project/Fork/CanvasEngine/Code/CanvasOut/Bin/Code.exe: CXX_EXECUTABLE_LINKER__Code_Release CMakeFiles/Code.dir/main.cpp.obj CMakeFiles/Code.dir/glad.c.obj CMakeFiles/Code.dir/Source/Graphic.cpp.obj CMakeFiles/Code.dir/Source/OpenGLGraphicCore.cpp.obj CMakeFiles/Code.dir/Source/RenderData.cpp.obj CMakeFiles/Code.dir/Source/GraphicPipeline.cpp.obj CMakeFiles/Code.dir/Source/GraphicFeature.cpp.obj CMakeFiles/Code.dir/Source/ForwardPipeline.cpp.obj CMakeFiles/Code.dir/Source/OpaqueFeature.cpp.obj CMakeFiles/Code.dir/Source/SkyboxFeature.cpp.obj CMakeFiles/Code.dir/Source/TransparentFeature.cpp.obj CMakeFiles/Code.dir/Source/ShaderLoader.cpp.obj CMakeFiles/Code.dir/Source/MeshLoader.cpp.obj CMakeFiles/Code.dir/Source/CameraManager.cpp.obj CMakeFiles/Code.dir/Source/Camera.cpp.obj CMakeFiles/Code.dir/Source/Light.cpp.obj CMakeFiles/Code.dir/Source/LightManager.cpp.obj CMakeFiles/Code.dir/Source/RendererManager.cpp.obj CMakeFiles/Code.dir/Source/OpenGLShaderStorage.cpp.obj CMakeFiles/Code.dir/Source/OpenGLMeshStorage.cpp.obj CMakeFiles/Code.dir/Source/RenderTextureAsset.cpp.obj CMakeFiles/Code.dir/Source/CustomEntity.cpp.obj CMakeFiles/Code.dir/Source/GameObject.cpp.obj CMakeFiles/Code.dir/Source/Component.cpp.obj CMakeFiles/Code.dir/Source/Transform.cpp.obj CMakeFiles/Code.dir/Source/Renderer.cpp.obj CMakeFiles/Code.dir/Source/GraphicCore.cpp.obj CMakeFiles/Code.dir/Source/TextureAsset.cpp.obj CMakeFiles/Code.dir/Source/Scene.cpp.obj CMakeFiles/Code.dir/Source/GlobalSetting.cpp.obj CMakeFiles/Code.dir/Source/ShaderAsset.cpp.obj CMakeFiles/Code.dir/Source/MeshAsset.cpp.obj CMakeFiles/Code.dir/Source/MaterialAsset.cpp.obj CMakeFiles/Code.dir/Source/AssetLog.cpp.obj CMakeFiles/Code.dir/Source/CustomPtr.cpp.obj CMakeFiles/Code.dir/Source/CustomAsset.cpp.obj CMakeFiles/Code.dir/Source/AssetManager.cpp.obj CMakeFiles/Code.dir/Source/SceneManager.cpp.obj CMakeFiles/Code.dir/Source/SerializeBase.cpp.obj CMakeFiles/Code.dir/Source/SerializeValue.cpp.obj CMakeFiles/Code.dir/Include/Framework/SerializePtr.cpp.obj CMakeFiles/Code.dir/Source/Debug.cpp.obj CMakeFiles/Code.dir/Source/Time.cpp.obj CMakeFiles/Code.dir/Source/Cipher.cpp.obj CMakeFiles/Code.dir/Source/IO.cpp.obj CMakeFiles/Code.dir/Source/String.cpp.obj CMakeFiles/Code.dir/Source/Color.cpp.obj CMakeFiles/Code.dir/Include/General/Math/CommonMath.cpp.obj CMakeFiles/Code.dir/Source/Engine.cpp.obj | F$:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/lib-mingw-w64/libglfw3.a
+build F$:/Project/Fork/CanvasEngine/Code/CanvasOut/Bin/Code.exe: CXX_EXECUTABLE_LINKER__Code_Release CMakeFiles/Code.dir/main.cpp.obj CMakeFiles/Code.dir/glad.c.obj CMakeFiles/Code.dir/Source/Graphic.cpp.obj CMakeFiles/Code.dir/Source/OpenGLGraphicCore.cpp.obj CMakeFiles/Code.dir/Source/RenderData.cpp.obj CMakeFiles/Code.dir/Source/GraphicPipeline.cpp.obj CMakeFiles/Code.dir/Source/GraphicFeature.cpp.obj CMakeFiles/Code.dir/Source/ForwardPipeline.cpp.obj CMakeFiles/Code.dir/Source/OpaqueFeature.cpp.obj CMakeFiles/Code.dir/Source/SkyboxFeature.cpp.obj CMakeFiles/Code.dir/Source/TransparentFeature.cpp.obj CMakeFiles/Code.dir/Source/ShaderLoader.cpp.obj CMakeFiles/Code.dir/Source/MeshLoader.cpp.obj CMakeFiles/Code.dir/Source/CameraManager.cpp.obj CMakeFiles/Code.dir/Source/Camera.cpp.obj CMakeFiles/Code.dir/Source/Light.cpp.obj CMakeFiles/Code.dir/Source/LightManager.cpp.obj CMakeFiles/Code.dir/Source/RendererManager.cpp.obj CMakeFiles/Code.dir/Source/OpenGLShaderStorage.cpp.obj CMakeFiles/Code.dir/Source/OpenGLMeshStorage.cpp.obj CMakeFiles/Code.dir/Source/OpenGLRenderTextureStorage.cpp.obj CMakeFiles/Code.dir/Source/OpenGLTextureStorage.cpp.obj CMakeFiles/Code.dir/Include/Core/Graphic/Core/RenderTexture.cpp.obj CMakeFiles/Code.dir/Source/CustomEntity.cpp.obj CMakeFiles/Code.dir/Source/GameObject.cpp.obj CMakeFiles/Code.dir/Source/Component.cpp.obj CMakeFiles/Code.dir/Source/Transform.cpp.obj CMakeFiles/Code.dir/Source/Renderer.cpp.obj CMakeFiles/Code.dir/Source/GraphicCore.cpp.obj CMakeFiles/Code.dir/Source/TextureAsset.cpp.obj CMakeFiles/Code.dir/Source/Scene.cpp.obj CMakeFiles/Code.dir/Source/GlobalSetting.cpp.obj CMakeFiles/Code.dir/Source/ShaderAsset.cpp.obj CMakeFiles/Code.dir/Source/MeshAsset.cpp.obj CMakeFiles/Code.dir/Source/MaterialAsset.cpp.obj CMakeFiles/Code.dir/Source/AssetLog.cpp.obj CMakeFiles/Code.dir/Source/CustomPtr.cpp.obj CMakeFiles/Code.dir/Source/CustomAsset.cpp.obj CMakeFiles/Code.dir/Source/AssetManager.cpp.obj CMakeFiles/Code.dir/Source/SceneManager.cpp.obj CMakeFiles/Code.dir/Source/SerializePtr.cpp.obj CMakeFiles/Code.dir/Source/CustomValue.cpp.obj CMakeFiles/Code.dir/Source/Debug.cpp.obj CMakeFiles/Code.dir/Source/Time.cpp.obj CMakeFiles/Code.dir/Source/Cipher.cpp.obj CMakeFiles/Code.dir/Source/IO.cpp.obj CMakeFiles/Code.dir/Source/String.cpp.obj CMakeFiles/Code.dir/Source/Color.cpp.obj CMakeFiles/Code.dir/Include/General/Math/CommonMath.cpp.obj CMakeFiles/Code.dir/Source/Engine.cpp.obj | F$:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/lib-mingw-w64/libglfw3.a
   FLAGS = -Wall -Werror -O3 -DNDEBUG
   LINK_FLAGS = -static-libgcc -static-libstdc++
   LINK_LIBRARIES = F:/Project/Fork/CanvasEngine/Code/ThirdParty/glfw/3.3.8_Windows/lib-mingw-w64/libglfw3.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

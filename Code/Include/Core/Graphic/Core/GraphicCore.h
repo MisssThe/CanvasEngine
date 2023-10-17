@@ -8,8 +8,8 @@
 #include <queue>
 #include "CustomPtr.h"
 #include "../RenderData/Components/Renderer.h"
-#include "../Assets/RenderTextureAsset.h"
 #include "../../../General/Math/Color.h"
+#include "RenderTexture.h"
 
 class GraphicCore : public CustomPtr {
 public:
@@ -18,7 +18,7 @@ public:
 //    virtual void DrawRenderer();
     virtual bool IsExist() = 0;
     virtual void BeginFrame() = 0;
-    virtual void SetTarget(var<RenderTextureAsset> renderTexture) = 0;
+    virtual void SetTarget(var<RenderTexture> renderTexture) = 0;
     virtual void ClearTarget(Color color, bool clearColor, bool clearDepth) = 0;
     virtual void DrawRenderers(std::queue<std::shared_ptr<Renderer>>& renderers) = 0;
     virtual void DrawRenderer(var<Renderer>& renderer) = 0;

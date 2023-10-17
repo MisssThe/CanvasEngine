@@ -87,7 +87,13 @@ set(Core
         Source/RendererManager.cpp Include/Core/Graphic/RenderData/RendererManager.h
         Source/OpenGLShaderStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLShaderStorage.h
         Source/OpenGLMeshStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLMeshStorage.h
-        Source/RenderTextureAsset.cpp Include/Core/Graphic/Assets/RenderTextureAsset.h)
+        Source/OpenGLRenderTextureStorage.cpp
+        Include/Core/Graphic/Core/OpenGL/OpenGLRenderTextureStorage.h
+        Source/OpenGLTextureStorage.cpp
+        Include/Core/Graphic/Core/OpenGL/OpenGLTextureStorage.h
+        Source/RenderTexture.cpp
+        Include/Core/Graphic/Core/RenderTexture.h
+)
 
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)
