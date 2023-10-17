@@ -4,7 +4,7 @@
 
 #include "../Include/Core/Graphic/Core/OpenGL/OpenGLMeshStorage.h"
 #include "glad/glad.h"
-#include "../Include/General/Queue.h"
+#include "../Include/General/Container/Queue.h"
 
 void OpenGLMeshStorage::Bind(std::shared_ptr<MeshAsset> mesh) {
     unsigned int index;

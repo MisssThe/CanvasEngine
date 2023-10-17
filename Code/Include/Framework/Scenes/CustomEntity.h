@@ -8,7 +8,7 @@
 
 #include "CustomPtr.h"
 #include "SerializePtr.h"
-#include "../../General/Cipher.h"
+#include "../../General/Tool/Cipher.h"
 #include <map>
 
 enum AliveState

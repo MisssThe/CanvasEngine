@@ -4,9 +4,9 @@
 
 #include <fstream>
 #include "../Include/Framework/Assets/AssetManager.h"
-#include "../Include/General/Map.h"
-#include "../Include/General/Debug.h"
-#include "../Include/General/IO.h"
+#include "../Include/General/Container/Map.h"
+#include "../Include/General/Tool/Debug.h"
+#include "../Include/General/Tool/IO.h"
 #include <filesystem>
 
 std::unordered_map<std::string, var<CustomAsset>> AssetManager::assetMap;

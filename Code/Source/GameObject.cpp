@@ -3,7 +3,7 @@
 //
 
 #include "Scenes/GameObject.h"
-#include "../Include/General/Queue.h"
+#include "../Include/General/Container/Queue.h"
 
 REFLECT_REGISTER(GameObject) /* NOLINT */
 

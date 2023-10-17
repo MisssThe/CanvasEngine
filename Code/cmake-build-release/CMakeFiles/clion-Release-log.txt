@@ -1,0 +1,13 @@
+"F:\Application\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=F:/Application/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S F:\Project\Fork\CanvasEngine\Code -B F:\Project\Fork\CanvasEngine\Code\cmake-build-release
+-- Configuring done (0.2s)
+CMake Error at CMakeLists.txt:99 (add_executable):
+  Cannot find source file:
+
+    Source/SerializeBase.cpp
+
+
+CMake Error at CMakeLists.txt:99 (add_executable):
+  No SOURCES given to target: Code
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

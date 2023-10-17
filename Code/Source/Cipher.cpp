@@ -2,8 +2,8 @@
 // Created by Administrator on 2023/9/14.
 //
 
-#include "../Include/General/Cipher.h"
-#include "../Include/General/Time.h"
+#include "../Include/General/Tool/Cipher.h"
+#include "../Include/General/Tool/Time.h"
 #include <random>
 
 //std::default_random_engine Cipher::dre(Time::SystemTime() + std::stoi(Mac()));

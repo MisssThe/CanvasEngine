@@ -50,4 +50,5 @@ void Graphic::Invoke() {
 void Graphic::Release() {
     CameraManager::Release();
     LightManager::Release();
+
 }

@@ -19,6 +19,8 @@ public:
     bool IsExist() override;
     void BeginFrame() override;
     void EndFrame() override;
+    void SetTarget(std::shared_ptr<RenderTextureAsset> renderTexture) override;
+    void ClearTarget(Color color, bool clearColor, bool clearDepth) override;
     void DrawRenderers(std::queue<std::shared_ptr<Renderer>>& renderers) override;
     void DrawRenderer(std::shared_ptr<Renderer> &renderer) override;
 private:

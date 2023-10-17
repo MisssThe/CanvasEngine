@@ -3,12 +3,12 @@
 //
 
 #include "../Include/Engine.h"
-#include "../Include/General/Debug.h"
+#include "../Include/General/Tool/Debug.h"
 #include "Assets/AssetManager.h"
 #include "Scenes/SceneManager.h"
 #include "../Include/Core/Graphic/Graphic.h"
 #include "GlobalSetting.h"
-#include "../Include/General/Queue.h"
+#include "../Include/General/Container/Queue.h"
 #include "../Include/Engine/Transform.h"
 
 std::queue<std::function<bool()>> Engine::closes; //NOLINT

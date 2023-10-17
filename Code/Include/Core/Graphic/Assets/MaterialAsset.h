@@ -17,6 +17,14 @@ public:
     std::string Type() override;
     ~MaterialAsset() override = default;
 public:
+    enum DepthTestMode {
+        LEqual,
+    };
+    enum BlendMode {
+        Opaque,
+        Transparent,
+    };
+public:
     struct MaterialInfo
     {
     public:
@@ -28,8 +36,9 @@ public:
     };
     std::unordered_map<std::string, MaterialInfo> properties;
     var<ShaderAsset> shader;
-    bool depthTest = true;
+    DepthTestMode depthTest = LEqual;
     bool depthWrite = true;
+    BlendMode blend = Opaque;
 };
 
 

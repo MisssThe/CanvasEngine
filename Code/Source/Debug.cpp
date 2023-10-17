@@ -3,8 +3,8 @@
 //
 
 #include <iostream>
-#include "../Include/General/Debug.h"
-#include "../Include/General/Time.h"
+#include "../Include/General/Tool/Debug.h"
+#include "../Include/General/Tool/Time.h"
 
 void Debug::Info(const std::string& context, const std::string& title) {
 

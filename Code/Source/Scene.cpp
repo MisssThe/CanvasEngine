@@ -7,9 +7,9 @@
 #include <utility>
 #include "Scenes/GameObject.h"
 #include "cereal/types/string.hpp"
-#include "../Include/General/Deque.h"
-#include "../Include/General/Map.h"
-#include "../Include/General/Queue.h"
+#include "../Include/General/Container/Deque.h"
+#include "../Include/General/Container/Map.h"
+#include "../Include/General/Container/Queue.h"
 
 REFLECT_REGISTER(Scene) /* NOLINT */
 

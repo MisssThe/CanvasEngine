@@ -3,8 +3,8 @@
 //
 #include "../Include/Core/Graphic/AssetsLoader/MeshLoader.h"
 #include "Assets/AssetManager.h"
-#include "../Include/General/IO.h"
-#include "../Include/General/String.h"
+#include "../Include/General/Tool/IO.h"
+#include "../Include/General/Tool/String.h"
 #include <map>
 
 

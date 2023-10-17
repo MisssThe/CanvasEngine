@@ -6,7 +6,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "GlobalSetting.h"
-#include "../Include/General/Debug.h"
+#include "../Include/General/Tool/Debug.h"
 
 REFLECT_REGISTER(OpenGLGraphicCore) /* NOLINT */
 
@@ -33,6 +33,8 @@ OpenGLGraphicCore::OpenGLGraphicCore() {
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
     }
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
 }
 
 OpenGLGraphicCore::~OpenGLGraphicCore() {
@@ -62,15 +64,25 @@ void OpenGLGraphicCore::DrawRenderer(std::shared_ptr<Renderer> &renderer) {
     this->shaderStorage->Bind(renderer->material->shader);
     this->meshStorage->Bind(renderer->mesh);
     this->shaderStorage->SetInfo(renderer->material);
-
-//    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
     if (indexCount > 0)
-        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
     else
         glDrawArrays(GL_TRIANGLES, vertexCount, GL_FLOAT);
 }
 
 void OpenGLGraphicCore::DrawRenderers(std::queue<std::shared_ptr<Renderer>>& renderers) {
 
+}
+
+void OpenGLGraphicCore::SetTarget(std::shared_ptr<RenderTextureAsset> renderTexture) {
+
+}
+
+void OpenGLGraphicCore::ClearTarget(Color color, bool clearColor, bool clearDepth) {
+    if (clearColor) {
+        glClearColor(color.r(), color.g(), color.b(), color.a());
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+    if (clearDepth)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

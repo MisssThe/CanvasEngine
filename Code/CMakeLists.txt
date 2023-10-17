@@ -34,14 +34,26 @@ set(FRAMEWORK
         Source/CustomPtr.cpp Include/Framework/CustomPtr.h
         Source/CustomAsset.cpp Include/Framework/Assets/CustomAsset.h
         Source/AssetManager.cpp Include/Framework/Assets/AssetManager.h
-        Source/SceneManager.cpp Include/Framework/Scenes/SceneManager.h Source/SerializePtr.cpp Include/Framework/SerializePtr.h)
+        Source/SceneManager.cpp Include/Framework/Scenes/SceneManager.h
+        Source/SerializePtr.cpp Include/Framework/SerializePtr.h
+        Source/CustomValue.cpp Include/Framework/CustomValue.h
+)
 
 set(GENERAL
-        Include/General/Map.h
+        Include/General/Container/Map.h
         Source/Debug.cpp
-        Include/General/Debug.h
+        Include/General/Tool/Debug.h
         Source/Time.cpp
-        Include/General/Time.h Include/General/Queue.h Source/Cipher.cpp Include/General/Cipher.h Include/General/Deque.h Source/IO.cpp Include/General/IO.h Source/String.cpp Include/General/String.h)
+        Include/General/Tool/Time.h
+        Include/General/Container/Queue.h
+        Source/Cipher.cpp Include/General/Tool/Cipher.h
+        Include/General/Container/Deque.h
+        Source/IO.cpp Include/General/Tool/IO.h
+        Source/String.cpp Include/General/Tool/String.h
+        Source/Color.cpp
+        Include/General/Math/Color.h
+        Include/General/Math/CommonMath.cpp
+        Include/General/Math/CommonMath.h)
 
 set(Entity
         Source/CustomEntity.cpp Include/Framework/Scenes/CustomEntity.h
@@ -74,7 +86,8 @@ set(Core
         Source/LightManager.cpp Include/Core/Graphic/RenderData/LightManager.h
         Source/RendererManager.cpp Include/Core/Graphic/RenderData/RendererManager.h
         Source/OpenGLShaderStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLShaderStorage.h
-        Source/OpenGLMeshStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLMeshStorage.h)
+        Source/OpenGLMeshStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLMeshStorage.h
+        Source/RenderTextureAsset.cpp Include/Core/Graphic/Assets/RenderTextureAsset.h)
 
 if (CMAKE_HOST_WIN32)
     add_executable(Code main.cpp glad.c ${Core} ${Entity} ${Asset} ${FRAMEWORK} ${GENERAL} Source/Engine.cpp Include/Engine.h)

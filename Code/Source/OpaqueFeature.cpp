@@ -3,7 +3,7 @@
 //
 
 #include "../Include/Core/Graphic/Pipeline/Pipeline/ForwardFeatures/OpaqueFeature.h"
-#include "../Include/General/Queue.h"
+#include "../Include/General/Container/Queue.h"
 
 REFLECT_REGISTER(OpaqueFeature) /* NOLINT */
 

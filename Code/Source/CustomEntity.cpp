@@ -6,8 +6,8 @@
 #include "Assets/CustomAsset.h"
 #include "Scenes/SceneManager.h"
 #include "Assets/AssetManager.h"
-#include "../Include/General/Map.h"
-#include "../Include/General/Cipher.h"
+#include "../Include/General/Container/Map.h"
+#include "../Include/General/Tool/Cipher.h"
 
 //REFLECT_REGISTER(CustomEntity)
 std::unordered_map<long long, var<CustomEntity> > CustomEntity::entityMap;   //只用于初始的序列化

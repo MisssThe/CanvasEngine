@@ -4,7 +4,7 @@
 
 #include "../Include/Core/Graphic/Core/OpenGL//OpenGLShaderStorage.h"
 #include "glad/glad.h"
-#include "../Include/General/Map.h"
+#include "../Include/General/Container/Map.h"
 
 void OpenGLShaderStorage::Bind(std::shared_ptr<ShaderAsset> shader) {
     unsigned int program;
@@ -62,14 +62,24 @@ unsigned int OpenGLShaderStorage::CompileShader(std::shared_ptr<ShaderAsset> sha
     return shaderProgram;
 }
 
-void OpenGLShaderStorage::SetInfo(std::shared_ptr<MaterialAsset> info) {
-    if (info->depthTest) {
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(GL_LEQUAL);
-    } else
-        glDisable(GL_DEPTH_TEST);
+void OpenGLShaderStorage::SetInfo(const std::shared_ptr<MaterialAsset>& info) {
+    switch (info->depthTest) {
+        case MaterialAsset::LEqual:
+            glDepthFunc(GL_LEQUAL);
+            break;
+        default:
+            glDepthFunc(GL_LEQUAL);
+    }
     if (info->depthWrite)
         glDepthMask(GL_TRUE);
     else
         glDepthMask(GL_TRUE);
+    switch (info->blend) {
+        case MaterialAsset::Opaque:
+            glBlendFunc(GL_ONE, GL_ZERO);
+            break;
+        case MaterialAsset::Transparent:
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            break;
+    }
 }
