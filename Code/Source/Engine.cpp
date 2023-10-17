@@ -13,14 +13,6 @@
 
 std::queue<std::function<bool()>> Engine::closes; //NOLINT
 
-void *Engine::operator new(size_t size) {
-    return std::malloc(size);
-}
-
-void Engine::operator delete(void *p) {
-
-}
-
 Engine::Engine() {
     Debug::Info("Init Engine", "Engine");
     AssetManager::Initial();
@@ -46,12 +38,12 @@ void create()
     lit->shader = safe_cast<ShaderAsset>(AssetManager::Instance("Caches/Shader/unlit.shader"));
     AssetManager::Create("Caches/Material/lit.mat", lit);
     var<Scene> s = SceneManager::Create();
-    for (int i = 0; i < 300; ++i) {
+    for (int i = 0; i < 30; ++i) {
         auto go = s->AddGameObject("go");
         var<Renderer> renderer = safe_cast<Renderer>(s->AddComponent(go, "Renderer"));
         s->AddComponent(go, "Transform");
         renderer->material = safe_cast<MaterialAsset>( AssetManager::Instance("Caches/Material/lit.mat"));
-        renderer->mesh = safe_cast<MeshAsset>( AssetManager::Instance("Caches/Mesh/cube.mesh"));
+        renderer->mesh = safe_cast<MeshAsset>( AssetManager::Instance("Caches/Mesh/sphere.mesh"));
     }
     Debug::Info("--------------------------------------------------------------");
     AssetManager::Create("Assets/Scene/aaa.scene",s);
@@ -66,8 +58,8 @@ void load()
 }
 
 void Engine::Invoke() {
-//create();
-    load();
+create();
+//    load();
     while (this->IsExist()) {
         SceneManager::Invoke();
         Graphic::Invoke();

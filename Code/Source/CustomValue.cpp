@@ -9,5 +9,5 @@ void CustomValue::operator delete(void *p) {
 }
 
 void *CustomValue::operator new(size_t t) {
-    return (void *)(1);
+    return std::malloc(t);
 }

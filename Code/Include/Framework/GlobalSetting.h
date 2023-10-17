@@ -21,6 +21,7 @@ public:
     static PipelineType pipelineType;
     static int windowWidth, windowHeight;
     static std::string windowName;
+    static bool isVSync;
 };
 
 

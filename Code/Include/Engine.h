@@ -8,11 +8,11 @@
 #define CODE_ENGINE_H
 
 
-#include <cstdlib>
+#include "CustomValue.h"
 #include <functional>
 #include <queue>
 
-class Engine {
+class Engine : CustomValue {
 public:
     Engine();
     ~Engine();
@@ -20,9 +20,6 @@ public:
     static void RegisterClose(const std::function<bool()>& call);
 private:
     bool IsExist() const;
-private:
-    void* operator new(size_t size);
-    void operator delete(void* p);
 private:
     static std::queue<std::function<bool()>> closes;
     bool isExist;

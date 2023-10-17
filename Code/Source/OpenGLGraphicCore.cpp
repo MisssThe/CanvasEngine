@@ -33,6 +33,8 @@ OpenGLGraphicCore::OpenGLGraphicCore() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
 
+    glfwSwapInterval( GlobalSetting::isVSync ? 1 : 0);
+
     this->meshStorage = new_ptr<OpenGLMeshStorage>();
     this->shaderStorage = new_ptr<OpenGLShaderStorage>();
     this->renderTextureStorage = new_ptr<OpenGLRenderTextureStorage>();
