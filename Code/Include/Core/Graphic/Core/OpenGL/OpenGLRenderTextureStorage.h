@@ -11,23 +11,19 @@
 
 class OpenGLRenderTextureStorage {
 public:
-    enum ColorFormat
-    {
-        RGBA32
-    };
-public:
-    var<RenderTexture> GetTemporary(unsigned int width, unsigned int height,unsigned int depth, ColorFormat format);
+    var<RenderTexture> GetTemporary(RenderTextureDescribe describe);
+    var<RenderTexture> GetTemporary(unsigned int width, unsigned int height, unsigned int depth, ColorFormat format);
     var<RenderTexture> GetTemporary(unsigned int width, unsigned int height);
     var<RenderTexture> GetTemporary(unsigned int width, unsigned int height, unsigned int depth);
-    void PutTemporary(var<RenderTexture> renderTexture);
-    void Bind(var<RenderTexture> renderTexture);
+    void PutTemporary(var<RenderTexture>& renderTexture);
+    void Bind(const var<RenderTexture>& renderTexture);
     void Release();
 private:
-    unsigned int CreateRT(unsigned int width, unsigned int height,unsigned int depth, ColorFormat format);
+    var<RenderTexture> CreateRT(unsigned int width, unsigned int height, unsigned int depth, ColorFormat format);
     void DestroyRT(unsigned int fbo);
 private:
-    std::unordered_map<var<RenderTexture>, unsigned int> renderTextures;
-    std::unordered_map<unsigned int, std::unordered_map<unsigned int, std::unordered_map<unsigned int, std::unordered_map<ColorFormat,var<RenderTexture>>>>> renderTextureMap;
+    std::unordered_map<RenderTextureDescribe, var<RenderTexture>, RenderTextureHash> renderTextures;
+    std::unordered_map<var<RenderTexture>, unsigned int> renderTextureMap;
 };
 
 

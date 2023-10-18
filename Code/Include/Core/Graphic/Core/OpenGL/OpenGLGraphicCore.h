@@ -20,10 +20,15 @@ public:
     bool IsExist() override;
     void BeginFrame() override;
     void EndFrame() override;
-    void SetTarget(std::shared_ptr<RenderTexture> renderTexture) override;
+    void SetTarget(var<RenderTexture> renderTexture) override;
     void ClearTarget(Color color, bool clearColor, bool clearDepth) override;
     void DrawRenderers(std::queue<std::shared_ptr<Renderer>>& renderers) override;
     void DrawRenderer(std::shared_ptr<Renderer> &renderer) override;
+    var<RenderTexture> GetTemporary(unsigned int width, unsigned int height, unsigned int depth, ColorFormat format) override;
+    var<RenderTexture> GetTemporary(unsigned int width, unsigned int height) override;
+    var<RenderTexture> GetTemporary(unsigned int width, unsigned int height, unsigned int depth) override;
+    void PutTemporary(var<RenderTexture> renderTexture) override;
+
 private:
     var<OpenGLMeshStorage> meshStorage;
     var<OpenGLShaderStorage> shaderStorage;

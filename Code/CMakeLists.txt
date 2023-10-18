@@ -91,7 +91,7 @@ set(Core
         Include/Core/Graphic/Core/OpenGL/OpenGLRenderTextureStorage.h
         Source/OpenGLTextureStorage.cpp
         Include/Core/Graphic/Core/OpenGL/OpenGLTextureStorage.h
-        Source/RenderTexture.cpp
+        Source/RenderTextureDescribe.cpp
         Include/Core/Graphic/Core/RenderTexture.h
 )
 

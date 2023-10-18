@@ -77,8 +77,8 @@ void OpenGLGraphicCore::DrawRenderers(std::queue<std::shared_ptr<Renderer>>& ren
 
 }
 
-void OpenGLGraphicCore::SetTarget(std::shared_ptr<RenderTexture> renderTexture) {
-
+void OpenGLGraphicCore::SetTarget(var<RenderTexture> renderTexture) {
+    this->renderTextureStorage->Bind(renderTexture);
 }
 
 void OpenGLGraphicCore::ClearTarget(Color color, bool clearColor, bool clearDepth) {
@@ -88,4 +88,20 @@ void OpenGLGraphicCore::ClearTarget(Color color, bool clearColor, bool clearDept
     }
     if (clearDepth)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+var<RenderTexture> OpenGLGraphicCore::GetTemporary(unsigned int width, unsigned int height, unsigned int depth, ColorFormat format) {
+    return this->renderTextureStorage->GetTemporary(width,height,depth,format);
+}
+
+var<RenderTexture> OpenGLGraphicCore::GetTemporary(unsigned int width, unsigned int height) {
+    return this->renderTextureStorage->GetTemporary(width,height);
+}
+
+var<RenderTexture> OpenGLGraphicCore::GetTemporary(unsigned int width, unsigned int height, unsigned int depth) {
+    return this->renderTextureStorage->GetTemporary(width,height,depth);
+}
+
+void OpenGLGraphicCore::PutTemporary(var<RenderTexture> renderTexture) {
+    this->renderTextureStorage->PutTemporary(renderTexture);
 }

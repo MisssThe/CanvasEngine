@@ -4,4 +4,8 @@
 
 #include "../Include/Core/Graphic/Core/RenderTexture.h"
 
-REFLECT_REGISTER(RenderTexture) /* NOLINT */
+REFLECT_REGISTER(RenderTexture)
+
+bool RenderTexture::IsAsset() {
+    return false;
+}
