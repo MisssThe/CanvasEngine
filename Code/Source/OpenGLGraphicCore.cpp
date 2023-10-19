@@ -47,11 +47,13 @@ OpenGLGraphicCore::~OpenGLGraphicCore() {
 }
 
 void OpenGLGraphicCore::BeginFrame() {
-    glClearColor(0.5f, 0.2f, 0.8f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    glClearColor(0.5f, 0.2f, 0.8f, 1.0f);
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void OpenGLGraphicCore::EndFrame() {
+//    glFinish();
+    //swap buffer只能交换buffer index 0
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
@@ -90,18 +92,10 @@ void OpenGLGraphicCore::ClearTarget(Color color, bool clearColor, bool clearDept
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-var<RenderTexture> OpenGLGraphicCore::GetTemporary(unsigned int width, unsigned int height, unsigned int depth, ColorFormat format) {
-    return this->renderTextureStorage->GetTemporary(width,height,depth,format);
-}
-
-var<RenderTexture> OpenGLGraphicCore::GetTemporary(unsigned int width, unsigned int height) {
-    return this->renderTextureStorage->GetTemporary(width,height);
-}
-
-var<RenderTexture> OpenGLGraphicCore::GetTemporary(unsigned int width, unsigned int height, unsigned int depth) {
-    return this->renderTextureStorage->GetTemporary(width,height,depth);
-}
-
 void OpenGLGraphicCore::PutTemporary(var<RenderTexture> renderTexture) {
     this->renderTextureStorage->PutTemporary(renderTexture);
+}
+
+std::shared_ptr<RenderTexture> OpenGLGraphicCore::GetTemporary(RenderTextureDescribe describe) {
+    return this->renderTextureStorage->GetTemporary(describe);
 }

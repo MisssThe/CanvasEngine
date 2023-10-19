@@ -13,7 +13,8 @@ public:
     void Bind(var<MeshAsset> mesh);
     void Release();
 private:
-    unsigned int CompileMesh(var<MeshAsset> mesh);
+    unsigned int CompileMesh(var<MeshAsset>& mesh);
+    int SubVertexBuffer(long long int offset, std::vector<float>& buffer, int index, int stride);
 private:
     std::unordered_map<var<MeshAsset>, unsigned int> meshes;
     std::queue<unsigned int> buffers;

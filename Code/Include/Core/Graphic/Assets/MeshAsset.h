@@ -13,6 +13,7 @@ public:
     std::string Type() override;
     ~MeshAsset() override = default;
     void Clear();
+    int AllCount();
 protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;
@@ -20,12 +21,11 @@ public:
     std::vector<float> position;
     std::vector<float> color;
     std::vector<float> normal;
-    std::vector<float> tangent;
+//    std::vector<float> tangent;
     std::vector<float> texCoord1;
-    std::vector<float> texCoord2;
-    std::vector<float> texCoord3;
+//    std::vector<float> texCoord2;
+//    std::vector<float> texCoord3;
     std::vector<unsigned int> face;
-    std::vector<float> compactnessInfo;
 public:
     int indexCount;
     int vertexCount;

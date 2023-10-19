@@ -39,69 +39,80 @@ void MeshLoader::LoadOBJ(const std::string &path, std::shared_ptr<MeshAsset> mes
     meshAsset->Clear();
     int group = -1;
     std::map<Vector3, unsigned int> temp;
-    int index = 0;
-    Vector3 vector3;
-    IO::ReadFilePerLine(path, [&meshAsset, &result, &face, &group, &temp, &index, &vector3](std::string& info) {
+    int index = 1;
+    Vector3 vector3{};
+    std::vector<float> position;
+    std::vector<float> color;
+    std::vector<float> normal;
+    std::vector<float> tangent;
+    std::vector<float> texCoord1;
+    IO::ReadFilePerLine(path, [&meshAsset, &result, &face, &group, &temp, &index, &vector3, &position, &color, &normal, &texCoord1](std::string& info) {
         //判断数据类型
         unsigned short int infoType = (unsigned short int)info[0] + (unsigned short int)info[1];
         String::Split(info, ' ', result);
         unsigned int size = result.size();
         switch (infoType) {
             case 150:   //vertex
-            {
                 for (unsigned int i = 1; i < 4 && i < size ; ++i) {
-                    meshAsset->position.push_back(std::stof(result[i]));
+                    position.push_back(std::stof(result[i]));
                 }
                 for (unsigned int i = 4; i < size; ++i) {
-                    meshAsset->color.push_back(std::stof(result[i]));
+                    color.push_back(std::stof(result[i]));
                 }
-            }
                 break;
             case 228:   //normal
                 for (unsigned int i = 1; i < 4 && i < size ; ++i) {
-                    meshAsset->normal.push_back(std::stof(result[i]));
+                    normal.push_back(std::stof(result[i]));
                 }
                 break;
             case 234:   //texCoord
                 for (unsigned int i = 1; i < 5 && i < size ; ++i) {
-                    meshAsset->texCoord1.push_back(std::stof(result[i]));
+                    texCoord1.push_back(std::stof(result[i]));
                 }
                 break;
             case 134:   //face
-                for (unsigned int i = 1; i < 4 && i < size ; ++i) {
-                    String::Split(result[i],'/',face);
-                    group = (int)face.size();
-                    for (unsigned int j = 0; j < 3 && j < face.size(); ++j) {
-                        vector3.info[j] = std::stoi(face[j]);
+                if (result.size() == 4) {
+                    //三角化网格
+                    for (unsigned int i = 1; i < 4 && i < size ; ++i) {
+                        String::Split(result[i],'/',face);
+                        group = (int)face.size();
+                        for (unsigned int j = 0; j < 3 && j < face.size(); ++j) {
+                            vector3.info[j] = std::stoi(face[j]);
+                        }
+                        if (temp.find(vector3) == temp.end()) {
+                            temp.insert(std::pair<Vector3, unsigned int >(vector3, index));
+                            if (vector3.info[0] > 0) {
+                                //坐标属性
+                                unsigned int begin = (vector3.info[0] - 1) * 3;
+                                meshAsset->position.push_back(position[begin]);
+                                meshAsset->position.push_back(position[begin + 1]);
+                                meshAsset->position.push_back(position[begin + 2]);
+                                if (!color.empty()) {
+                                    meshAsset->color.push_back(position[begin]);
+                                    meshAsset->color.push_back(position[begin + 1]);
+                                    meshAsset->color.push_back(position[begin + 2]);
+                                }
+                            }
+                            if (vector3.info[1] > 0) {
+                                //法线属性
+                                unsigned int begin = (vector3.info[1] - 1) * 3;
+                                meshAsset->normal.push_back(normal[begin]);
+                                meshAsset->normal.push_back(normal[begin + 1]);
+                                meshAsset->normal.push_back(normal[begin + 2]);
+                            }
+                            if (vector3.info[2] > 0) {
+                                //纹理属性
+                                unsigned int begin = (vector3.info[2] - 1) * 2;
+                                meshAsset->texCoord1.push_back(texCoord1[begin]);
+                                meshAsset->texCoord1.push_back(texCoord1[begin + 1]);
+                            }
+                            meshAsset->face.push_back(index++);
+                        } else {
+                            meshAsset->face.push_back(temp[vector3]);
+                        }
                     }
-                    if (temp.find(vector3) == temp.end()) {
-                        temp.insert(std::pair<Vector3, unsigned int>(vector3, index++));
-                        //添加position和color
-                        int positionIndex = vector3.info[0] * 3;
-                        meshAsset->compactnessInfo.push_back(meshAsset->position[positionIndex]);
-                        meshAsset->compactnessInfo.push_back(meshAsset->position[positionIndex + 1]);
-                        meshAsset->compactnessInfo.push_back(meshAsset->position[positionIndex + 2]);
-                        if (!meshAsset->color.empty()) {
-                            meshAsset->compactnessInfo.push_back(meshAsset->color[positionIndex + 2]);
-                            meshAsset->compactnessInfo.push_back(meshAsset->color[positionIndex + 2]);
-                            meshAsset->compactnessInfo.push_back(meshAsset->color[positionIndex + 2]);
-                        }
-                        //添加法线
-                        if (!meshAsset->normal.empty()) {
-                            int normalIndex = vector3.info[1] * 3;
-                            meshAsset->compactnessInfo.push_back(meshAsset->normal[normalIndex]);
-                            meshAsset->compactnessInfo.push_back(meshAsset->normal[normalIndex + 1]);
-                            meshAsset->compactnessInfo.push_back(meshAsset->normal[normalIndex + 2]);
-                        }
-                        //添加纹理坐标
-                        if (!meshAsset->texCoord1.empty()) {
-                            int texCoordIndex = vector3.info[1] * 3;
-                            meshAsset->compactnessInfo.push_back(meshAsset->texCoord1[texCoordIndex]);
-                            meshAsset->compactnessInfo.push_back(meshAsset->texCoord1[texCoordIndex + 1]);
-                            meshAsset->compactnessInfo.push_back(meshAsset->texCoord1[texCoordIndex + 2]);
-                        }
-                    }
-                    meshAsset->face.push_back(temp[vector3]);
+                } else {
+                    //未进行三角化网格 ignore
                 }
                 break;
             default:

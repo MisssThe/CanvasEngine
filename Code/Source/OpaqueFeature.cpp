@@ -8,14 +8,20 @@
 REFLECT_REGISTER(OpaqueFeature) /* NOLINT */
 
 void OpaqueFeature::Invoke(std::shared_ptr<RenderData> data) {
-    var<RenderTexture> renderTexture = data->core->GetTemporary(1920, 1080);
-    data->core->SetTarget(renderTexture);
+//    RenderTextureDescribe describe;
+//    describe.width = 1920;
+//    describe.height = 1080;
+//    describe.depth = 24;
+//    describe.formats = { ColorFormat::RGBA32, ColorFormat::RGBA32, ColorFormat::RGBA32 };
+//    var<RenderTexture> renderTexture = data->core->GetTemporary(describe);
+//    data->core->SetTarget(renderTexture);
+    Color color;
+    color.SetColor(1,2,3,4);
+    data->core->ClearTarget(color, true, true);
 
     data->core->DrawRenderers(data->renderers);
     Queue::Iterator<var<Renderer>>(data->renderers, [&data](var<Renderer> &renderer) {
         data->core->DrawRenderer(renderer);
     });
-    //拿取不透明物体并进行排序
-
-    data->core->PutTemporary(renderTexture);
+//    data->core->PutTemporary(renderTexture);
 }

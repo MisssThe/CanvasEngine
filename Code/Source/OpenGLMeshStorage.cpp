@@ -5,6 +5,7 @@
 #include "../Include/Core/Graphic/Core/OpenGL/OpenGLMeshStorage.h"
 #include "glad/glad.h"
 #include "../Include/General/Container/Queue.h"
+#include "../Include/General/Container/Map.h"
 
 void OpenGLMeshStorage::Bind(std::shared_ptr<MeshAsset> mesh) {
     unsigned int index;
@@ -16,33 +17,6 @@ void OpenGLMeshStorage::Bind(std::shared_ptr<MeshAsset> mesh) {
     glBindVertexArray(index);
 }
 
-unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset> mesh) {
-    unsigned int VBO, VAO, EBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh->compactnessInfo.size(), mesh->compactnessInfo.data(), GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh->face.size(), mesh->face.data(), GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-    this->meshes.insert(std::pair<var<MeshAsset>, unsigned int>( mesh, VAO));
-    this->buffers.push(VBO);
-    this->buffers.push(EBO);
-
-    return VAO;
-}
-
 void OpenGLMeshStorage::Release() {
     for (auto a : this->meshes) {
         glDeleteVertexArrays(1, &a.second);
@@ -50,4 +24,52 @@ void OpenGLMeshStorage::Release() {
     Queue::IteratorRemove<unsigned int>(this->buffers,[](unsigned int b) {
         glDeleteBuffers(1, &b);
     });
+}
+
+int OpenGLMeshStorage::SubVertexBuffer(long long int offset, std::vector<float> &buffer, int index, int stride) {
+    if (buffer.empty())
+        return 0;
+    int size = (int) (sizeof(float) * buffer.size());
+    glBufferSubData(GL_ARRAY_BUFFER, offset, size, &buffer[0]);
+    glVertexAttribPointer(index, stride, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void *) offset);
+    glEnableVertexAttribArray(index);
+    return size;
+}
+
+unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset>& mesh) {
+    unsigned int vao;
+    unsigned int vbo, ebo;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glGenBuffers(1, &ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, (int)(sizeof(float) * mesh->face.size()), &mesh->face[0], GL_STATIC_DRAW);
+
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, (int)(sizeof(float) * mesh->AllCount()), nullptr, GL_STATIC_DRAW);
+
+    int offset = 0;
+    offset += this->SubVertexBuffer(offset, mesh->position, 0, 3);
+    offset += this->SubVertexBuffer(offset, mesh->color, 1, 4);
+    offset += this->SubVertexBuffer(offset, mesh->normal, 2, 3);
+//    offset += this->SubVertexBuffer(offset, mesh->tangent, 2, 4);
+    offset += this->SubVertexBuffer(offset, mesh->texCoord1, 3, 2);
+//    offset += this->SubVertexBuffer(offset, mesh->uv1s, 5, 2);
+//    offset += this->SubVertexBuffer(offset, mesh->uv2s, 6, 2);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    glDeleteBuffers(1, &vbo);
+    glDeleteBuffers(1, &ebo);
+//    if (offset < 1) {
+//        glDeleteVertexArrays(1, &this->vao);
+//        this->vao = 0;
+//        Debug::Warn("OpenGL Mesh Compile", {"Compile Failed [", mesh->path, "]"});
+//        return false;
+//    }
+    Map::Insert(this->meshes, mesh, vao);
+    return vao;
 }

@@ -16,23 +16,41 @@ enum ColorFormat
 
 struct RenderTextureDescribe : public CustomValue {
 public:
-    unsigned int width;
-    unsigned int height;
-    unsigned int depth; 
-    ColorFormat format;
+    int width;
+    int height;
+    int depth;
+    std::vector<ColorFormat> formats;
     bool operator==(const RenderTextureDescribe& rt) const {
-        return rt.width == this->width && rt.height == this->height && rt.depth == this->depth && rt.format == this->format;
+        if (rt.formats.size() != this->formats.size())
+            return false;
+        for (unsigned int index = 0; index < this->formats.size(); ++index) {
+            if (this->formats[index] == rt.formats[index])
+                return false;
+        }
+        return rt.width == this->width
+        && rt.height == this->height
+        && rt.depth == this->depth;
     }
 };
 
 struct RenderTextureHash
 {
-    std::size_t operator() (const RenderTextureDescribe & node) const {
-        std::size_t h1 = std::hash<unsigned int>()(node.width);
-        std::size_t h2 = std::hash<unsigned int>()(node.height);
-        std::size_t h3 = std::hash<unsigned int>()(node.depth);
-        std::size_t h4 = std::hash<unsigned int>()(node.format);
-        return h1 ^ h2 ^ h3 ^ h4;
+public:
+    std::size_t operator() (const RenderTextureDescribe & c) const
+    {
+        size_t seed = 0;
+        CustomHash(seed, c.width);
+        CustomHash(seed, c.height);
+        CustomHash(seed, c.depth);
+        for (auto f : c.formats) {
+            CustomHash(seed, f);
+        }
+        return seed;
+    }
+private:
+    void CustomHash(size_t& seed, const int& info)const
+    {
+        seed = std::hash<int>()(info) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
 };
 
