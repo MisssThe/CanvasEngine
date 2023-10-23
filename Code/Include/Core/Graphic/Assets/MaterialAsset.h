@@ -24,6 +24,11 @@ public:
         Opaque,
         Transparent,
     };
+    enum CullMode {
+        Front,      //保留正面
+        Back,       //保留背面
+        Both        //两面都保留
+    };
 public:
     struct MaterialInfo
     {
@@ -39,6 +44,7 @@ public:
     DepthTestMode depthTest = LEqual;
     bool depthWrite = true;
     BlendMode blend = Opaque;
+    CullMode cull = Front;
 };
 
 

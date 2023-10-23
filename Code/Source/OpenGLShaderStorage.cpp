@@ -63,6 +63,7 @@ unsigned int OpenGLShaderStorage::CompileShader(std::shared_ptr<ShaderAsset> sha
 }
 
 void OpenGLShaderStorage::SetInfo(const std::shared_ptr<MaterialAsset>& info) {
+    //============== 设置深度测试 ==============
     switch (info->depthTest) {
         case MaterialAsset::LEqual:
             glDepthFunc(GL_LEQUAL);
@@ -70,10 +71,14 @@ void OpenGLShaderStorage::SetInfo(const std::shared_ptr<MaterialAsset>& info) {
         default:
             glDepthFunc(GL_LEQUAL);
     }
+
+    //============== 设置深度写入 ==============
     if (info->depthWrite)
         glDepthMask(GL_TRUE);
     else
         glDepthMask(GL_TRUE);
+
+    //============== 设置混合模式 ==============
     switch (info->blend) {
         case MaterialAsset::Opaque:
             glBlendFunc(GL_ONE, GL_ZERO);
@@ -82,4 +87,16 @@ void OpenGLShaderStorage::SetInfo(const std::shared_ptr<MaterialAsset>& info) {
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             break;
     }
+    //============== 设置剔除模式 ==============
+//    switch (info->cull) {
+//        case MaterialAsset::Front:
+//            glCullFace(GL_BACK);
+//            break;
+//        case MaterialAsset::Back:
+//            glCullFace(GL_FRONT);
+//            break;
+//        case MaterialAsset::Both:
+//            glDisable(GL_FRONT_AND_BACK);
+//            break;
+//    }
 }

@@ -93,18 +93,24 @@ void MeshLoader::LoadOBJ(const std::string &path, std::shared_ptr<MeshAsset> mes
                                     meshAsset->color.push_back(position[begin + 2]);
                                 }
                             }
-                            if (vector3.info[1] > 0) {
-                                //法线属性
-                                unsigned int begin = (vector3.info[2] - 1) * 3;
-                                meshAsset->normal.push_back(normal[begin]);
-                                meshAsset->normal.push_back(normal[begin + 1]);
-                                meshAsset->normal.push_back(normal[begin + 2]);
-                            }
-                            if (vector3.info[2] > 0) {
+                            if (!texCoord1.empty()) {
                                 //纹理属性
                                 unsigned int begin = (vector3.info[1] - 1) * 2;
                                 meshAsset->texCoord1.push_back(texCoord1[begin]);
                                 meshAsset->texCoord1.push_back(texCoord1[begin + 1]);
+                            }
+                            if (!normal.empty()) {
+                                //法线属性
+                                int infoIndex = -1;
+                                if (vector3.info[2] < 1) {
+                                    infoIndex = 1;
+                                } else {
+                                    infoIndex = 2;
+                                }
+                                unsigned int begin = (vector3.info[infoIndex] - 1) * 3;
+                                meshAsset->normal.push_back(normal[begin]);
+                                meshAsset->normal.push_back(normal[begin + 1]);
+                                meshAsset->normal.push_back(normal[begin + 2]);
                             }
                             meshAsset->face.push_back(index++);
                         } else {
