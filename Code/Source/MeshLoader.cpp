@@ -95,14 +95,14 @@ void MeshLoader::LoadOBJ(const std::string &path, std::shared_ptr<MeshAsset> mes
                             }
                             if (vector3.info[1] > 0) {
                                 //法线属性
-                                unsigned int begin = (vector3.info[1] - 1) * 3;
+                                unsigned int begin = (vector3.info[2] - 1) * 3;
                                 meshAsset->normal.push_back(normal[begin]);
                                 meshAsset->normal.push_back(normal[begin + 1]);
                                 meshAsset->normal.push_back(normal[begin + 2]);
                             }
                             if (vector3.info[2] > 0) {
                                 //纹理属性
-                                unsigned int begin = (vector3.info[2] - 1) * 2;
+                                unsigned int begin = (vector3.info[1] - 1) * 2;
                                 meshAsset->texCoord1.push_back(texCoord1[begin]);
                                 meshAsset->texCoord1.push_back(texCoord1[begin + 1]);
                             }
@@ -120,5 +120,9 @@ void MeshLoader::LoadOBJ(const std::string &path, std::shared_ptr<MeshAsset> mes
         }
     });
     //填充完数据后对数据进行调整优化
-    //step1:去除重复点
+    //step1:index减一
+    for (unsigned int & i : meshAsset->face) {
+        i = i -1;
+    }
+    //step2:去除重复点
 }

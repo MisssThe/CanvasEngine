@@ -16,7 +16,7 @@ void OpaqueFeature::Invoke(std::shared_ptr<RenderData> data) {
 //    var<RenderTexture> renderTexture = data->core->GetTemporary(describe);
 //    data->core->SetTarget(renderTexture);
     Color color;
-    color.SetColor(1,2,3,4);
+    color.SetColor(255,0,125,255);
     data->core->ClearTarget(color, true, true);
 
     data->core->DrawRenderers(data->renderers);

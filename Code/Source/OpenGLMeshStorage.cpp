@@ -31,12 +31,22 @@ int OpenGLMeshStorage::SubVertexBuffer(long long int offset, std::vector<float> 
         return 0;
     int size = (int) (sizeof(float) * buffer.size());
     glBufferSubData(GL_ARRAY_BUFFER, offset, size, &buffer[0]);
-    glVertexAttribPointer(index, stride, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void *) offset);
+    glVertexAttribPointer(index, stride, GL_FLOAT, GL_FALSE, stride * (int)sizeof(float), (void *) offset);
     glEnableVertexAttribArray(index);
     return size;
 }
 
 unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset>& mesh) {
+//    float vertices[] = {
+//            0.5f,  0.5f, 0.0f,  // top right
+//            0.5f, -0.5f, 0.0f,  // bottom right
+//            -0.5f, -0.5f, 0.0f,  // bottom left
+//            -0.5f,  0.5f, 0.0f   // top left
+//    };
+//    unsigned int indices[] = {  // note that we start from 0!
+//            0, 1, 3,  // first Triangle
+//            1, 2, 3   // second Triangle
+//    };
     unsigned int vao;
     unsigned int vbo, ebo;
     glGenVertexArrays(1, &vao);
@@ -45,6 +55,7 @@ unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset>& mesh) {
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, (int)(sizeof(float) * mesh->face.size()), &mesh->face[0], GL_STATIC_DRAW);
+//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, (int)(sizeof(indices)), indices, GL_STATIC_DRAW);
 
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -56,8 +67,8 @@ unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset>& mesh) {
     offset += this->SubVertexBuffer(offset, mesh->normal, 2, 3);
 //    offset += this->SubVertexBuffer(offset, mesh->tangent, 2, 4);
     offset += this->SubVertexBuffer(offset, mesh->texCoord1, 3, 2);
-//    offset += this->SubVertexBuffer(offset, mesh->uv1s, 5, 2);
-//    offset += this->SubVertexBuffer(offset, mesh->uv2s, 6, 2);
+//    offset += this->SubVertexBuffer(offset, mesh->texCoord2, 5, 2);
+//    offset += this->SubVertexBuffer(offset, mesh->texCoord3, 6, 2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -68,7 +79,7 @@ unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset>& mesh) {
 //        glDeleteVertexArrays(1, &this->vao);
 //        this->vao = 0;
 //        Debug::Warn("OpenGL Mesh Compile", {"Compile Failed [", mesh->path, "]"});
-//        return false;
+//        return -1;
 //    }
     Map::Insert(this->meshes, mesh, vao);
     return vao;

@@ -43,7 +43,7 @@ void create()
         var<Renderer> renderer = safe_cast<Renderer>(s->AddComponent(go, "Renderer"));
         s->AddComponent(go, "Transform");
         renderer->material = safe_cast<MaterialAsset>( AssetManager::Instance("Caches/Material/lit.mat"));
-        renderer->mesh = safe_cast<MeshAsset>( AssetManager::Instance("Caches/Mesh/quad.mesh"));
+        renderer->mesh = safe_cast<MeshAsset>( AssetManager::Instance("Caches/Mesh/canvas.mesh"));
     }
     Debug::Info("--------------------------------------------------------------");
     AssetManager::Create("Assets/Scene/aaa.scene",s);
