@@ -18,6 +18,18 @@ void MaterialAsset::SerializeOutInternal(outputArchive &archive) {
     archive(this->properties, this->depthTest, this->depthWrite, this->cull);
 }
 
+void MaterialAsset::AddTexture(const std::string &name, const std::string &texture) {
+
+}
+
+void MaterialAsset::AddVector(const std::string &name, float x, float y, float z, float w, MaterialAsset::InfoMode mode) {
+
+}
+
+void MaterialAsset::BindShader(std::shared_ptr<ShaderAsset> &shaderAsset) {
+    //清空错误数据类型的材质缓存数据
+}
+
 void MaterialAsset::MaterialInfo::serialize(inputArchive &archive) {
     archive(this->flag);
     if (this->flag)

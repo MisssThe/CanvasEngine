@@ -11,7 +11,7 @@ void Debug::Info(const std::string& context, const std::string& title) {
     std::cout << "[" <<Time::CanvasTimeWithStr() <<"] [" << title <<"]: " << context << std::endl;
 }
 
-void Debug::Warm(const std::string &context, const std::string &title) {
+void Debug::Warn(const std::string &context, const std::string &title) {
     std::cout << "[" <<Time::CanvasTimeWithStr() <<"] [" << title <<"]: " << context << std::endl;
 
 }

@@ -29,11 +29,20 @@ public:
         Back,       //保留背面
         Both        //两面都保留
     };
+    enum InfoMode
+    {
+        Vec1, Vec2, Vec3, Vec4, Texture2D
+    };
+public:
+    void BindShader(var<ShaderAsset>& shaderAsset);
+    void AddTexture(const std::string& name, const std::string& texture);
+    void AddVector(const std::string& name, float x, float y, float z, float w, InfoMode mode);
 public:
     struct MaterialInfo
     {
     public:
-        bool flag;
+        std::string key;
+        InfoMode flag;
         float info[4];
         var<TextureAsset> texture;
         void serialize(inputArchive &archive);

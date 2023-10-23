@@ -38,7 +38,7 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
         return ca->second;
     std::ifstream is(path, std::ios::binary);
     if (!is.is_open()) {
-        Debug::Warm("Error Path [" + path + "]","Asset Manager");
+        Debug::Warn("Error Path [" + path + "]","Asset Manager");
         return nullptr;
     }
     inputArchive bia(is);
@@ -47,20 +47,20 @@ var<CustomAsset> AssetManager::Instance(const std::string& path) {
     var<CustomAsset> cai = nullptr;
     auto temp = Reflect::Instance(type);
     if (temp == nullptr) {
-        Debug::Warm("Error Value Type","Asset Manager");
+        Debug::Warn("Error Value Type","Asset Manager");
         return nullptr;
     }
     try {
         cai = safe_cast<CustomAsset>(temp);
     } catch (...) {
         //return empty and delete this file
-        Debug::Warm("Error Value Type, Cast Failed","Asset Manager");
+        Debug::Warn("Error Value Type, Cast Failed","Asset Manager");
         return nullptr;
     }
     try {
         cai->SerializeIn(bia);
     } catch(...) {
-        Debug::Warm("Asset Has Change","Asset Manager");
+        Debug::Warn("Asset Has Change","Asset Manager");
     }
     cai->path = path;
     cai->name = IO::FileName(path);

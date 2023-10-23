@@ -93,6 +93,8 @@ set(Core
         Include/Core/Graphic/Core/OpenGL/OpenGLTextureStorage.h
         Source/RenderTextureDescribe.cpp
         Include/Core/Graphic/Core/RenderTexture.h
+        Source/TextureLoader.cpp
+        Include/Core/Graphic/AssetsLoader/TextureLoader.h
 )
 
 if (CMAKE_HOST_WIN32)

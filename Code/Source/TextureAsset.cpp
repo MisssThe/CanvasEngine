@@ -7,9 +7,9 @@
 REFLECT_REGISTER(TextureAsset) /* NOLINT */
 
 void TextureAsset::SerializeInInternal(inputArchive &archive) {
-
+    archive(filter, repeat, mipCount, texturePath);
 }
 
 void TextureAsset::SerializeOutInternal(outputArchive &archive) {
-
+    archive(filter, repeat, mipCount, texturePath);
 }

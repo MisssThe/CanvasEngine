@@ -36,6 +36,7 @@ void create()
 {
     var<MaterialAsset> lit = new_ptr<MaterialAsset>();
     lit->shader = safe_cast<ShaderAsset>(AssetManager::Instance("Caches/Shader/unlit.shader"));
+    lit->properties.
     AssetManager::Create("Caches/Material/lit.mat", lit);
     var<Scene> s = SceneManager::Create();
     for (int i = 0; i < 30; ++i) {

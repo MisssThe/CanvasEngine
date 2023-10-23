@@ -6,6 +6,7 @@
 #include "glad/glad.h"
 #include "../Include/General/Container/Queue.h"
 #include "../Include/General/Container/Map.h"
+#include "../Include/General/Tool/Debug.h"
 
 void OpenGLMeshStorage::Bind(std::shared_ptr<MeshAsset> mesh) {
     unsigned int index;
@@ -75,12 +76,11 @@ unsigned int OpenGLMeshStorage::CompileMesh(var<MeshAsset>& mesh) {
 
     glDeleteBuffers(1, &vbo);
     glDeleteBuffers(1, &ebo);
-//    if (offset < 1) {
-//        glDeleteVertexArrays(1, &this->vao);
-//        this->vao = 0;
-//        Debug::Warn("OpenGL Mesh Compile", {"Compile Failed [", mesh->path, "]"});
-//        return -1;
-//    }
+    if (offset < 1) {
+        glDeleteVertexArrays(1, &vao);
+        Debug::Warn("OpenGL Mesh Compile", "Compile Failed [" + mesh->path + "]");
+        return -1;
+    }
     Map::Insert(this->meshes, mesh, vao);
     return vao;
 }

@@ -14,7 +14,7 @@ class ShaderLoader {
 public:
     static void Load(const std::string& path);
 private:
-    static void LoadGLSL(const std::string& path, var<ShaderAsset> shaderAsset);
+    static void LoadGLSL(const std::string& path, var<ShaderAsset>& shaderAsset);
 };
 
 

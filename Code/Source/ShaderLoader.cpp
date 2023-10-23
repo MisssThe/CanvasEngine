@@ -5,6 +5,8 @@
 #include "../Include/Core/Graphic/AssetsLoader/ShaderLoader.h"
 #include "Assets/AssetManager.h"
 #include "../Include/General/Tool/IO.h"
+#include "../Include/General/Tool/String.h"
+#include "../Include/General/Container/Map.h"
 
 bool ShaderRegister = AssetManager::RegisterRefresh([](std::string& path){
     if (path.find("Assets\\Shader") == std::string::npos)
@@ -27,11 +29,26 @@ void ShaderLoader::Load(const std::string& path) {
         LoadGLSL(path, shaderAsset);
 }
 
-void ShaderLoader::LoadGLSL(const std::string &path, var<ShaderAsset> shaderAsset) {
+void ShaderLoader::LoadGLSL(const std::string &path, var<ShaderAsset>& shaderAsset) {
     std::string extension = IO::ExtendName(path);
     if (extension == "vert") {
         IO::ReadFileAsString(path, shaderAsset->vertCode);
     } else if (extension == "frag") {
         IO::ReadFileAsString(path, shaderAsset->fragCode);
+    } else if (extension == "prop") {
+        //扫描info properties
+        shaderAsset->properties.clear();
+        std::vector<std::string> vec(3);
+        IO::ReadFilePerLine(path, [&vec, &shaderAsset](std::string &info) {
+            if (info.find("uniform") == std::string::npos) {
+                return;
+            }
+            String::Split(info, ' ', vec);
+            if (vec[1] == "sampler2D") {
+                Map::Insert(shaderAsset->properties, vec[2], ShaderAsset::ShaderPropertyType::Texture2D);
+            } else if (vec[1] == "vec4") {
+                Map::Insert(shaderAsset->properties, vec[2], ShaderAsset::ShaderPropertyType::Float4);
+            }
+        });
     }
 }
