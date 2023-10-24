@@ -140,3 +140,11 @@ void OpenGLShaderStorage::SetInfo(const std::shared_ptr<MaterialAsset>& info) {
 OpenGLShaderStorage::OpenGLShaderStorage() {
     this->textureStorage = new_ptr<OpenGLTextureStorage>();
 }
+
+void OpenGLShaderStorage::SetGlobalMatrix() {
+
+}
+
+void OpenGLShaderStorage::SetGlobalTexture() {
+
+}

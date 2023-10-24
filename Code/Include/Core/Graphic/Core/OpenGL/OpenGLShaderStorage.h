@@ -14,6 +14,8 @@ public:
     OpenGLShaderStorage();
     void Bind(var<ShaderAsset> shader);
     void SetInfo(const var<MaterialAsset>& info);
+    void SetGlobalTexture();
+    void SetGlobalMatrix();
     void Release();
 private:
     unsigned int CompileShader(var<ShaderAsset> shader);

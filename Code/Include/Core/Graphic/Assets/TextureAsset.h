@@ -10,9 +10,7 @@
 class TextureAsset : public CustomAsset {
 public:
     std::string Type() override;
-    ~TextureAsset() override{
-        std::cout << "hh";
-    }
+    ~TextureAsset() override = default;
 public:
     enum FilterMode
     {
@@ -31,6 +29,5 @@ protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;
 };
-
 
 #endif //CODE_TEXTUREASSET_H

@@ -16,6 +16,7 @@ set(FRAMEWORK_INCLUDE  ${PROJECT_SOURCE_DIR}/Include/Framework)
 set(CEREAL_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/cereal)
 set(GLAD_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glad/4.6/include)
 set(STB_IMAGE_INCLUDE ${PROJECT_SOURCE_DIR}/ThirdParty/image/include)
+set(GLM_INCLUDE ${PROJECT_SOURCE_DIR}/ThirdParty/glm/0.9.9.8/include)
 if (CMAKE_HOST_WIN32)
     set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_Windows/include)
     set(ASSIMP_INCLUDE ${PROJECT_SOURCE_DIR}/ThirdParty/assimp/5.2.5_Windows/include)
@@ -30,6 +31,7 @@ include_directories(
         ${GLAD_INCLUDE}
         ${CEREAL_INCLUDE}
         ${STB_IMAGE_INCLUDE}
+        ${GLM_INCLUDE}
 )
 
 set(FRAMEWORK
@@ -39,6 +41,8 @@ set(FRAMEWORK
         Source/SceneManager.cpp Include/Framework/Scenes/SceneManager.h
         Source/SerializePtr.cpp Include/Framework/SerializePtr.h
         Source/CustomValue.cpp Include/Framework/CustomValue.h
+        Include/Framework/StaticInfo.cpp
+        Include/Framework/StaticInfo.h
 )
 
 set(GENERAL
@@ -54,7 +58,7 @@ set(GENERAL
         Source/String.cpp Include/General/Tool/String.h
         Source/Color.cpp
         Include/General/Math/Color.h
-        Include/General/Math/CommonMath.cpp
+        Source/CommonMath.cpp
         Include/General/Math/CommonMath.h)
 
 set(Entity

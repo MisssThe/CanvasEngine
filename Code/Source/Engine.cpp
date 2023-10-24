@@ -48,6 +48,11 @@ void create()
         renderer->material = safe_cast<MaterialAsset>( AssetManager::Instance("Caches/Material/lit.mat"));
         renderer->mesh = safe_cast<MeshAsset>( AssetManager::Instance("Caches/Mesh/quad.mesh"));
     }
+    //添加一个相机
+    auto camera = s->AddGameObject("camera");
+    var<Camera> c = safe_cast<Camera>(s->AddComponent(camera, "Camera"));
+
+
     Debug::Info("--------------------------------------------------------------");
     AssetManager::Create("Assets/Scene/aaa.scene",s);
     Debug::Info("--------------------------------------------------------------");

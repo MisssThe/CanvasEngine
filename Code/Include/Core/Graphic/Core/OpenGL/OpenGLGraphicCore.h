@@ -22,11 +22,12 @@ public:
     void EndFrame() override;
     void SetTarget(var<RenderTexture> renderTexture) override;
     void ClearTarget(Color color, bool clearColor, bool clearDepth) override;
-    void DrawRenderers(std::queue<std::shared_ptr<Renderer>>& renderers) override;
-    void DrawRenderer(std::shared_ptr<Renderer> &renderer) override;
-    std::shared_ptr<RenderTexture> GetTemporary(RenderTextureDescribe describe) override;
+    void DrawRenderers(std::queue<var<Renderer>>& renderers) override;
+    void DrawRenderer(var<Renderer> &renderer) override;
+    var<RenderTexture> GetTemporary(RenderTextureDescribe describe) override;
     void PutTemporary(var<RenderTexture> renderTexture) override;
-
+    void ExecuteSpace(std::function<void()> space) override;
+    void Blit(var<Renderer> source, var<Renderer> target,var<MaterialAsset> material) override;
 private:
     var<OpenGLMeshStorage> meshStorage;
     var<OpenGLShaderStorage> shaderStorage;
