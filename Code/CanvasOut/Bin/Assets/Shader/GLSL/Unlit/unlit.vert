@@ -6,6 +6,10 @@ layout (location = 3) in vec2 texCoord;
 
 out vec2 uv;
 
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projMatrix;
+
 void main()
 {
     gl_Position = vec4(position.x, position.y, position.z, 1.0);

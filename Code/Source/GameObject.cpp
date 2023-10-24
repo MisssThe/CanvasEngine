@@ -17,7 +17,7 @@ void GameObject::SerializeInInternal(inputArchive &archive) {
 }
 
 void GameObject::SerializeOutInternal(outputArchive &archive) {
-    int count = components.size();
+    int count = (int)components.size();
     archive(count);
     Queue::Iterator<var<Component>>(this->components, [&archive, this](var<Component>& component) {
         auto comPtr = cast<CustomPtr>(component);

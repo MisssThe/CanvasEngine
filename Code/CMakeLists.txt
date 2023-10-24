@@ -15,6 +15,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 set(FRAMEWORK_INCLUDE  ${PROJECT_SOURCE_DIR}/Include/Framework)
 set(CEREAL_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/cereal)
 set(GLAD_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glad/4.6/include)
+set(STB_IMAGE_INCLUDE ${PROJECT_SOURCE_DIR}/ThirdParty/image/include)
 if (CMAKE_HOST_WIN32)
     set(GLFW_INCLUDE  ${PROJECT_SOURCE_DIR}/ThirdParty/glfw/3.3.8_Windows/include)
     set(ASSIMP_INCLUDE ${PROJECT_SOURCE_DIR}/ThirdParty/assimp/5.2.5_Windows/include)
@@ -28,6 +29,7 @@ include_directories(
         ${GLFW_INCLUDE}
         ${GLAD_INCLUDE}
         ${CEREAL_INCLUDE}
+        ${STB_IMAGE_INCLUDE}
 )
 
 set(FRAMEWORK
@@ -64,9 +66,13 @@ set(Entity
         Source/GraphicCore.cpp Include/Core/Graphic/Core/GraphicCore.h)
 
 set(Asset
-        Source/TextureAsset.cpp
-        Source/Scene.cpp
-        Include/Framework/Scenes/Scene.h Source/GlobalSetting.cpp Include/Framework/GlobalSetting.h Source/ShaderAsset.cpp Include/Core/Graphic/Assets/ShaderAsset.h Source/MeshAsset.cpp Include/Core/Graphic/Assets/MeshAsset.h Source/TextureAsset.cpp Include/Core/Graphic/Assets/TextureAsset.h Source/MaterialAsset.cpp Include/Core/Graphic/Assets/MaterialAsset.h Source/AssetLog.cpp Include/Framework/Assets/AssetLog.h)
+        Source/Scene.cpp Include/Framework/Scenes/Scene.h
+        Source/GlobalSetting.cpp Include/Framework/GlobalSetting.h
+        Source/ShaderAsset.cpp Include/Core/Graphic/Assets/ShaderAsset.h
+        Source/MeshAsset.cpp Include/Core/Graphic/Assets/MeshAsset.h
+        Source/TextureAsset.cpp Include/Core/Graphic/Assets/TextureAsset.h
+        Source/MaterialAsset.cpp Include/Core/Graphic/Assets/MaterialAsset.h
+        Source/AssetLog.cpp Include/Framework/Assets/AssetLog.h)
 
 set(Core
         Source/Graphic.cpp Include/Core/Graphic/Graphic.h
@@ -87,14 +93,10 @@ set(Core
         Source/RendererManager.cpp Include/Core/Graphic/RenderData/RendererManager.h
         Source/OpenGLShaderStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLShaderStorage.h
         Source/OpenGLMeshStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLMeshStorage.h
-        Source/OpenGLRenderTextureStorage.cpp
-        Include/Core/Graphic/Core/OpenGL/OpenGLRenderTextureStorage.h
-        Source/OpenGLTextureStorage.cpp
-        Include/Core/Graphic/Core/OpenGL/OpenGLTextureStorage.h
-        Source/RenderTextureDescribe.cpp
-        Include/Core/Graphic/Core/RenderTexture.h
-        Source/TextureLoader.cpp
-        Include/Core/Graphic/AssetsLoader/TextureLoader.h
+        Source/OpenGLRenderTextureStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLRenderTextureStorage.h
+        Source/OpenGLTextureStorage.cpp Include/Core/Graphic/Core/OpenGL/OpenGLTextureStorage.h
+        Source/RenderTextureDescribe.cpp Include/Core/Graphic/Core/RenderTexture.h
+        Source/TextureLoader.cpp Include/Core/Graphic/AssetsLoader/TextureLoader.h
 )
 
 if (CMAKE_HOST_WIN32)

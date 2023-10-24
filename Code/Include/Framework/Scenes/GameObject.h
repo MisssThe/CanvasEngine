@@ -16,9 +16,9 @@ protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;
 public:
-    void SetActive(bool flag) override final;
-    void Destroy() override final;
-    bool IsGameObject() override final;
+    void SetActive(bool flag) final;
+    void Destroy() final;
+    bool IsGameObject() final;
     std::string Type() override;
     ~GameObject() override = default;
 public:

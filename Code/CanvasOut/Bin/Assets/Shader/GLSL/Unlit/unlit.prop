@@ -1,1 +1,2 @@
-uniform sampler2D albedoTex;
+uniform sampler2D albedoTex
+uniform sampler2D normalTex

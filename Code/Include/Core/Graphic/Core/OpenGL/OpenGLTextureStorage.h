@@ -5,18 +5,15 @@
 #ifndef CODE_OPENGLTEXTURESTORAGE_H
 #define CODE_OPENGLTEXTURESTORAGE_H
 
+#include "../../Assets/TextureAsset.h"
 
-#include "CustomPtr.h"
-//#include "Assets/CustomAsset.h"
-//#include "CustomEntity.h"
-
-class OpenGLTextureStorage : public CustomPtr {
-//class OpenGLTextureStorage : public CustomAsset {
-//class OpenGLTextureStorage : public CustomEntity {
+class OpenGLTextureStorage  {
 public:
-    std::string Type() override;
-
-    ~OpenGLTextureStorage() override = default;
+    void Bind(var<TextureAsset>& textureAsset, int index);
+private:
+    unsigned int CompileTexture(var<TextureAsset>& textureAsset);
+private:
+    std::unordered_map<var<TextureAsset>, unsigned int> textureMap;
 };
 
 

@@ -35,8 +35,10 @@ Engine::~Engine() {
 void create()
 {
     var<MaterialAsset> lit = new_ptr<MaterialAsset>();
-    lit->shader = safe_cast<ShaderAsset>(AssetManager::Instance("Caches/Shader/unlit.shader"));
-    lit->properties.
+    var shader = safe_cast<ShaderAsset>(AssetManager::Instance("Caches/Shader/unlit.shader"));
+    lit->BindShader(shader);
+    lit->AddTexture("albedoTex", "Caches/Texture/test.texture");
+    lit->AddTexture("normalTex", "Caches/Texture/normal.texture");
     AssetManager::Create("Caches/Material/lit.mat", lit);
     var<Scene> s = SceneManager::Create();
     for (int i = 0; i < 30; ++i) {

@@ -10,6 +10,10 @@
 class Map {
 public:
     template<class A, class B> static void Insert(std::unordered_map<A, B>& map, const A& a, const B& b) {
+        if (map.find(a) != map.end()) {
+            map[a] = b;
+            return;
+        }
         map.insert(std::pair<A,B>(a, b));
     }
 

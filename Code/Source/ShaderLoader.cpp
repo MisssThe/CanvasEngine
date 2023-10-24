@@ -39,15 +39,22 @@ void ShaderLoader::LoadGLSL(const std::string &path, var<ShaderAsset>& shaderAss
         //扫描info properties
         shaderAsset->properties.clear();
         std::vector<std::string> vec(3);
-        IO::ReadFilePerLine(path, [&vec, &shaderAsset](std::string &info) {
+        int textureIndex = 0;
+        IO::ReadFilePerLine(path, [&vec, &shaderAsset, &textureIndex](std::string &info) {
             if (info.find("uniform") == std::string::npos) {
                 return;
             }
             String::Split(info, ' ', vec);
             if (vec[1] == "sampler2D") {
-                Map::Insert(shaderAsset->properties, vec[2], ShaderAsset::ShaderPropertyType::Texture2D);
+                Map::Insert(shaderAsset->properties, vec[2], ShaderAsset::InfoMode::Texture2D);
             } else if (vec[1] == "vec4") {
-                Map::Insert(shaderAsset->properties, vec[2], ShaderAsset::ShaderPropertyType::Float4);
+                Map::Insert(shaderAsset->properties, vec[2], ShaderAsset::InfoMode::Vec4);
+            } else if (vec[1] == "vec3") {
+
+            } else if (vec[1] == "vec2") {
+
+            } else if (vec[1] == "vec1") {
+
             }
         });
     }

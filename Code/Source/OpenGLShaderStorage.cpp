@@ -58,6 +58,11 @@ unsigned int OpenGLShaderStorage::CompileShader(std::shared_ptr<ShaderAsset> sha
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+    //查找数据ID
+    glUseProgram(shaderProgram);
+    for (const auto& info : shader->properties) {
+        Map::Insert<std::string, int>(shader->propertiesID, info.first, glGetUniformLocation(shaderProgram, info.first.c_str()));
+    }
     Map::Insert<var<ShaderAsset>, unsigned int>(this->shaders, shader, shaderProgram);
     return shaderProgram;
 }
@@ -88,15 +93,50 @@ void OpenGLShaderStorage::SetInfo(const std::shared_ptr<MaterialAsset>& info) {
             break;
     }
     //============== 设置剔除模式 ==============
-//    switch (info->cull) {
-//        case MaterialAsset::Front:
-//            glCullFace(GL_BACK);
-//            break;
-//        case MaterialAsset::Back:
-//            glCullFace(GL_FRONT);
-//            break;
-//        case MaterialAsset::Both:
-//            glDisable(GL_FRONT_AND_BACK);
-//            break;
-//    }
+    switch (info->cull) {
+        case MaterialAsset::Front:
+            glCullFace(GL_BACK);
+            break;
+        case MaterialAsset::Back:
+            glCullFace(GL_FRONT);
+            break;
+        case MaterialAsset::Both:
+            glDisable(GL_FRONT_AND_BACK);
+            break;
+    }
+    //============== 设置具体属性 ==============
+    int textureIndex = 0;
+    for (const auto& p : info->shader->properties) {
+        auto f = info->properties.find(p.first);
+        auto c= info->properties["normalTex"];
+        if (f == info->properties.end())
+            continue;
+        if (f->second.flag != p.second)
+            continue;
+        int location = info->shader->propertiesID[p.first];
+        switch (p.second) {
+            case ShaderAsset::Vec1:
+                glUniform1f(location, f->second.info[0]);
+                break;
+            case ShaderAsset::Vec2:
+                glUniform2f(location, f->second.info[0], f->second.info[1]);
+                break;
+            case ShaderAsset::Vec3:
+                glUniform3f(location, f->second.info[0], f->second.info[1],  f->second.info[2]);
+                break;
+            case ShaderAsset::Vec4:
+                glUniform4f(location, f->second.info[0], f->second.info[1],  f->second.info[2],  f->second.info[3]);
+                break;
+            case ShaderAsset::Texture2D:
+                glUniform1i(location, textureIndex);
+                auto a = f->second;
+                auto b = f->first;
+                this->textureStorage->Bind(f->second.texture, textureIndex++);
+                break;
+        }
+    }
+}
+
+OpenGLShaderStorage::OpenGLShaderStorage() {
+    this->textureStorage = new_ptr<OpenGLTextureStorage>();
 }

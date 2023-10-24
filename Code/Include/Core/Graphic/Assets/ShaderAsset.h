@@ -16,16 +16,16 @@ protected:
     void SerializeInInternal(inputArchive &archive) override;
     void SerializeOutInternal(outputArchive &archive) override;
 public:
-    enum ShaderPropertyType
+    enum InfoMode
     {
-        Float, Float2, Float3, Float4,
-        Texture2D, Texture3D,
+        Vec1, Vec2, Vec3, Vec4, Texture2D
     };
 public:
     std::string vertCode;
     std::string fragCode;
 public:
-    std::unordered_map<std::string, ShaderPropertyType> properties;
+    std::unordered_map<std::string, InfoMode> properties;
+    std::unordered_map<std::string, int> propertiesID;
 };
 
 
